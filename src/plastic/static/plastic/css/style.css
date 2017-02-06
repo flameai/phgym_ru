@@ -1,0 +1,170 @@
+body {
+    background-color: #f8fbfd;
+}
+
+.phoneform {
+    background-color: #fff;
+    margin-top: 50px;
+    padding: 3em;
+}
+
+.phoneform .input-field {
+    max-width: 400px;
+}
+
+.phoneform .btn {
+    margin-bottom: 20px;
+}
+
+.phoneform .input-field input {
+    margin-top: 50px;
+    width: 80%;
+    font-size: 25px;
+}
+.phoneform .input-field span {
+    font-size: 25px;
+}
+
+.phoneform .input-field label {
+    margin-top: 50px;
+}
+
+.regform {
+    /*    max-width:900px;*/
+    background: #fff;
+    margin-top: 50px;
+    padding: 3em
+}
+
+.regform label {
+    text-align: left;
+}
+
+.btn {
+    background-color: #f9690e;
+}
+
+.btn:hover {
+    background-color: #f9690e;
+}
+
+.card-action button {
+    float: right;
+}
+
+.card-action p {
+    display: inline;
+}
+
+input:not([type]):focus:not([readonly])+label,
+input[type=text]:focus:not([readonly])+label,
+input[type=password]:focus:not([readonly])+label,
+input[type=email]:focus:not([readonly])+label,
+input[type=url]:focus:not([readonly])+label,
+input[type=time]:focus:not([readonly])+label,
+input[type=date]:focus:not([readonly])+label,
+input[type=datetime]:focus:not([readonly])+label,
+input[type=datetime-local]:focus:not([readonly])+label,
+input[type=tel]:focus:not([readonly])+label,
+input[type=number]:focus:not([readonly])+label,
+input[type=search]:focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+    color: #f9690e
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #f9690e;
+    box-shadow: 0 1px 0 0 #f9690e
+}
+
+[type="checkbox"]:checked+label:before {
+    top: -4px;
+    left: -5px;
+    width: 12px;
+    height: 22px;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid #f9690e;
+    border-bottom: 2px solid #f9690e;
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #f9690e;
+}
+
+
+/*
+.card.medium {
+    height: 380px;
+}
+*/
+
+.flow-text {
+    font-size: 1rem;
+    border: solid 1px #a0a0a0;
+    padding: 20px;
+}
+
+.card-title {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card-action p {
+    display: inline;
+    font-size: 25px;
+    /*    line-height: 1;*/
+}
+
+nav {
+    background-color: #fff;
+}
+
+nav .brand-logo {
+    padding: 20px;
+}
+
+nav,
+nav .nav-wrapper i,
+nav a.button-collapse,
+nav a.button-collapse i {
+    height: 160px;
+    line-height: 160px;
+    border-top: #f9690e solid;
+}
+
+nav ul a {
+    transition: background-color .3s;
+    font-size: 1.3rem;
+    color: #f9690e;
+    display: block;
+    padding: 0px 30px;
+    cursor: pointer;
+}
+
+nav ul a:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.clubselect {
+    margin-top:30px;
+}

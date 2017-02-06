@@ -1,0 +1,78 @@
+{% extends 'mainapp/base.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Тренеры {% endblock title %}
+
+{% block body %}
+    <div class="content" style="padding-top: 30px;">
+		<div>
+        <div class="lessons trainers" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+            <div class="lessons-arrows">
+                <span class="next"><i class="fa fa-chevron-right"></i></span>
+                <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
+            </div>
+            <div class="container">
+                <div class="row tesla-carousel-items">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="trainer">
+                            <div class="trainer-class d-border-c d-text-c">YF</div>
+                            <div class="trainer-hover">
+                                <h5 class="d-text-c">Александр Яшанькин</h5>
+                                <ul>
+                                    <li><i class="d-text-c fa fa-trophy"></i> 10-кратный чемпион мира по бодибилдингу </li>
+                                </ul>
+                            </div>
+                            <img src="{% static 'images/photos/trainer-1.jpg' %}" alt="trainer" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="trainer">
+                            <div class="trainer-class d-border-c d-text-c">YF</div>
+                            <div class="trainer-hover">
+                                <h5 class="d-text-c">Дмитрий Яшанькин</h5>
+                                <ul>
+                                    <li><i class="d-text-c fa fa-trophy"></i> 3-кратный Чемпион мира по фитнесу</li>
+
+                                </ul>
+                            </div>
+                            <img src="{% static 'images/photos/trainer-2.jpg' %}" alt="trainer" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="trainer">
+                            <div class="trainer-class d-border-c d-text-c">YF</div>
+                            <div class="trainer-hover">
+                                <h5 class="d-text-c">Оксана Яшанькина</h5>
+                                <ul>
+                                    <li><i class="d-text-c fa fa-trophy"></i> Чемпионка России и Европы по спортивной гимнастике</li>
+                                </ul>
+                            </div>
+                            <img src="{% static 'images/photos/trainer-3.jpg' %}" alt="Яшанькина Оксана" />
+                        </div>
+                    </div>
+					          <div class="col-md-4 col-xs-12">
+                        <div class="trainer">
+                            <div class="trainer-class d-border-c d-text-c">YF</div>
+                            <div class="trainer-hover">
+                                <h5 class="d-text-c">Елизавета Мукминова</h5>
+                                <ul>
+                                    <li><i class="d-text-c fa fa-trophy"></i>Многократная абсолютная чемпионка России и УрФО</br> Двухкратная победительница Кубка Яшанькина в категории Fitness Bikini</li>
+                                </ul>
+                            </div>
+                            <img src="{% static 'images/photos/mukminova.jpg' %}" alt="Елизавета Мукминова" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			</div>
+		<div>
+			<div class="container">
+			{{ page.content | safe }}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock body %}

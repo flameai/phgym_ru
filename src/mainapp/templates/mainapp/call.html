@@ -1,0 +1,33 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %} Заказать звонок {% endblock title %}
+
+{% block body %}
+<div class="container content">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
+        <h4 style="text-align:center;">{{ form.title }}</h4>
+        {{ form.context | safe }}
+        <form action="{% url 'call' slug=slug %}" class="abonement-form" id="form" name="mailform" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="subject" id="formsubject" value="ЗАКАЗ ЗВОНКА С САЙТА" />
+          <fieldset class="csc-mailform">
+            <div>
+              <label for="mailformName">Ваше имя:</label>
+              <input type="text" name="Name" id="formName" size="40" value="" required/>
+            </div>
+            <div>
+              <label for="mailformTel">Номер телефона</label>
+              <input type="text" name="Tel" id="formTel" size="11" value="" required />
+            </div>
+            <div>
+              <input type="submit" name="formtype_mail" class="abonement-btn" id="form_submit" value="Отправить"/>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+</div>
+
+{% endblock body %}

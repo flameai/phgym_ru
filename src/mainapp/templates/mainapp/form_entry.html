@@ -1,0 +1,111 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %} Заказать бесплатное занятие {% endblock title %}
+
+{% block body %}
+<div class="container content">
+
+      <div style="padding-top: 30px">
+        <h4 style="text-align: center">{{ form.title }}</h4>
+          {{ form.context | safe }}
+      </div>
+      <div style="padding-top: 30px">
+        <h4 style="text-align:center; font-size: 16px">Заявка на день бесплатного фитнеса</h4>
+        <form action="{% url 'entry' slug=slug %}" id="form" name="form" method="POST">
+          {% csrf_token %}
+
+          <input type="hidden" name="subject" id="formsubject" value="ЗАКАЗ БЕСПЛАТНОГО ЗАНЯТИЯ С САЙТА" />
+          <fieldset class="csc-mailform">
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="formName">Ваше имя</label> *
+                <input type="text" name="Name" id="formName" size="40" value="" required />
+              </div>
+              <div class="col-sm-6">
+                <label for="formTel">Номер телефона</label> *
+                <input type="text" name="Tel" id="formTel" size="11" required />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="formEmail">E-mail</label> *
+                <input type="text" name="Email" id="formEmail" size="40" value="" required />
+              </div>
+              <div class="col-sm-6">
+                <label for="formClub">Выберите клуб: </label> *
+                <select name="Club" id="formClub">
+                  <option value="Фурманова, 117">Фурманова, 117</option>
+                  <option value="ТРК КомсоМОЛЛ">ТРК КомсоМОЛЛ</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <p>Уважаемый Гость! Просим вас принять участие в опросе. Нам очень важно ваше мнение.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div>
+                  <label>Принять участие в опросе</label>
+                  <input type="checkbox" name="Interview" class="form_interview" id="inter" checked />
+                </div>
+
+                <div class="interview" style="margin-top: 10px;">
+                  <div class="row">
+                    <div class="col-sm-6 entry-form_checkbox-wrapper">
+                      <label for="entryformOrigin">Как вы узнали о нас</label>
+                      <p><input type="checkbox" name="origin", value="Internet" /> Internet</p>
+                      <p><input type="checkbox" name="origin", value="Наружная реклама" /> Наружная реклама</p>
+                      <p><input type="checkbox" name="origin", value="Вывеска на здании" /> Вывеска на здании</p>
+                      <p><input type="checkbox" name="origin", value="Флаеры" /> Флаеры</p>
+                      <p><input type="checkbox" name="origin", value="Работаю\проживаю рядом" /> Работаю\проживаю рядом</p>
+                      <p><input type="checkbox" name="origin", value="Знакомые" /> Знакомые</p>
+                      <p><input type="checkbox" name="origin", value="Другое" /> Другое</p>
+
+                      <label for="formParametr">Какой параметр при выборе фитнес-центра является определяющим</label>
+                      <p><input type="radio" name="parametr" value="Близость к дому\работе">Близость к дому\работе</p>
+                      <p><input type="radio" name="parametr" value="Стоимость абонемента">Стоимость абонемента</p>
+                      <p><input type="radio" name="parametr" value="Профессионализм тренеров">Профессионализм тренеров</p>
+                      <p><input type="radio" name="parametr" value="Качество оборудования">Качество оборудования</p>
+                      <p><input type="radio" name="parametr" value="Комфорт и дополнительный сервис">Комфорт и дополнительный сервис</p>
+                      <p><input type="radio" name="parametr" value="Престиж бренда">Престиж бренда</p>
+                      <p><input type="radio" name="parametr" value="Другое">Другое</p>
+                    </div>
+                    <div class="col-sm-6 entry-form_checkbox-wrapper">
+                      <label for="entryformService">Какие услуги клуба являются для вас наиболее важными</label>
+                      <p><input type="checkbox" name="service", value="Силовые тренажеры" /> Силовые тренажеры</p>
+                      <p><input type="checkbox" name="service", value="Кардио тренажеры" /> Кардио тренажеры</p>
+                      <p><input type="checkbox" name="service", value="Групповые занятия" /> Групповые занятия</p>
+                      <p><input type="checkbox" name="service", value="Функциональный тренинг" /> Функциональный тренинг</p>
+                      <p><input type="checkbox" name="service", value="Бокс, единоборства" /> Бокс, единоборства</p>
+                      <p><input type="checkbox" name="service", value="Детские секции" /> Детские секции</p>
+                      <p><input type="checkbox" name="service", value="Персональный тренинг" /> Персональный тренинг</p>
+                      <p><input type="checkbox" name="service", value="Другое" /> Другое</p>
+
+                      <label for="formTarget">Ваши фитнес-цели</label>
+                      <p><input type="checkbox" name="target", value="Похудение" /> Похудение</p>
+                      <p><input type="checkbox" name="target", value="Набор мышечной массы" /> Набор мышечной массы</p>
+                      <p><input type="checkbox" name="target", value="Улучшения самочувствия, здоровья" /> Улучшение самочувствия, здоровья</p>
+                      <p><input type="checkbox" name="target", value="Стать профессиональным спортсменом" /> Стать профессиональным спортсменом</p>
+                      <p><input type="checkbox" name="target", value="Другое" /> Другое</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+
+              <input class="entryform-btn btn" type="submit" name="formtype" id="form_submit" value="Отправить заявку"/>
+
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+</div>
+
+
+{% endblock body %}

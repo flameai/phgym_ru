@@ -1,0 +1,41 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %} {% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link type="text/css" rel="stylesheet" href="{% static 'plastic/css/materialize.min.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static 'plastic/css/style.css' %}">
+
+
+  </head>
+  <body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/shop" class="brand-logo center"><img src="{% static 'plastic/img/logo.png' %}"></a>
+        </div>
+    </nav>
+    <div class="container" style="display: none" data-bind="style: {display: 'block'}">
+
+      {% block body %} {% endblock body %}
+
+    </div>
+
+    <script src="{% static 'plastic/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'plastic/js/jquery.mask.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'plastic/js/materialize.min.js' %}"></script>
+
+    <script src="{% static 'plastic/js/moment.min.js' %}"></script>
+    <script src="{% static 'plastic/js/knockout-3.4.0.js' %}"></script>
+    <script src="{% static 'plastic/js/knockout-mapping.js' %}"></script>
+    <script src="{% static 'plastic/js/bindings.js' %}"></script>
+
+    <script src="{% static 'plastic/js/models/m_auth.js' %}"></script>
+    <script src="{% static 'plastic/js/models/m_registration.js' %}"></script>
+    <script src="{% static 'plastic/js/models/m_payment.js' %}"></script>
+    <script src="{% static 'plastic/js/main.js' %}"></script>
+  </body>
+</html>

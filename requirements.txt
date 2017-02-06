@@ -1,0 +1,7 @@
+Django==1.10.2
+django-ckeditor==5.1.1
+django-suit==0.2.21
+django-yandex-cash-register==0.1.4
+lxml==3.6.4
+Pillow==3.4.2
+requests==2.12.3

@@ -1,0 +1,407 @@
+{% extends 'mainapp/base.html' %}
+{% load static from staticfiles %}
+{% block title %} Главная {% endblock title %}
+
+{% block body %}
+<div class="content" style="margin: 0px;padding-right: 0px; padding-left:0px;">
+<!--  CONTENT ELEMENT, uid:3/html [begin] -->
+<div id="c3" class="csc-default" >
+<!--  Raw HTML content: [begin] -->
+<!-- === START COTENT === -->
+<div class="content">
+
+    <div class="main-slider">
+        <div id="main-slider" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+          {% for slider in sliders %}
+              <li data-target="#main-slider" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active" {% endif %}></li>
+          {% endfor %}
+          </ol>
+          <div class="carousel-inner">
+            {% for slider in sliders %}
+              <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-8 col-sm-12">
+                              <h1 class="main-slider__item-header">{{ slider.title }}</h1>
+                              <h1 class="main-slider__item-header d-text-c">{{ slider.subtitle }}</h1>
+                              <div class="text-left">
+                                  <span class="divider"></span>
+                              </div>
+                              <div class="main-slider__item-text">
+                                  {{ slider.context | safe }}
+                              </div>
+                              {% if slider.button_text and slider.button_url %}
+                              <a class="slider-btn btn pull-left" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+    </div>
+<!-- TIME -->
+
+<!-- SEPARATOR INFO  -->
+<div class="separator-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="d-text-c">АВТОРСКАЯ СИСТЕМА <br>TOP FITNESS ® </h3>
+                <div>
+                    <span class="divider"></span>
+                </div>
+                <div>
+                    <p>
+                        Это комплексная программа, по которой занимаются мировые звезды, позволяющая не только достигать стандартных целей фитнес-процесса, но и увеличивать общую физическую выносливость.
+                    </p>
+                    <br>
+                </div>
+                <div>
+                  <a class="slider-btn btn" href="{% url 'fitness' slug=slug %}">Подробнее</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <iframe src="https://player.vimeo.com/video/178136754?color=ffffff" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+        <!--<h4>Если вам нравится предложение - прочтите о нем подробнее</h4>
+        <a href="#" class="button-1 d-bg-c d-text-c-h d-border-c bold">подробнее</a> -->
+    </div>
+</div>
+<!-- SEPARATOR INFO  -->
+
+
+<!-- BLOG -->
+<div class="black-bg lessons blog-section__no-margin padding" id="blog" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Видеоблог</h3>
+            </div>
+            <div class="col-md-12">
+                <span class="divider"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="lessons-arrows">
+        <span class="next"><i class="fa fa-chevron-right"></i></span>
+        <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
+    </div>
+    <div class="container blog-videos_padding-top ">
+        <div class="row tesla-carousel-items">
+            <div class="col-md-4 col-xs-12">
+                <div class="blog-entry">
+                    <div class="entry-cover">
+                        <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="blog-entry">
+                    <div class="entry-cover">
+                        <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="blog-entry">
+                    <div class="entry-cover">
+                      <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BLOG -->
+
+<!-- SEPARATOR INFO -->
+<div class="only-in-yashankin">
+    <div class="d-bg-c padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h2>Доступный фитнес !<br /><span style="font-size:1.5em">2500</span> р. все включено!</h2>
+                    <a href="{% url 'abonement' slug=slug %}" class="btn btn-abonement">Заказать</a>
+                </div>
+                <div class="col-md-6 text-left">
+                    <span class="divider divider-white"></span>
+                    <p class="blog-text">Только в декабре!<br />Персональная тренировка в подарок!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SEPARATOR INFO -->
+
+
+<!-- SEPARATOR INFO -->
+<div class="separator-info" id="trainers">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Наши тренеры</h3>
+            </div>
+            <div class="col-md-12">
+                <span class="divider"></span>
+            </div>
+            <div class="col-md-12">
+                <p>Вы можете всегда получить исчерпывающий ответ на любой вопрос<br> по тренировке у наших специалистов</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SEPARATOR INFO -->
+
+<!-- TRAINERS -->
+<div class="lessons trainers" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+    <div class="lessons-arrows">
+        <span class="next"><i class="fa fa-chevron-right"></i></span>
+        <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
+    </div>
+    <div class="container">
+        <div class="row tesla-carousel-items">
+            <div class="col-md-4 col-xs-12">
+                <div class="trainer">
+                    <div class="trainer-class d-border-c d-text-c"></div>
+                    <div class="trainer-hover">
+                        <h5 class="d-text-c">Александр Яшанькин</h5>
+                        <ul>
+                            <li><i class="d-text-c fa fa-trophy"></i> 10-кратный чемпион мира по бодибилдингу </li>
+                            <!--<li><i class="d-text-c fa fa-bolt"></i> Мастер спорта международного класса</li>-->
+                        </ul>
+                    </div>
+                    <img src="{% static 'images/photos/trainer-1.jpg' %}" alt="trainer" />
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="trainer">
+                    <div class="trainer-class d-border-c d-text-c"></div>
+                    <div class="trainer-hover">
+                        <h5 class="d-text-c">Дмитрий Яшанькин</h5>
+                        <ul>
+                            <li><i class="d-text-c fa fa-trophy"></i> 3-хкратный Чемпион мира по бодибилдингу и фитнесу</li>
+
+                        </ul>
+                    </div>
+                    <img src="{% static 'images/photos/trainer-2.jpg' %}" alt="trainer" />
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="trainer">
+                    <div class="trainer-class d-border-c d-text-c"></div>
+                    <div class="trainer-hover">
+                        <h5 class="d-text-c">Оксана Яшанькина</h5>
+                        <ul>
+                            <li><i class="d-text-c fa fa-trophy"></i> Чемпионка России и Европы по спортивной гимнастике</li>
+                            <!--<li><i class="d-text-c fa fa-bolt"></i> 5 Years of Experience</li> -->
+                        </ul>
+                    </div>
+                    <img src="{% static 'images/photos/trainer-3.jpg' %}" alt="Яшанькина Оксана" />
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="trainer">
+                    <div class="trainer-class d-border-c d-text-c"></div>
+                    <div class="trainer-hover">
+                        <h5 class="d-text-c">Елизавета Мукминова</h5>
+                        <ul>
+                            <li><i class="d-text-c fa fa-trophy"></i>Многократная абсолютная чемпионка России и УрФО</br> Двухкратная победительница Кубка Яшанькина в категории Fitness Bikini</li>
+                            <!--<li><i class="d-text-c fa fa-bolt"></i> 5 Years of Experience</li> -->
+                        </ul>
+                    </div>
+                    <img src="{% static 'images/photos/mukminova.jpg' %}" alt="Елизавета Мукминова" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TRAINERS -->
+
+<!-- SEPARATOR INFO -->
+<div class="separator-info" id="classes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Фитнес-зоны</h3>
+            </div>
+            <div class="col-md-12">
+                <span class="divider"></span>
+            </div>
+            <div class="col-md-12">
+                <p>Фитнес-центр YASHANKIN FITNESS - это 1200 кв м пространства,<br> специально спроектированного с учетом специфики системы TOP FITNESS®</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SEPARATOR INFO -->
+
+<!-- CLASSES -->
+<div class="lessons" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+    <div class="lessons-arrows">
+        <span class="next"><i class="fa fa-chevron-right"></i></span>
+        <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
+    </div>
+    <div class="container">
+        <div class="row tesla-carousel-items">
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/funk_tren.jpg' %}" alt="Функциональный тренинг" />
+                    <h4>Функциональный тренинг</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/trenager.jpg' %}" alt="Тренажерный зал" />
+                    <h4>Тренажерный зал</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20  </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/heavy_athlete.jpg' %}" alt="Тяжелая атлетика" />
+                    <h4>Тяжелая атлетика</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/group.jpg' %}" alt="Групповые программы" />
+                    <h4>Групповые программы</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/bodybuilding.jpg' %}" alt="Секция классического бодибилдинга" />
+                    <h4>Секция классического бодибилдинга</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/phisiq.jpg' %}" alt="Школа Men's physique" />
+                    <h4>Школа Men's physique</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="lesson d-bg-c-h">
+                    <img src="{% static 'images/photos/bikini.jpg' %}" alt="Школа фитнес бикини" />
+                    <h4>Школа фитнес-бикини</h4>
+                    <!--<p>Понедельник - Среда 10:30 - 14:20 </p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CLASSES -->
+
+
+<!-- APPLICATION -->
+<div class="parallax parallax-3 application">
+    <div class="d-bg-c padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 application__left-side">
+                    <h2>Скачай мобильное<br> приложение и будь в курсе:</h2>
+                    <span class="divider divider-white"></span>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <a href="#" class="application__link">
+                                <span class="application__icon-container">
+                                    <img src="{% static 'images/app/events.svg' %}" alt="" class="application__icon">
+                                </span>
+                                <span class="application__text">Событий</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" class="application__link">
+                                <span class="application__icon-container">
+                                    <img src="{% static 'images/app/offer.svg' %}" alt="" class="application__icon">
+                                </span>
+                                <span class="application__text">Спецпредложений</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 ">
+                            <a href="#" class="application__link">
+                                <span class="application__icon-container">
+                                    <img src="{% static 'images/app/news.svg' %}" alt="" class="application__icon">
+                                </span>
+                                <span class="application__text">Новостей</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <a href="#" class="application__link">
+                                <span class="application__icon-container">
+                                    <img src="{% static 'images/app/shedule.svg' %}" alt="" class="application__icon">
+                                </span>
+                                <span class="application__text">Расписания</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <span class="app_img">
+                        <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                            <img src="{% static 'images/app/google_play.png' %}" width="140px">
+                        </a>
+                    </span>
+                    <span class="app_img">
+                        <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                            <img src="{% static 'images/app/app_store.png' %}" width="140px">
+                        </a>
+                    </span>
+                </div>
+                <div class="col-md-6 col-sm-6 application__right-side hidden-xs">
+                    <img src="../../static/images/app/телефон2.png" class="app_photo" alt="Приложение Powerhouse Gym для мобильного">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- APPLICATION -->
+
+<!-- SEPARATOR INFO -->
+<!-- <div class="separator-info" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h3 class="d-border-c">В шаговой доступности от Вас</h3>
+            </div>
+            <div class="col-md-9">
+                <h1><p>Мы ждем в нашем клубе:  </br><b>г.Екатеринбург, ул.Фурманова, 117</b> </br><b><div class="Phone4"> +7(343)376-28-86</div></b></br>sales@yashankin.com</p></h1>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- SEPARATOR INFO -->
+
+<!-- MAP -->
+<!-- <div class="map-location">
+
+<div class="map-wrap">
+<div class="overlay" onClick="style.pointerEvents='none'"></div>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2183.8578401756804!2d60.589018045097205!3d56.81407063799143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c16ee754e45bc9%3A0xa42f63d5cf11c8dc!2z0YPQuy4g0KTRg9GA0LzQsNC90L7QstCwLCAxMTcsINCV0LrQsNGC0LXRgNC40L3QsdGD0YDQsywg0KHQstC10YDQtNC70L7QstGB0LrQsNGPINC-0LHQuy4sIDYyMDE0NA!5e0!3m2!1sru!2sru!4v1468490897287" width="600" height="450" frameborder="0" style="border:0" allowfullscreen scrolling="no" ></iframe>
+</div>
+</div> -->
+<!-- MAP -->
+
+</div>
+<!-- === END CONTENT === -->
+
+<!--  Raw HTML content: [end] -->
+</div>
+<!--  CONTENT ELEMENT, uid:3/html [end] -->
+</div>
+{% endblock body %}

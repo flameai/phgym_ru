@@ -1,0 +1,167 @@
+{% extends 'mainapp/base.html' %}
+{% load static from staticfiles %}
+{% block title %} Продажа абонементов {% endblock title %}
+
+{% block body %}
+
+<div data-bind="template: {name: 'site'}"></div>
+<div data-bind="template: {name: 'phone'}"></div>
+<div data-bind="template: {name: 'sms'}"></div>
+<div data-bind="template: {name: 'registration'}"></div>
+
+<script type="text/html" id="phone">
+<!-- ko if: page() == "phone" -->
+    <div class="container content" style="padding-top: 30px">
+        <div class="text-center">
+          <!-- ko with: m_auth -->
+            <form style="display: inline-block;" data-bind="submit: sendPhone">
+                <div class="phoneform card-panel lighten-5">
+                    <h4>Введите номер<br /> вашего телефона</h4>
+                    <p>Мы отправим вам SMS с PIN-кодом для авторизации на нашем сервисе.<br />Для вас эта операция бесплатна!</p>
+                    <div class="input-field">
+                        <span>+</span>
+                        <input id="username" type="text" class="validate" data-bind="masked: phone, mask: '70000000000'">
+                    </div>
+                    <button data-bind="click: sendPhone" class="btn entryform-btn" style="width: 100%">Отправить код</button>  <!-- отправить запрос на sms -->
+                </div>
+            </form>
+            <!-- /ko -->
+        </div>
+    </div>
+<!-- /ko -->
+</script>
+
+<script type="text/html" id="sms">
+<!-- ko if: page() == "sms" -->
+    <div class="container content" style="padding-top: 30px">
+        <div class="text-center">
+
+              <!-- ko with: m_auth -->
+                <form style="display: inline-block;" data-bind="submit: authorization">
+                    <div class=" phoneform card-panel  lighten-5">
+                        <div class="input-field ">
+                            <h4>Введите код из СМС</h4>
+                            <input id="username" type="text" class="validate" data-bind="value: pin">
+                            <p data-bind="visible: error" class="text-danger" >Неправильный PIN</p>
+                            <button data-bind="click: authorization" class="btn entryform-btn" style="width: 100%">Готово</button>
+                        </div>
+                    </div>
+                </form>
+                <div style="display: none" id="hiddenForm"></div>
+                <!-- /ko -->
+        </div>
+    </div>
+<!-- /ko -->
+</script>
+
+<script type="text/html" id="site">
+<!-- ko if: page() == "site" -->
+    <div class="container content">
+        <div class="row">
+            <div class="input-field col-sm-12 clubselect" style="padding-top: 30px">
+                <label>Выберите клуб</label>
+                <select class="clubs-select" data-bind="options: clubs, optionsText: 'club', optionsValue: 'club', value: club"></select>
+
+            </div>
+        </div>
+
+        <h4 style="text-align: center;">Продажа абонементов</h4>
+
+        <div class="row">
+            <!-- ko if: currentClub -->
+                <!-- ko foreach: currentClub().goods -->
+                    <div class="col-xs-12 col-sm-6 col-lg-4">
+                        <form method="post" action="/shop/payment">
+                            <input type="hidden" name="item_kod" data-bind="attr: {value: $data.item_kod}" />
+                            <input type="hidden" name="order_type" data-bind="attr: {value: $data.type}" />
+                            <input type="hidden" name="club" data-bind="attr: {value: $parent.club}" />
+
+                            <div class="card medium">
+                                <div class="card-image">
+                                  <!-- ko if: $data.picture -->
+                                    <img data-bind="attr: {src: $data.picture}">
+                                  <!-- /ko -->
+                                  <!-- ko ifnot: $data.picture -->
+                                    <img src="/static/plastic/img/default.jpg" />
+                                  <!-- /ko -->
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="card-title" data-bind="text: $data.item">Название карточки</h4>
+                                    <p data-bind="text: $data.description"></p>
+                                    <h3 class="d-text-c" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
+                                    <button type="submit" class="btn" data-bind="click: $parent.buyItem">Купить</buton>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+
+    </div>
+<!-- /ko -->
+</script>
+
+<script type="text/html" id="registration">
+<!-- ko if: page() == "registration" -->
+    <div class="container content" style="padding-top: 30px">
+        <div class="row">
+          <!-- ko with: m_registration -->
+            <form class="regform card-panel  lighten-5">
+                <h4 style="text-align: center">Регистрация нового пользователя</h4>
+                <div class="row">
+                    <div class="input-field col-sm-12 col-md-6">
+                        <label for="last_name">ФИО</label>
+                        <input id="last_name" type="text" class="validate" data-bind="value: fio">
+                    </div>
+                    <div class="input-field col-sm-12 col-md-6">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" class="validate" data-bind="value: email">
+                    </div>
+                    <!-- <div class="input-field col-sm-12 clubselect">
+                        <label>Выберите клуб</label>
+                        <select class="clubs-select" data-bind="options: app.clubs, optionsText: 'club', optionsValue: 'club', value: app.club"></select>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="textblock col-sm-12">
+                        <p class="flow-text oferta_context"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>
+                            <input type="checkbox" id="test5" data-bind="checked: oferta" style="width: initial; margin-right: 5px;" />
+                            Я принимаю условия
+                        </p>
+                    </div>
+                </div>
+                <div class="center row">
+                    <div class="col-sm-12">
+                        <button data-bind="enable: registerValidate, click: registration" class="btn entryform-btn" >Отправить</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /ko -->
+        </div>
+    </div>
+<!-- /ko -->
+</script>
+
+{% endblock body %}
+{% block scripts %}
+    <script src="{% static 'plastic/js/jquery.mask.min.js' %}"></script>
+
+    <script src="{% static 'plastic/js/materialize.min.js' %}"></script>
+
+    <script src="{% static 'plastic/js/moment.min.js' %}"></script>
+    <script src="{% static 'plastic/js/knockout-3.4.0.js' %}"></script>
+    <script src="{% static 'plastic/js/knockout-mapping.js' %}"></script>
+    <script src="{% static 'plastic/js/bindings.js' %}"></script>
+
+    <script src="{% static 'plastic/js/models/m_auth.js' %}"></script>
+    <script src="{% static 'plastic/js/models/m_registration.js' %}"></script>
+    <script src="{% static 'plastic/js/models/m_payment.js' %}"></script>
+    <script src="{% static 'plastic/js/main.js' %}"></script>
+
+{% endblock scripts %}
