@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from djangoseo.admin import register_seo_admin, get_inline
+from seo import MyMetadata
 from django.forms import ModelForm
 from suit.widgets import SuitDateWidget, AutosizedTextarea
 from suit.admin import SortableModelAdmin
 
 from .models import *
 
+register_seo_admin(admin.site, MyMetadata)
 
 class NewsForm(ModelForm):
     class Meta:
@@ -18,10 +21,12 @@ class NewsForm(ModelForm):
         }
 
 class NewsAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
     list_display = ('title', 'date')
     list_display_links = ('title', 'date')
     list_filter = ['date']
     form = NewsForm
+    inlines = [get_inline(MyMetadata)]
 
 admin.site.register(News, NewsAdmin)
 
@@ -41,11 +46,12 @@ class EntryInline(admin.TabularInline):
     max_num = 12
 
 
-class ClubAdmin(admin.ModelAdmin):
-    list_display = ('address','phone','email','worktime')
+class ClubAdmin(SortableModelAdmin):
+    list_display = ('address','phone','email','worktime','city','order')
     inlines = [
         GymInline,
     ]
+    sortable = 'order'
 
 admin.site.register(Club,ClubAdmin)
 
@@ -85,3 +91,5 @@ class PageAdmin(SortableModelAdmin):
     sortable = 'order'
 
 admin.site.register(Page, PageAdmin)
+
+admin.site.register(City)

@@ -8,29 +8,46 @@ from .templatetags.mainapp_extras import register
 
 from .models import *
 
-def index(request, slug="comsomoll"):
+def index(request, slug=""):
     context = {'indexpage': True}
 
-    try:
-        club = Club.objects.get(slug=slug)
-        sliders = Slider.objects.filter(club=club).order_by('order')
-        context.update({'sliders': sliders})
-    except:
-        pass
-    return render(request,'mainapp/index.html',context)
+    if slug:
+        try:
+            club = Club.objects.get(slug=slug)
+            sliders = Slider.objects.filter(club=club).order_by('order')
+            context.update({'sliders': sliders})
+        except:
+            pass
+        return render(request,'mainapp/index.html',context)
+    else:
+        try:
+            sliders = Slider.objects.filter(club__isnull=True).order_by('order')
+            context.update({'sliders': sliders})
+        except:
+            pass
+        return render(request,'mainapp/indexcompany.html',context)
 
-def news(request, slug="comsomoll"):
+
+def news(request, slug=""):
     context = {}
-    try:
-        club = Club.objects.get(slug=slug)
-        news = News.objects.filter(club=club).order_by("-date")
-        context.update({'news': news})
-        title = u"Новости"
-        subtitle = u""
-        context.update({'title': title, 'subtitle': subtitle})
-    except:
-        pass
-    return render(request,'mainapp/news.html', context)
+    if slug:    # вывод подробной статьи
+        try:
+            news = News.objects.get(slug=slug)
+            title = news.title  # сделать парсер уровня 
+            subtitle = u""
+            context.update({'title': title, 'subtitle': subtitle, 'news': news})
+            return render(request,'mainapp/full_news.html', context)
+        except:
+            pass
+    else:   # вывод списка кратких статей
+        try:
+            news = News.objects.all().order_by("-date")
+            title = u"Новости"
+            subtitle = u""
+            context.update({'title': title, 'subtitle': subtitle, 'news_list': news})
+            return render(request,'mainapp/news.html', context)
+        except:
+            pass
 
 def stock(request, slug="comsomoll"):
     title = u"Акции"
@@ -266,6 +283,21 @@ def getPhoneForClub(clubslug):
     except:
         pass
 
+@register.simple_tag
+def getClubsByCity(city):
+    try:
+        clubs = Club.objects.filter(city=city).order_by('address')
+        return clubs
+    except:
+        pass
+
+@register.simple_tag
+def getCities():
+    try:
+        cities = City.objects.all()
+        return cities
+    except:
+        pass
 
 def getDataByDays(clubnum,gymnum):
      club = Club.objects.get(pk=clubnum)

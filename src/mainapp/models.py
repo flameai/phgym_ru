@@ -27,6 +27,18 @@ class FormRequest(models.Model):
         verbose_name = u'заявка с форм'
         verbose_name_plural = u'заявки с форм'
 
+class City(models.Model):
+    name = models.CharField(verbose_name=u"Название",max_length=100)
+
+    def __str__(self):
+        return "%s" % self.name
+    def __unicode__(self):
+        return "%s" % self.name
+
+    class Meta:
+        verbose_name = u'город'
+        verbose_name_plural = u'города'
+
 
 class Club(models.Model):
     address = models.CharField(verbose_name=u"Адрес",max_length=200)
@@ -35,6 +47,8 @@ class Club(models.Model):
     worktime = models.CharField(verbose_name=u"Время работы",max_length=200)
     slug = models.SlugField(verbose_name=u"Слаг", default="")
     callibri = models.CharField(verbose_name=u"Callibri", max_length=50, default="", blank=True)
+    city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default=None, verbose_name=u"Город",blank=True,null=True,)
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.address
@@ -47,19 +61,15 @@ class Club(models.Model):
 
 class News(models.Model):
     title = models.CharField(u'заголовок',max_length=128)
+    slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateField(u'дата',default=date.today)
-    main_photo = models.ImageField(u'фото')
-    text = RichTextUploadingField(u'текст новости')
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, verbose_name=u"клуб",blank=True,null=True,)
+    short_text = RichTextUploadingField(u'краткий текст новости',default="",)
+    full_text = RichTextUploadingField(u'полный текст новости',default="",)
 
     def __str__(self):
         return self.title
     def __unicode__(self):
         return self.title
-
-    def get_text(self):
-        from django.utils.safestring import mark_safe
-        return mark_safe(self.text)
 
     class Meta:
         verbose_name = u'новость'
@@ -168,7 +178,7 @@ class Slider(models.Model):
     context = RichTextField(verbose_name=u'Текст')
     button_url = models.URLField(verbose_name=u'Ссылка кнопки', blank=True)
     button_text = models.CharField(verbose_name=u'Текст на кнопке', max_length=100, blank=True)
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None)
+    club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:

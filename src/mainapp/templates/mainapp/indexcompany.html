@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% load static from staticfiles %}
+{% block title %} Корпоративная страница {% endblock title %}
+
+{% block body %}
+<div class="content" style="margin: 0px;padding-right: 0px; padding-left:0px;">
+  <div id="c3" class="csc-default" >
+    <div class="content">
+      <div class="main-slider">
+        <div id="main-slider" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+          {% for slider in sliders %}
+              <li data-target="#main-slider" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active" {% endif %}></li>
+          {% endfor %}
+          </ol>
+          <div class="carousel-inner">
+            {% for slider in sliders %}
+              <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <h1 class="main-slider__item-header">{{ slider.title }}</h1>
+                        <h1 class="main-slider__item-header d-text-c">{{ slider.subtitle }}</h1>
+                        <div class="text-left">
+                            <span class="divider"></span>
+                        </div>
+                        <div class="main-slider__item-text">
+                            {{ slider.context | safe }}
+                        </div>
+                        {% if slider.button_text and slider.button_url %}
+                        <a class="slider-btn btn pull-left" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div> <!-- /Slider -->
+    </div>
+  </div>
+</div>
+{% endblock body %}

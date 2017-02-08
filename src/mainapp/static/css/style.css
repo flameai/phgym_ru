@@ -4316,3 +4316,11 @@ list-style:none;
 	top: 25%;
     left: 10px;
 }
+.mainmenu {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+.menu {
+	flex-grow: 1;
+}

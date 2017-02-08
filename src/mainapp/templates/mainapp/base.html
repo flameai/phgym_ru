@@ -1,12 +1,18 @@
 {% load static from staticfiles %}
 {% load mainapp_extras %}
+{% load seo %}
+{% get_metadata as metadata %}
 <!doctype html>
 <html>
   <head>
+    {{metadata.description}}
+    {{metadata.keywords}}
+    {% if metadata.title %}
+      {{ metadata.title }}
+    {% else %}
     <title>{% block title %} {% endblock title %}</title>
-    <meta name="DESCRIPTION" content="Яшанькин фитнес, фитнес-студия нового формата">
-    <meta name="KEYWORDS" content="Дмитрий Яшанькин, фитнес, Топ Фитнес">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% endif %}
+
     <meta charset="utf-8">
 
     <link rel="shortcut icon" href="{% static 'images/elements/favicon.ico' %}" type="image/x-icon">
@@ -26,29 +32,32 @@
       <div class="top-header d-border-c">
           <div class="container">
             <div class="row top-header__row">
-                <div class="col-xs-12 col-sm-6 col-md-2">
-                    <div class="logo">
-                      <a href="/"> <img src="{% static 'images/logo.jpg' %}" width="150px" height="auto"></a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-2 col-md-push-8">
-                  <a class="btn pull-right" href="{% url 'call' slug=slug %}">Заказать звонок</a>
-                </div>
-                <nav>
-                  <div class="col-xs-12 col-sm-6 col-md-3 col-md-pull-2  address-wraper" style="border-right: 1px solid #b4b4b4;">
-                    <a href="/furmanova/">
-                      <p class="top-header__adress">Ул. Фурманова, 117</p>
-                      <p class="top-header__phone"><img src="{% static 'images/phone.png' %}" class="top-header__icon"><span class="furman_phone">+7 (343) 376-28-86</span></p>
-                    </a>
+              <div class="col-xs-12 col-sm-6 col-md-2">
+                  <div class="logo">
+                    <a href="/"> <img src="{% static 'images/logo.jpg' %}" width="150px" height="auto"></a>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-5 col-md-pull-2 address-wraper">
-                    <a href="/comsomoll/">
-                      <img src="{% static 'images/logo2.png' %}" class="hidden-xs" style="position: absolute; top: -10px;">
-                      <p class="top-header__adress address-with-logo">ТРК "КомсоМОЛЛ" (Д.Сибирского тракта, 2)</p>
-                      <p class="top-header__phone phone-with-logo"><img src="{% static 'images/phone.png' %}" class="top-header__icon"><span class="komsom_phone">+7 (343) 270-79-09</span></p>
-                    </a>
-                  </div>
-                </nav>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-8">
+                <select class="form-control" id="navigation">
+                  <option value="">Выберите клуб</option>
+                  {% getCities as cities %}
+                  {% if cities %}
+                    {% for city in cities %}
+                      {% getClubsByCity city as clubs %}
+                      {% if clubs %}
+                      <optgroup label="{{city.name}}">
+                        {% for club in clubs %}
+                          <option value="/{{club.slug}}">{{club.address}}</option>
+                        {% endfor %}
+                      </optgroup>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </select>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-2">
+                <a class="btn pull-right" href="{% url 'call' slug=slug %}">Заказать звонок</a>
+              </div>
             </div>
           </div>
       </div>
@@ -61,7 +70,7 @@
                         <div class="responsive-menu d-text-c-h"><i class="fa fa-align-justify" aria-hidden="true"></i>Меню</div>
                         <ul>
                           <li>
-                            <a href="{% url 'news' slug=slug %}" target="_top" class="d-text-c-h">Новости</a>
+                            <a href="{% url 'news' %}" target="_top" class="d-text-c-h">Новости</a>
                           </li>
                           <li>
                             <a href="{% url 'stock' slug=slug %}" target="_top" class="d-text-c-h">Акции</a>
@@ -177,6 +186,5 @@
       /></noscript>
       <!-- DO NOT MODIFY -->
       <!-- End Facebook Pixel Code -->
-
   </body>
 </html>

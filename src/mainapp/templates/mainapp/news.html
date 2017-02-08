@@ -5,11 +5,11 @@
 <div class="container content">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
-        {%for news_item in news %}
+        {%for news in news_list %}
             <div class="news_item" >
-                <img src="{{news_item.main_photo.url}}" class="news_item__image" alt="" />	
-                <h4 class="news_item__title">{{news_item.title}}</h4>
-                <div class="news_item__text">{{news_item.text | safe}}</div>
+                <h4 class="news_item__title">{{news.title}}</h4>
+                <div class="news_item__text">{{news.short_text | safe}}</div>
+                <a href="{{news.slug}}">Подробнее</a>
             </div>
         {% endfor %}
         </div>
