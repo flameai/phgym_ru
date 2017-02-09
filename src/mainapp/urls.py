@@ -8,17 +8,19 @@ urlpatterns = [
     url(r'^$', views.index),
 
     url(r'^news/$', views.news, name='news'),
-    url(r'^news/(?P<slug>[\w-]+)/$', views.news, name='news'),
+    url(r'^news/(?P<page>[\w-]+)/$', views.news, name='news'),
 
     url(r'^(?P<slug>[\w-]+)/stock/$', views.stock, name='stock'),
     url(r'^(?P<slug>[\w-]+)/stock/(?P<page>[\w-]+)/$', views.stock, name='stock'),
 
-    url(r'^(?P<slug>[\w-]+)/topfitness/$', views.fitness, name='fitness'),
-    url(r'^(?P<slug>[\w-]+)/service/$', views.service, name='service'),
+    url(r'^(?P<slug>[\w-]+)/program/$', views.program, name='program'),
+    url(r'^(?P<slug>[\w-]+)/program/(?P<page>[\w-]+)/$', views.program, name='program'),
+
+    # url(r'^(?P<slug>[\w-]+)/topfitness/$', views.fitness, name='fitness'),
     url(r'^(?P<slug>[\w-]+)/schedule/(?P<detail>[\w-]+)$', views.schedule, name="schedule"),
-    url(r'^(?P<slug>[\w-]+)/trainers/$', views.trainers, name="trainers"),
+    # url(r'^(?P<slug>[\w-]+)/trainers/$', views.trainers, name="trainers"),
     url(r'^(?P<slug>[\w-]+)/comments/$', views.comments, name="comments"),
-    url(r'^(?P<slug>[\w-]+)/about/$', views.about, name="about"),
+    # url(r'^(?P<slug>[\w-]+)/about/$', views.about, name="about"),
     url(r'^(?P<slug>[\w-]+)/contacts/$', views.contacts, name="contacts"),
     url(r'^(?P<slug>[\w-]+)/call/$', views.call, name='call'),
     url(r'^(?P<slug>[\w-]+)/entry/$', views.entry, name='entry'),

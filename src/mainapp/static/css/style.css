@@ -2230,8 +2230,6 @@ list-style:none;
 	font-weight: 400;
 }
 .path .path-root {
-	float: right;
-	margin-right: 5px;
 	font-size: 13px;
 	color: #fff;
 }
@@ -4209,7 +4207,7 @@ list-style:none;
 }
 
 .fixed-margin {
-  margin-top: 163px ;
+  margin-top: 155px ;
 }
 @media(max-width: 991px){
 	.fixed-margin {

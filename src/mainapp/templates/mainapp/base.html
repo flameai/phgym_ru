@@ -54,9 +54,7 @@
                   {% endif %}
                 </select>
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-2">
-                <a class="btn pull-right" href="{% url 'call' slug=slug %}">Заказать звонок</a>
-              </div>
+              <div class="col-xs-12 col-sm-6 col-md-2"></div>
             </div>
           </div>
       </div>
@@ -67,18 +65,13 @@
                   <div class="col-md-12">
                       <nav class="menu">
                         <div class="responsive-menu d-text-c-h"><i class="fa fa-align-justify" aria-hidden="true"></i>Меню</div>
+                        {% if slug %}
                         <ul>
-                          <li>
-                            <a href="{% url 'news' %}" target="_top" class="d-text-c-h">Новости</a>
-                          </li>
                           <li>
                             <a href="{% url 'stock' slug=slug %}" target="_top" class="d-text-c-h">Акции</a>
                           </li>
-                          <!-- <li>
-                            <a href="{% url 'fitness' slug=slug %}" target="_top" class="d-text-c-h">Система Top Fitness®</a>
-                          </li> -->
                           <li>
-                            <a href="{% url 'service' slug=slug %}" target="_top" class="d-text-c-h">Услуги</a>
+                            <a href="{% url 'program' slug=slug %}" target="_top" class="d-text-c-h">Программы</a>
                           </li>
                           <li>
                             <a href="#" target="_top">Расписание</a>
@@ -93,9 +86,6 @@
                             </ul>
                             {% endif %}
                           </li>
-                          <!-- <li>
-                            <a href="{% url 'trainers' slug=slug %}" target="_top" class="d-text-c-h">Тренеры</a>
-                          </li> -->
                           <li>
                             <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
@@ -103,15 +93,19 @@
                             <a href="{% url 'entry' slug=slug %}" target="_top" class="d-text-c-h"><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px; line-height: inherit;"></i>Бесплатный fitness<i class="fa fa-star" aria-hidden="true" style="margin-left: 5px; line-height: inherit;"></i></a>
                           </li>
                         </ul>
+                        {% else %}
+                        <ul>
+                          <li>
+                            <a href="#" class="d-text-c-h">Приложение</a>
+                          </li>
+                          <li>
+                            <a href="#" class="d-text-c-h">Франшиза</a>
+                          </li>
+                        </ul>
+                        {% endif %}
                       </nav>
                   </div>
-
               </div>
-              <div class="row">
-
-
-              </div>
-
           </div>
       </div>
     </header>

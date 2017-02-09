@@ -29,8 +29,6 @@ class NewsAdmin(admin.ModelAdmin):
 
 admin.site.register(News, NewsAdmin)
 
-admin.site.register(StaticPage)
-
 class WeekDayInline(admin.TabularInline):
     model = WeekDay
     max_num = 7
@@ -98,3 +96,9 @@ class StockAdmin(admin.ModelAdmin):
     list_display = ('title','date','club')
 
 admin.site.register(Stock, StockAdmin)
+
+class ProgramAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+    list_display = ('title', 'date', 'club')
+
+admin.site.register(Program, ProgramAdmin)

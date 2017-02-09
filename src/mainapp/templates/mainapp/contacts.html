@@ -6,22 +6,23 @@
 <div class="container content" style="padding-top: 30px;">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h4>Мы находимся по адресам</h4>
+      <h4>Мы находимся по адресу</h4>
       <div class="contacts-list">
-      {% for club in clubs %}
         <div class="row contacts-row">
-          <div class="col-md-5 contacts-col">
+          <div class="col-md-3 contacts-col">
             <div><i class="fa fa-map-marker d-text-c" aria-hidden="true"></i> {{club.address}}</div>
+          </div>
+          <div class="col-md-3 contacts-col">
+            <div><i class="fa fa-clock-o d-text-c" aria-hidden="true"></i> {{club.worktime}}</div>
           </div>
           <div class="col-md-3 contacts-col">
             <div><i class="fa fa-phone d-text-c" aria-hidden="true"></i><span class="{{club.callibri}}">{{club.phone}}</span></div>
           </div>
-          <div class="col-md-4 contacts-col">
+          <div class="col-md-3 contacts-col">
             <div><i class="fa fa-envelope d-text-c" aria-hidden="true"></i> <a href="mailto:{{club.email}}">{{club.email}}</a></div>
           </div>
           <div class="clearfix"></div>
         </div>
-      {% endfor %}
       </div>
       <br /><br />
       <div id="map" class="contact-map"></div>
@@ -33,8 +34,7 @@
             center: city
           });
           var positions = [
-            {map: new google.maps.LatLng(56.813548,60.5911959),address: "Фурманова, 117",},
-            {map: new google.maps.LatLng(56.8297263,60.6715995), address: "Дублер Сибирского Тракта, 2 (ТРК «КомсоМОЛЛ»)"}
+            {map: {lat: {{ club.lat|stringformat:"f" }}, lng: {{club.lon|stringformat:"f" }}}, address: "{{ club.address }}"}
           ];
 
           positions.forEach(function(item){

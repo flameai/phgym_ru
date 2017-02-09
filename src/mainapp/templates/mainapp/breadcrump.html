@@ -1,8 +1,12 @@
 <div class="path no-margin">
     <div class="padding black-bg">
         <div class="container">
-            <div class="path-root"><a href="/">Главная</а>&nbsp;&nbsp;\&nbsp;&nbsp;<a href="{{ request.path }}" onfocus="blurLink(this);"  target="_top">{{title}}</a></div>
-            <div class="subheader">{{subtitle}}</div>
+            <div class="path-root">
+              <a href="/">Главная</a>
+              {% for item in breadcrumbs %}
+                \ <a href="{{item.url}}">{{item.title}}</a>
+              {% endfor %}
+            </div>
         </div>
     </div>
 </div>

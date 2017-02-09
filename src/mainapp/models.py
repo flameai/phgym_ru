@@ -26,7 +26,7 @@ class FormRequest(models.Model):
     class Meta:
         verbose_name = u'заявка с форм'
         verbose_name_plural = u'заявки с форм'
-        
+
 
 class City(models.Model):
     name = models.CharField(verbose_name=u"Название",max_length=100)
@@ -49,6 +49,8 @@ class Club(models.Model):
     slug = models.SlugField(verbose_name=u"Слаг", default="")
     callibri = models.CharField(verbose_name=u"Callibri", max_length=50, default="", blank=True)
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default=None, verbose_name=u"Город",blank=True,null=True,)
+    lat = models.FloatField(verbose_name=u'широта', default=0.,)
+    lon = models.FloatField(verbose_name=u'долгота', default=0.,)
     order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -96,18 +98,13 @@ class Stock(models.Model):
         verbose_name_plural = u'акции'
 
 
-class StaticPage(models.Model):
-    PAGE_TYPES = (
-        ("stock", "Акции"),
-        ("fitness", "Top Fitness"),
-        ("service", "Услуги"),
-        ("trainers", "Тренеры"),
-    )
-
-    title = models.CharField(verbose_name=u'Название',max_length=255)
-    pagetype = models.CharField(verbose_name=u"Тип страницы",choices=PAGE_TYPES, default="", max_length=10)
-    content = RichTextUploadingField(verbose_name=u"Содержание")
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, verbose_name=u"Клуб",blank=True,null=True,)
+class Program(models.Model):
+    title = models.CharField(verbose_name=u'название',max_length=255)
+    slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
+    date = models.DateField(u'дата', default=date.today)
+    image = models.ImageField(verbose_name=u'Изображение')
+    full_text = RichTextUploadingField(verbose_name=u'Подробное содержание')
+    club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
 
     def __str__(self):
         return self.title
@@ -115,8 +112,9 @@ class StaticPage(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = u'статическая страница'
-        verbose_name_plural = u'статические страницы'
+        verbose_name = u'программа'
+        verbose_name_plural = u'программы'
+
 
 class Gym(models.Model):
     title = models.CharField(verbose_name=u'Название',max_length=255)

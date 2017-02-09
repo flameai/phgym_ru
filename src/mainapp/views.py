@@ -33,23 +33,22 @@ def index(request, slug=""):
         return render(request,'mainapp/indexcompany.html',context)
 
 
-def news(request, slug=""):
+def news(request, page=""):
     context = {}
-    if slug:    # вывод подробной статьи
+    if page:    # вывод подробной статьи
         try:
-            news = News.objects.get(slug=slug)
-            title = news.title  # сделать парсер уровня
-            subtitle = u""
-            context.update({'title': title, 'subtitle': subtitle, 'news': news})
+            news = News.objects.get(slug=page)
+            breadcrumbs = [{"title": "Новости", "url": "/news/"}, {"title": news.title, "url": request.path }]
+            print(request)
+            context.update({'breadcrumbs': breadcrumbs, 'news': news})
             return render(request,'mainapp/news/item.html', context)
         except:
             pass
     else:   # вывод списка кратких статей
         try:
             news = News.objects.all().order_by("-date")
-            title = u"Новости"
-            subtitle = u""
-            context.update({'title': title, 'subtitle': subtitle, 'news_list': news})
+            breadcrumbs = [{"title": "Новости", "url": request.path }]
+            context.update({'breadcrumbs': breadcrumbs, 'news_list': news})
             return render(request,'mainapp/news/list.html', context)
         except:
             pass
@@ -59,10 +58,9 @@ def stock(request, slug="", page=""):
     if page:    # вывод подробной статьи
         try:
             club = Club.objects.get(slug=slug)
-            stock = Stock.objects.get(slug=page)
-            title = stock.title
-            subtitle = u''
-            context.update({'title': title, 'subtitle': subtitle, 'stock': stock})
+            stock = Stock.objects.get(slug=page, club=club)
+            breadcrumbs = [{'title': "Акции", "url": "/"+ slug + "/stock/"}, {'title': stock.title, "url": request.path }]
+            context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
             return render(request,'mainapp/stock/item.html', context)
         except:
             pass
@@ -70,34 +68,44 @@ def stock(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             stocks = Stock.objects.filter(club=club)
-            title = u"Акции"
-            subtitle = u''
-            context.update({'title': title, 'subtitle': subtitle, "stocks": stocks })
+            breadcrumbs = [{'title': "Акции", "url": request.path }]
+            context.update({'breadcrumbs': breadcrumbs, "stocks": stocks })
+            return render(request,'mainapp/stock/list.html',context)
         except:
             pass
-        return render(request,'mainapp/stock/list.html',context)
 
 
-def fitness(request, slug="comsomoll"):
-    context = getContext('fitness')
-    try:
-        title = u"Система Top Fitness®"
-        subtitle = u"Система Top Fitness от Дмитрия Яшанькина"
-        context.update({'title': title, 'subtitle': subtitle})
-    except:
-        pass
-    return render(request,'mainapp/fitness.html',context)
+# def fitness(request, slug="comsomoll"):
+#     context = getContext('fitness')
+#     try:
+#         title = u"Система Top Fitness®"
+#         subtitle = u"Система Top Fitness от Дмитрия Яшанькина"
+#         context.update({'title': title, 'subtitle': subtitle})
+#     except:
+#         pass
+#     return render(request,'mainapp/fitness.html',context)
 
-def service(request, slug="comsomoll"):
-    title = u'Услуги'
-    context = {'title': title}
-    try:
-        club = Club.objects.get(slug=slug)
-        data = StaticPage.objects.get(pagetype='service',club=club)
-        context.update({"page": data })
-    except:
-        pass
-    return render(request,'mainapp/service.html',context)
+def program(request, slug="", page=""):
+    context = {}
+    if page:    # подробная статья
+        try:
+            club = Club.objects.get(slug=slug)
+            prog = Program.objects.get(club=club, slug=page)
+            breadcrumbs = [{'title': "Программы", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path}]
+            context.update({'breadcrumbs': breadcrumbs, "program": prog})
+            return render(request,'mainapp/program/item.html', context)
+        except:
+            pass
+    else:       # список статей
+        try:
+            club = Club.objects.get(slug=slug)
+            progs = Program.objects.filter(club=club)
+            breadcrumbs = [{'title': "Программы", "url": request.path }]
+            context.update({"breadcrumbs": breadcrumbs, "programs": progs })
+            return render(request,'mainapp/program/list.html',context)
+        except:
+            pass
+
 
 def schedule(request, slug="comsomoll", detail=None):
     schedule_num = detail
@@ -116,14 +124,14 @@ def schedule(request, slug="comsomoll", detail=None):
         pass
     return render(request,'mainapp/schedule.html', context)
 
-def trainers(request, slug="comsomoll"):
-    context = getContext('trainers')
-    try:
-        title = u"Тренеры"
-        context.update({'title': title})
-    except:
-        pass
-    return render(request,'mainapp/trainers.html',context)
+# def trainers(request, slug="comsomoll"):
+#     context = getContext('trainers')
+#     try:
+#         title = u"Тренеры"
+#         context.update({'title': title})
+#     except:
+#         pass
+#     return render(request,'mainapp/trainers.html',context)
 
 def comments(request, slug="comsomoll"):
     context = {}
@@ -134,23 +142,21 @@ def comments(request, slug="comsomoll"):
         pass
     return render(request,'mainapp/comments.html',context)
 
-def about(request, slug="comsomoll"):
-    context = getContext('about')
-    try:
-        title = u"О компании"
-        context.update({'title': title})
-    except:
-        pass
-    return render(request,'mainapp/about.html', context)
+# def about(request, slug="comsomoll"):
+#     context = getContext('about')
+#     try:
+#         title = u"О компании"
+#         context.update({'title': title})
+#     except:
+#         pass
+#     return render(request,'mainapp/about.html', context)
 
 def contacts(request, slug="comsomoll"):
     context = {}
     try:
-        clubs = Club.objects.all()
-        context = {"clubs": clubs}
-        title = u"Контакты"
-        subtitle = u"Контактная информация"
-        context.update({'title': title, 'subtitle': subtitle})
+        club = Club.objects.get(slug=slug)
+        breadcrumbs = [{"title": "Контакты", "url": request.path}]
+        context.update({'breadcrumbs': breadcrumbs, 'club': club})
     except:
         pass
     return render(request,'mainapp/contacts.html', context)
@@ -390,14 +396,14 @@ def timeByNum(num):
     }
     return time[num]
 
-def getContext(page):
-    context = {}
-    try:
-        data = StaticPage.objects.get(pagetype=page)
-        context.update({"page": data })
-    except:
-        pass
-    return context
+# def getContext(page):
+#     context = {}
+#     try:
+#         data = StaticPage.objects.get(pagetype=page)
+#         context.update({"page": data })
+#     except:
+#         pass
+#     return context
 
 def getClubByName(name):
     club = Club.objects.get(slug=name)
