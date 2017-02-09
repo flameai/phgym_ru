@@ -11,7 +11,7 @@ from .models import *
 def index(request, slug=""):
     context = {'indexpage': True}
 
-    if slug:
+    if slug:    # Главная страница клуба
         try:
             club = Club.objects.get(slug=slug)
             sliders = Slider.objects.filter(club=club).order_by('order')
@@ -19,10 +19,15 @@ def index(request, slug=""):
         except:
             pass
         return render(request,'mainapp/index.html',context)
-    else:
+    else:   # Корпоративная страница
         try:
             sliders = Slider.objects.filter(club__isnull=True).order_by('order')
             context.update({'sliders': sliders})
+        except:
+            pass
+        try:
+            news = News.objects.all().order_by('-id')[:3]
+            context.update({'news_list': news})
         except:
             pass
         return render(request,'mainapp/indexcompany.html',context)
@@ -33,10 +38,10 @@ def news(request, slug=""):
     if slug:    # вывод подробной статьи
         try:
             news = News.objects.get(slug=slug)
-            title = news.title  # сделать парсер уровня 
+            title = news.title  # сделать парсер уровня
             subtitle = u""
             context.update({'title': title, 'subtitle': subtitle, 'news': news})
-            return render(request,'mainapp/full_news.html', context)
+            return render(request,'mainapp/news/item.html', context)
         except:
             pass
     else:   # вывод списка кратких статей
@@ -45,21 +50,32 @@ def news(request, slug=""):
             title = u"Новости"
             subtitle = u""
             context.update({'title': title, 'subtitle': subtitle, 'news_list': news})
-            return render(request,'mainapp/news.html', context)
+            return render(request,'mainapp/news/list.html', context)
         except:
             pass
 
-def stock(request, slug="comsomoll"):
-    title = u"Акции"
-    context = {'title': title}
-    # context = getContext('stock')
-    try:
-        club = Club.objects.get(slug=slug)
-        data = StaticPage.objects.get(pagetype='stock',club=club)
-        context.update({"page": data })
-    except:
-        pass
-    return render(request,'mainapp/stock.html',context)
+def stock(request, slug="", page=""):
+    context = {}
+    if page:    # вывод подробной статьи
+        try:
+            club = Club.objects.get(slug=slug)
+            stock = Stock.objects.get(slug=page)
+            title = stock.title
+            subtitle = u''
+            context.update({'title': title, 'subtitle': subtitle, 'stock': stock})
+            return render(request,'mainapp/stock/item.html', context)
+        except:
+            pass
+    else:   # Вывод списка акций
+        try:
+            club = Club.objects.get(slug=slug)
+            stocks = Stock.objects.filter(club=club)
+            title = u"Акции"
+            subtitle = u''
+            context.update({'title': title, 'subtitle': subtitle, "stocks": stocks })
+        except:
+            pass
+        return render(request,'mainapp/stock/list.html',context)
 
 
 def fitness(request, slug="comsomoll"):

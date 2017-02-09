@@ -38,6 +38,78 @@
           </div>
         </div>
       </div> <!-- /Slider -->
+      <div class="main-news">
+        3 последних новости <br />
+        {% for news in news_list %}
+          <a href="/news/{{news.slug}}">{{news.title}}</a> - {{news.date}}<br />
+        {% endfor %}
+      </div> <!-- /News -->
+      <!-- APPLICATION -->
+      <div class="parallax parallax-3 application">
+          <div class="d-bg-c padding">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-6 application__left-side">
+                          <h2>Скачай мобильное<br> приложение и будь в курсе:</h2>
+                          <span class="divider divider-white"></span>
+
+                          <div class="row" style="margin-top: 15px;">
+                              <div class="col-sm-6">
+                                  <a href="#" class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/events.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Событий</span>
+                                  </a>
+                              </div>
+                              <div class="col-sm-6">
+                                  <a href="#" class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/offer.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Спецпредложений</span>
+                                  </a>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-6 ">
+                                  <a href="#" class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/news.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Новостей</span>
+                                  </a>
+                              </div>
+                              <div class="col-sm-6 ">
+                                  <a href="#" class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/shedule.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Расписания</span>
+                                  </a>
+                              </div>
+                          </div>
+
+                          <span class="app_img">
+                              <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                                  <img src="{% static 'images/app/google_play.png' %}" width="140px">
+                              </a>
+                          </span>
+                          <span class="app_img">
+                              <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                                  <img src="{% static 'images/app/app_store.png' %}" width="140px">
+                              </a>
+                          </span>
+                      </div>
+                      <div class="col-md-6 col-sm-6 application__right-side hidden-xs">
+                          <img src="../../static/images/app/телефон2.png" class="app_photo" alt="Приложение Powerhouse Gym для мобильного">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- APPLICATION -->
     </div>
   </div>
 </div>

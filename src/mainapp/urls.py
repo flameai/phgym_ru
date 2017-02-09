@@ -9,7 +9,10 @@ urlpatterns = [
 
     url(r'^news/$', views.news, name='news'),
     url(r'^news/(?P<slug>[\w-]+)/$', views.news, name='news'),
+
     url(r'^(?P<slug>[\w-]+)/stock/$', views.stock, name='stock'),
+    url(r'^(?P<slug>[\w-]+)/stock/(?P<page>[\w-]+)/$', views.stock, name='stock'),
+
     url(r'^(?P<slug>[\w-]+)/topfitness/$', views.fitness, name='fitness'),
     url(r'^(?P<slug>[\w-]+)/service/$', views.service, name='service'),
     url(r'^(?P<slug>[\w-]+)/schedule/(?P<detail>[\w-]+)$', views.schedule, name="schedule"),

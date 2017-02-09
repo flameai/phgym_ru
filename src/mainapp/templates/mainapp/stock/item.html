@@ -1,0 +1,18 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %} {{stock.title}} {% endblock title %}
+
+{% block body %}
+<div class="container content">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
+            <div class="news_item" >
+                <h4 class="news_item__title">{{stock.title}}</h4>
+                <div class="news_item__text">{{stock.full_text | safe}}</div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+{% endblock body %}

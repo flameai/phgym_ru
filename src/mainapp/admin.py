@@ -26,7 +26,6 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'date')
     list_filter = ['date']
     form = NewsForm
-    inlines = [get_inline(MyMetadata)]
 
 admin.site.register(News, NewsAdmin)
 
@@ -93,3 +92,9 @@ class PageAdmin(SortableModelAdmin):
 admin.site.register(Page, PageAdmin)
 
 admin.site.register(City)
+
+class StockAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+    list_display = ('title','date','club')
+
+admin.site.register(Stock, StockAdmin)

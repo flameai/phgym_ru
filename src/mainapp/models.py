@@ -26,6 +26,7 @@ class FormRequest(models.Model):
     class Meta:
         verbose_name = u'заявка с форм'
         verbose_name_plural = u'заявки с форм'
+        
 
 class City(models.Model):
     name = models.CharField(verbose_name=u"Название",max_length=100)
@@ -59,6 +60,7 @@ class Club(models.Model):
         verbose_name = u"клуб"
         verbose_name_plural = u"клубы"
 
+
 class News(models.Model):
     title = models.CharField(u'заголовок',max_length=128)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
@@ -74,6 +76,25 @@ class News(models.Model):
     class Meta:
         verbose_name = u'новость'
         verbose_name_plural = u'новости'
+
+
+class Stock(models.Model):
+    title = models.CharField(verbose_name=u'заголовок', max_length=255)
+    slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
+    date = models.DateField(u'дата', default=date.today)
+    short_text = RichTextUploadingField(verbose_name=u'краткий текст')
+    full_text = RichTextUploadingField(verbose_name=u'полный текст')
+    club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
+
+    def __str__(self):
+        return self.title
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = u'акция'
+        verbose_name_plural = u'акции'
+
 
 class StaticPage(models.Model):
     PAGE_TYPES = (
