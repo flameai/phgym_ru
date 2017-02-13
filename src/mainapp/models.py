@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django import forms
-from datetime import date
+from datetime import date, datetime
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
 from django.conf import settings
@@ -66,7 +66,7 @@ class Club(models.Model):
 class News(models.Model):
     title = models.CharField(u'заголовок',max_length=128)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
-    date = models.DateField(u'дата',default=date.today)
+    date = models.DateTimeField(u'дата',default=datetime.now)
     short_text = RichTextUploadingField(u'краткий текст новости',default="",)
     full_text = RichTextUploadingField(u'полный текст новости',default="",)
 
@@ -252,3 +252,29 @@ class Page(models.Model):
     class Meta:
         verbose_name = u'страница'
         verbose_name_plural = u'страницы'
+
+
+class StaticPage(models.Model):
+    title = models.CharField(u'название', max_length=200, default='')
+    club = models.OneToOneField(Club, on_delete=models.CASCADE, default=None, blank=True, null=True,)
+    context = RichTextUploadingField(verbose_name=u'содержание')
+
+    class Meta:
+        verbose_name = u'статическая страница'
+        verbose_name_plural = u'статические страницы'
+
+class FitnesZone(models.Model):
+    title = models.CharField(u'название', max_length=200, default='')
+    club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
+    image = models.ImageField(u'рисунок')
+    link = models.URLField(u'ссылка')
+
+    def __str__(self):
+        return u"%s" % self.title
+
+    def __unicode__(self):
+        return u"%s" % self.title
+
+    class Meta:
+        verbose_name = u'фитнес-зона'
+        verbose_name_plural = u'фитнес-зоны'

@@ -3,7 +3,7 @@ from django.contrib import admin
 from djangoseo.admin import register_seo_admin, get_inline
 from seo import MyMetadata
 from django.forms import ModelForm
-from suit.widgets import SuitDateWidget, AutosizedTextarea
+from suit.widgets import SuitDateWidget, AutosizedTextarea, SuitSplitDateTimeWidget
 from suit.admin import SortableModelAdmin
 
 from .models import *
@@ -15,7 +15,7 @@ class NewsForm(ModelForm):
         model = News
         fields = '__all__'
         widgets = {
-            'date': SuitDateWidget,
+            'date': SuitSplitDateTimeWidget,
             'title': AutosizedTextarea,
             'text': AutosizedTextarea,
         }
@@ -102,3 +102,13 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'club')
 
 admin.site.register(Program, ProgramAdmin)
+
+class StaticPageAdmin(admin.ModelAdmin):
+    list_display = ('title','club',)
+
+admin.site.register(StaticPage, StaticPageAdmin)
+
+class FitnesZoneAdmin(admin.ModelAdmin):
+    list_display = ('title','club',)
+
+admin.site.register(FitnesZone, FitnesZoneAdmin)

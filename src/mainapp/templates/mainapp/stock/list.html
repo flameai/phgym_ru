@@ -1,7 +1,5 @@
 {% extends 'mainapp/base.html' %}
 
-{% load static from staticfiles %}
-
 {% block title %} Акции {% endblock title %}
 
 {% block body %}
@@ -9,9 +7,9 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
         {% for stock in stocks %}
-          <div class="stock__item">
-            <h4 class="stock__item__title">{{stock.title}}</h4>
-            <div class="stock__item__content">{{stock.short_text | safe}}</div>
+          <div class="news_item">
+            <h4 class="news_item__title">{{stock.title}}</h4>
+            <div class="news_item__text">{{stock.short_text | safe}}</div>
             <a href="{{stock.slug}}">Подробнее</a>
           </div>
         {% endfor %}

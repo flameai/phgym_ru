@@ -6,6 +6,7 @@
 <div class="content" style="margin: 0px;padding-right: 0px; padding-left:0px;">
   <div id="c3" class="csc-default" >
     <div class="content">
+      {% if sliders %}  <!-- Slider -->
       <div class="main-slider">
         <div id="main-slider" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
@@ -38,15 +39,45 @@
           </div>
         </div>
       </div> <!-- /Slider -->
+      {% endif %}
+
+      {% if news_list %}
       <div class="main-news">
-        3 последних новости <br />
-        {% for news in news_list %}
-          <a href="/news/{{news.slug}}">{{news.title}}</a> - {{news.date}}<br />
-        {% endfor %}
-        <a href="/news/">Все новости</a>
-      </div> <!-- /News -->
-      <!-- APPLICATION -->
-      <div class="parallax parallax-3 application">
+        <div class="container">
+          <div class="row">
+            {% for news in news_list %}
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-6">{{news.title}}</div>
+                <div class="col-sm-6">{{news.date|date:"d.m.Y H:i"}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">{{news.short_text | safe}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <a href="/news/{{news.slug}}" class="pull-right">Подробнее</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <a href="/news/">Все новости</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if staticpage %}
+      <div class="main-block"> <!-- StaticPage -->
+        {{ staticpage.context | safe }}
+      </div>  <!-- /StaticPage -->
+      {% endif %}
+      
+      <div class="parallax parallax-3 application"> <!-- APPLICATION -->
           <div class="d-bg-c padding">
               <div class="container">
                   <div class="row">
@@ -109,8 +140,7 @@
                   </div>
               </div>
           </div>
-      </div>
-      <!-- APPLICATION -->
+      </div>  <!-- APPLICATION -->
     </div>
   </div>
 </div>

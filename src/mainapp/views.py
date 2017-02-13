@@ -14,10 +14,27 @@ def index(request, slug=""):
     if slug:    # Главная страница клуба
         try:
             club = Club.objects.get(slug=slug)
+        except DoesNotExist:
+            return  # обработать ошибку некорректного slug
+
+        try:
             sliders = Slider.objects.filter(club=club).order_by('order')
             context.update({'sliders': sliders})
         except:
             pass
+
+        try:
+            staticPage = StaticPage.objects.get(club=club)
+            context.update({'staticpage': staticPage})
+        except:
+            pass
+
+        try:
+            fitneszone = FitnesZone.objects.filter(club=club)
+            context.update({'fitneszones': fitneszone})
+        except:
+            pass
+
         return render(request,'mainapp/index.html',context)
     else:   # Корпоративная страница
         try:
@@ -28,6 +45,11 @@ def index(request, slug=""):
         try:
             news = News.objects.all().order_by('-id')[:3]
             context.update({'news_list': news})
+        except:
+            pass
+        try:
+            staticpage = StaticPage.objects.get(club__isnull=True)
+            context.update({'staticpage': staticpage})
         except:
             pass
         return render(request,'mainapp/indexcompany.html',context)
