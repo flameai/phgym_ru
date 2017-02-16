@@ -86,6 +86,9 @@ class Stock(models.Model):
     date = models.DateField(u'дата', default=date.today)
     short_text = RichTextUploadingField(verbose_name=u'краткий текст')
     full_text = RichTextUploadingField(verbose_name=u'полный текст')
+    show_button = models.BooleanField(u'отображать кнопку', default=False)
+    text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
+    url_button = models.URLField(u'ссылка кнопки', default='//', blank=True, null=True )
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
 
     def __str__(self):

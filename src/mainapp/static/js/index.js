@@ -32,13 +32,13 @@ $(function(){
 
   $("#navigation").change(function(){
     document.location.href = $(this).val();
-  }); // сделать ручку, возвращающую список клубов и выводить ее на клиенте (не через django templates)
+  });
 
 });
 
 $(document).ready(function(){
     var url = location.pathname.split('/')[1];
-    if(url) {
+    if(url && url != 'news') {
       $('#navigation').val('/'+url);
     }
 });
