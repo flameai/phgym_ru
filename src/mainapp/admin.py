@@ -44,7 +44,7 @@ class EntryInline(admin.TabularInline):
 
 
 class ClubAdmin(SortableModelAdmin):
-    list_display = ('address','phone','email','worktime','city','order')
+    list_display = ('address','phone','email','worktime','order')
     inlines = [
         GymInline,
     ]
@@ -89,7 +89,6 @@ class PageAdmin(SortableModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 
-admin.site.register(City)
 
 class StockAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
