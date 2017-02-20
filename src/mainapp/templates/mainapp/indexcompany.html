@@ -48,17 +48,17 @@
                 <div class="row" style="margin-bottom: 20px">
                     {% for news in news_list %}
                     <div class="col-sm-4">
-                        
+
                         <div class="news_photo" style="background-image: url({% static 'images/news/38373874ce.jpg' %});"></div>
                         <h5 class="red-text">{{news.title}}</h5>
-                        <div>{{news.date|date:"d.m.Y H:i"}}</div>
-                    
-                      
+                        <div>{{news.date|date:"d.m.Y"}}</div>
+
+
                         <div>{{news.short_text | safe}}</div>
-                      
-                     
+
+
                         <a href="/news/{{news.slug}}" class="pull-right">Подробнее</a>
-                       
+
                     </div>
                     {% endfor %}
                 </div>
@@ -81,7 +81,7 @@
         </div>
       </div>  <!-- /StaticPage -->
       {% endif %}
-      
+
       <div class="application grey"> <!-- APPLICATION -->
           <div class="padding">
               <div class="container">
