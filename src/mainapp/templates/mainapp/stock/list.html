@@ -9,6 +9,7 @@
         {% for stock in stocks %}
           <div class="news_item">
             <h4 class="news_item__title">{{stock.title}}</h4>
+            <div class="news_item__image"><img src="{{stock.image.url}}" /></div>
             <div class="news_item__text">{{stock.short_text | safe}}</div>
             <a href="{{stock.slug}}">Подробнее</a>
           </div>
