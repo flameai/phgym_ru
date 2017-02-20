@@ -65,6 +65,7 @@ a {
 a:focus {
 	text-decoration: none;
 	outline: none;
+	color: #E31E24;
 }
 a:hover {
 	color: #E31E24;
