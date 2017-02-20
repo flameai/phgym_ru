@@ -28,17 +28,17 @@ class FormRequest(models.Model):
         verbose_name_plural = u'заявки с форм'
 
 
-class City(models.Model):
-    name = models.CharField(verbose_name=u"Название",max_length=100)
-
-    def __str__(self):
-        return "%s" % self.name
-    def __unicode__(self):
-        return "%s" % self.name
-
-    class Meta:
-        verbose_name = u'город'
-        verbose_name_plural = u'города'
+# class City(models.Model):
+#     name = models.CharField(verbose_name=u"Название",max_length=100)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#     def __unicode__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = u'город'
+#         verbose_name_plural = u'города'
 
 
 class Club(models.Model):
@@ -48,7 +48,7 @@ class Club(models.Model):
     worktime = models.CharField(verbose_name=u"Время работы",max_length=200)
     slug = models.SlugField(verbose_name=u"Слаг", default="")
     callibri = models.CharField(verbose_name=u"Callibri", max_length=50, default="", blank=True)
-    city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default=None, verbose_name=u"Город",blank=True,null=True,)
+    # city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default=None, verbose_name=u"Город",blank=True,null=True,)
     lat = models.FloatField(verbose_name=u'широта', default=0.,)
     lon = models.FloatField(verbose_name=u'долгота', default=0.,)
     order = models.PositiveIntegerField(default=0)

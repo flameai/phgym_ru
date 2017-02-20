@@ -328,18 +328,10 @@ def getPhoneForClub(clubslug):
         pass
 
 @register.simple_tag
-def getClubsByCity(city):
+def getClubs():
     try:
-        clubs = Club.objects.filter(city=city).order_by('address')
+        clubs = Club.objects.all()
         return clubs
-    except:
-        pass
-
-@register.simple_tag
-def getCities():
-    try:
-        cities = City.objects.all()
-        return cities
     except:
         pass
 
