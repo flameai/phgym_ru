@@ -67,6 +67,7 @@ class News(models.Model):
     title = models.CharField(u'заголовок',max_length=128)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateTimeField(u'дата',default=datetime.now)
+    image = models.ImageField(u'миниатюра',default="")
     short_text = RichTextUploadingField(u'краткий текст новости',default="",)
     full_text = RichTextUploadingField(u'полный текст новости',default="",)
 
@@ -84,11 +85,12 @@ class Stock(models.Model):
     title = models.CharField(verbose_name=u'заголовок', max_length=255)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateField(u'дата', default=date.today)
+    image = models.ImageField(u'миниатюра',default="")
     short_text = RichTextUploadingField(verbose_name=u'краткий текст')
     full_text = RichTextUploadingField(verbose_name=u'полный текст')
     show_button = models.BooleanField(u'отображать кнопку', default=False)
     text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
-    url_button = models.URLField(u'ссылка кнопки', default='//', blank=True, null=True )
+    url_button = models.URLField(u'ссылка кнопки', default='', blank=True, null=True )
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
 
     def __str__(self):
