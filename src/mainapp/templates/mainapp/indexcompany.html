@@ -48,8 +48,11 @@
                 <div class="row" style="margin-bottom: 20px">
                     {% for news in news_list %}
                     <div class="col-sm-4">
-
+                        {% if news.image %}
+                        <div class="news_photo" style="background-image: url({{news.image.url}});"></div>
+                        {% else %}
                         <div class="news_photo" style="background-image: url({% static 'images/news/38373874ce.jpg' %});"></div>
+                        {% endif %}
                         <h5 class="red-text">{{news.title}}</h5>
                         <div>{{news.date|date:"d.m.Y"}}</div>
 
