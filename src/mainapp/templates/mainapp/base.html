@@ -13,7 +13,7 @@
     {% endif %}
 
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'images/elements/favicon.ico' %}" type="image/x-icon">
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -27,17 +27,18 @@
 
   </head>
   <body>
-      <header class="navbar navbar-default navbar-fixed-top" style="background-color: white; border-bottom: none;">
+      <header class="navbar navbar-default navbar-fixed-top">
       <div class="top-header d-border-c">
           <div class="container">
             <div class="row top-header__row">
               <div class="col-xs-12 col-sm-6 col-md-2">
                   <div class="logo">
-                    <a href="/"> <img src="{% static 'images/logo.jpg' %}" width="150px" height="auto"></a>
+                    <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
                   </div>
+
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-8">
-                <select class="form-control" id="navigation">
+              <div class="col-xs-12 col-sm-6 col-md-10">
+                <select class="form-control" id="navigation" style="margin-top: 35px;">
                   <option value="">Выберите клуб</option>
                   {% getCities as cities %}
                   {% if cities %}
@@ -117,16 +118,46 @@
     {% block body %} {% endblock body %}
     </div>
 
-    <footer class="black-bg">
+    <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><p>© 2016 Yashankin Fitness. All rights reserved.</p></div>
-                <div class="col-md-6">
+                <div class="col-md-5 col-sm-6">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
+                            <h5>Екатеринбург</h5>
+                            <a>Родонитовая 29,</a><br>
+                            <a>Хохрякова 10,</a><br>
+                            <a>С.Дерябиной 24,</a><br>
+                            <a>Д.Сибирский тракт 2,</a><br>
+                            <a>Халтурина 55</a> 
+                        </div>
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
+                            <h5>Реутов</h5>
+                            <a>Юбилейная 57</a>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-5 col-sm-6">                 
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">                  
+                            <h5>Казань</h5>
+                            <a>Краснококшайская 119</a> 
+                        </div>
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
+                            <h5>Томск</h5>
+                            <a>Красноармейская 120</a>
+                        </div>
+                    </div>
+                </div>               
+                <div class="col-md-2 col-sm-12">
                     <ul class="social text-right">
-                        <li><a href="https://www.facebook.com/yashankinfitness/" target="_blank"><i class="social social-fb"></i></a></li>
-                        <li><a href="https://www.youtube.com/user/DYashankin" target="_blank"><i class="social social-yt"></i></a></li>
-                        <li><a href="https://vk.com/furmanova117" target="_blank"><i class="social social-vk"></i></a></li>
-                    </ul>
+                        <li><a href="https://www.facebook.com/" target="_blank"><div class="social social-fb"></div></a></li>
+                        <li><a href="https://vk.com/" target="_blank"><div class="social social-vk"></div></a></li>
+                        <li><a href="https://" target="_blank"><div class="social social-i"></div></a></li>
+                    </ul>                    
+                </div>
+                <div class="col-xs-12">
+                    <p>© 2017 PowerHouse Gym.</p>
                 </div>
             </div>
         </div>
