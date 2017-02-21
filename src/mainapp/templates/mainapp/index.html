@@ -24,7 +24,7 @@
                       <div class="row">
                           <div class="col-md-8 col-sm-12">
                               <h1 class="main-slider__item-header">{{ slider.title }}</h1>
-                              <h1 class="main-slider__item-header d-text-c">{{ slider.subtitle }}</h1>
+                              <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
                               <div class="text-left">
                                   <span class="divider"></span>
                               </div>
@@ -32,7 +32,7 @@
                                   {{ slider.context | safe }}
                               </div>
                               {% if slider.button_text and slider.button_url %}
-                              <a class="slider-btn btn pull-left" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                              <a class="slider-btn btn pull-left red" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
                               {% endif %}
                           </div>
                       </div>
@@ -47,13 +47,17 @@
     <!-- TEXT -->
     {% if staticpage %}
     <div class="main-block">
-      {{ staticpage.context | safe }}
+        <div class="padding">
+            <div class="container">
+                {{ staticpage.context | safe }}
+            </div>
+        </div>
     </div>
     {% endif %}
     <!-- /TEXT -->
 
     <!-- BLOG -->
-    <div class="black-bg lessons blog-section__no-margin padding" id="blog" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+    <div class="grey lessons blog-section__no-margin padding" id="blog" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
 
         <div class="container">
             <div class="row">
@@ -100,7 +104,7 @@
 
     <!-- SEPARATOR INFO -->
     <div class="only-in-yashankin">
-        <div class="d-bg-c padding">
+        <div class="padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
@@ -118,7 +122,7 @@
     <!-- /SEPARATOR INFO -->
 
     <!-- SEPARATOR INFO -->
-    <div class="separator-info" id="classes">
+    <div class="separator-info grey" id="classes">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -137,7 +141,7 @@
 
     <!-- CLASSES -->
     {% if fitneszones %}
-    <div class="lessons" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+    <div class="lessons grey" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
         <div class="lessons-arrows">
             <span class="next"><i class="fa fa-chevron-right"></i></span>
             <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
@@ -146,7 +150,7 @@
             <div class="row tesla-carousel-items">
                 {% for fitzone in fitneszones %}
                 <div class="col-md-4 col-xs-12">
-                    <div class="lesson d-bg-c-h">
+                    <div class="lesson">
                         <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
                         <h4>{{fitzone.title}}</h4>
                     </div>

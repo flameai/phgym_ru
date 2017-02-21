@@ -2,15 +2,10 @@
 {% block title %} {{program.title}} {% endblock title %}
 
 {% block body %}
-<div class="container content">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
-            <div class="news_item" >
-                <h4 class="news_item__title">{{program.title}}</h4>
-                <div class="news_item__text">{{program.full_text | safe}}</div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
+<div class="grey" style="padding-top: 40px; padding-bottom: 40px">
+	<div class="container content">
+        <h4 class="news_item__title">{{program.title}}</h4>
+        <div class="news_item__text">{{program.full_text | safe}}</div>
     </div>
 </div>
 
