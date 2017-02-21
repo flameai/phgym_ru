@@ -94,7 +94,8 @@ select {
 	border: 1px solid #e1e1e1;
 	font-size: 14px;
 }
-select {
+select,
+input {
 	background-color: #000 !important;
 	color: #fff !important;
 	box-shadow: none !important;
@@ -258,17 +259,18 @@ a {
 	text-transform: uppercase;
 	padding: 6px 20px;
 	margin: auto;
-	background: #f9690e;
 	color:white;
-	border: 2px solid #4c4c4c;
+	background-color: #E31E24 !important;
+	border: none;
 	font-weight: 700;
-	border-color: #f9690e !important;
+	height: 50px;
+	
 }
 
 .abonement-btn:hover,
 #mailformformtype_mail:hover{
-	background: #fff;
-	color: #4c4c4c;
+	background: #ab0c11 !important;
+	
 }
 
 
