@@ -59,6 +59,7 @@
                   </optgroup>
                 </select>
                 <div class="row" style="margin-top: 25px;">
+                  {% getClubInfo slug as club %}
                   <div class="col-sm-6">
                     <div style="font-size: 18px">
                         <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
@@ -67,10 +68,10 @@
                   </div>
                   <div class="col-sm-6">
                     <div style="font-size: 18px">
-                        <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i> 
+                        <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i>
                         {{club.address}}
                     </div>
-                  </div>                  
+                  </div>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-6 col-md-2">
@@ -78,7 +79,7 @@
                       <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
                   </div>
               </div>
-             
+
             </div>
           </div>
       </div>
@@ -114,7 +115,7 @@
                             <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
                           <li>
-                            <a href="{% url 'entry' slug=slug %}" target="_top" class="d-text-c-h"><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px; line-height: inherit;"></i>Бесплатный fitness<i class="fa fa-star" aria-hidden="true" style="margin-left: 5px; line-height: inherit;"></i></a>
+                            <a href="#" class="d-text-c-h">Интернет-магазин</a>
                           </li>
                         </ul>
                         {% else %}
@@ -193,7 +194,7 @@
                             </a>
                         </div>
                     </div>
-                   
+
                 </div>
                 <div class="col-xs-12">
                     <p>© 2007-2017 Powerhouse Gym.</p>
