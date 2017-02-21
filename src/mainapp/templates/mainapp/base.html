@@ -43,7 +43,7 @@
                   <select class="form-control" id="navigation" style="margin-top: 35px;">
                     <option value="">Выберите клуб</option>
                     <optgroup label="Реутов">
-                      <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                      <option value="http://phgreutov.ru/" target="blank">Юбилейная, 57</option>
                     </optgroup>
                     <optgroup label="Казань">
                       <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
@@ -105,10 +105,10 @@
                             {% endif %}
                           </li>
                           <li>
-                            <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
+                            <a href="#" class="d-text-c-h">Интернет-магазин</a>
                           </li>
                           <li>
-                            <a href="{% url 'entry' slug=slug %}" target="_top" class="d-text-c-h"><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px; line-height: inherit;"></i>Бесплатный fitness<i class="fa fa-star" aria-hidden="true" style="margin-left: 5px; line-height: inherit;"></i></a>
+                            <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
                         </ul>
                         {% else %}

@@ -28,10 +28,13 @@ $(function(){
     interval: 6000
   });
 
-  var slug = location.pathname.split("/")[1];
-
   $("#navigation").change(function(){
-    document.location.href = $(this).val();
+    if($(this).val().indexOf("http://") != -1) {
+      window.open($(this).val(),'_blank');
+
+    } else {
+      document.location.href = $(this).val();
+    }
   });
 
 });
