@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/8b519c62ae.css" media="all">
     <link rel="stylesheet" href="{% static 'css/jquery.arcticmodal-0.3.css' %}">
     <link rel="stylesheet" href="{% static 'css/themes/simple.css' %}">
-    <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
     {% block styles %} {% endblock styles %}
 
 
@@ -38,41 +37,48 @@
                   </div>
 
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-10">
-                <div class="row">
-                  <select class="form-control" id="navigation" style="margin-top: 35px;">
-                    <option value="">Выберите клуб</option>
-                    <optgroup label="Реутов">
-                      <option value="http://phgreutov.ru/" target="blank">Юбилейная, 57</option>
-                    </optgroup>
-                    <optgroup label="Казань">
-                      <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                    </optgroup>
-                    {% getClubs as clubs %}
-                    {% if clubs %}
-                    <optgroup label="Екатеринбург">
-                      {% for club in clubs %}
-                        <option value="/{{club.slug}}">{{club.address}}</option>
-                      {% endfor %}
-                    </optgroup>
-                    {% endif %}
-                    <optgroup label="Томск">
-                      <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
-                    </optgroup>
-                  </select>
-                </div>
-                {% if slug %}
-                <div class="row">
-                  {% getClubInfo slug as club %}
-                  <div>
-                    <span>{{club.phone}}</span>
-                    <span>{{club.address}}</span>
-                    <a class="btn" href="{% url 'call' slug=slug %}">Заказать звонок</a>
+              <div class="col-xs-12 col-sm-6 col-md-8">
+                <select class="form-control" id="navigation" style="margin-top: 30px;">
+                  <option value="">Выберите клуб</option>
+                  <optgroup label="Реутов">
+                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                  </optgroup>
+                  <optgroup label="Казань">
+                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                  </optgroup>
+                  {% getClubs as clubs %}
+                  {% if clubs %}
+                  <optgroup label="Екатеринбург">
+                    {% for club in clubs %}
+                      <option value="/{{club.slug}}">{{club.address}}</option>
+                    {% endfor %}
+                  </optgroup>
+                  {% endif %}
+                  <optgroup label="Томск">
+                    <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
+                  </optgroup>
+                </select>
+                <div class="row" style="margin-top: 25px;">
+                  <div class="col-sm-6">
+                    <div style="font-size: 18px">
+                        <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
+                        <span class="{{club.callibri}}">{{club.phone}}</span>
+                    </div>
                   </div>
+                  <div class="col-sm-6">
+                    <div style="font-size: 18px">
+                        <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i> 
+                        {{club.address}}
+                    </div>
+                  </div>                  
                 </div>
-                {% endif %}
               </div>
-              <div class="col-xs-12 col-sm-6 col-md-2"></div>
+              <div class="col-xs-12 col-sm-6 col-md-2">
+                  <div style="margin-top: 30px; position: relative;">
+                      <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                  </div>
+              </div>
+             
             </div>
           </div>
       </div>
@@ -105,10 +111,10 @@
                             {% endif %}
                           </li>
                           <li>
-                            <a href="#" class="d-text-c-h">Интернет-магазин</a>
+                            <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
                           <li>
-                            <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
+                            <a href="{% url 'entry' slug=slug %}" target="_top" class="d-text-c-h"><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px; line-height: inherit;"></i>Бесплатный fitness<i class="fa fa-star" aria-hidden="true" style="margin-left: 5px; line-height: inherit;"></i></a>
                           </li>
                         </ul>
                         {% else %}
@@ -175,16 +181,23 @@
                         <li><a target="_blank"><div class="social social-vk"></div></a></li>
                         <li><a  target="_blank"><div class="social social-i"></div></a></li>
                     </ul>
+                    <div class="apps">
+                        <div class="app-icon">
+                            <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                                <img src="{% static 'images/app/googleplay.svg' %}" style="width:140px">
+                            </a>
+                        </div>
+                        <div class="app-icon">
+                            <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                                <img src="{% static 'images/app/app_store.svg' %}" width="140px">
+                            </a>
+                        </div>
+                    </div>
+                   
                 </div>
                 <div class="col-xs-12">
                     <p>© 2007-2017 Powerhouse Gym.</p>
                 </div>
-                {% if slug %}
-                <div class="col-xs-12">
-                  <img src="" alt="Google play">
-                  <img src="" alt="App Store">
-                </div>
-                {% endif %}
             </div>
         </div>
     </footer>
@@ -198,7 +211,6 @@
 
 
       <script src="{% static 'plastic/js/jquery-3.1.1.min.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script>
       <script src="{% static 'js/jquery.arcticmodal-0.3.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/jquery.validate.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/localization/messages_ru.min.js' %}" type="text/javascript"></script>
