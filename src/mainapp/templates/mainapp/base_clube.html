@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-xs-6 visible-xs ">
                     <div style="margin-top: 30px; position: relative;">
-                        <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                        <a href="{% url 'call' slug=slug %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-8">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="hidden-xs col-sm-2 col-md-2">
                     <div style="margin-top: 30px; position: relative;">
-                        <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                        <a href="{% url 'call' slug=slug %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
                     </div>
                 </div>
             </div>
