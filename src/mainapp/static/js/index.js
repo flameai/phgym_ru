@@ -41,7 +41,7 @@ $(function(){
 
 $(document).ready(function(){
     var url = location.pathname.split('/')[1];
-    if(url && url != 'news') {
+    if(url && url != 'news' && url != 'pages') {
       $('#navigation').val('/'+url);
     }
 });
