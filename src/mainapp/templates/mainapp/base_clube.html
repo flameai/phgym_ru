@@ -35,7 +35,6 @@
                     <div class="logo">
                         <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
                     </div>
-
                 </div>
                 <div class="col-xs-6 visible-xs ">
                     <div style="margin-top: 30px; position: relative;">
@@ -64,12 +63,13 @@
                       </optgroup>
                     </select>
                     <div class="row" style="margin-top: 25px;">
-                      <div class="col-sm-6">
-                        <div style="font-size: 18px">
-                            <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                            <span class="{{club.callibri}}">{{club.phone}}</span>
-                        </div>
-                      </div>
+                        {% getClubInfo slug as club %}
+                          <div class="col-sm-6">
+                            <div style="font-size: 18px">
+                                <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
+                                <span class="{{club.callibri}}">{{club.phone}}</span>
+                            </div>
+                          </div>
                       <div class="col-sm-6">
                         <div style="font-size: 18px">
                             <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i> 
@@ -118,7 +118,7 @@
                             <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
                           <li>
-                            <a href="{% url 'entry' slug=slug %}" target="_top" class="d-text-c-h"><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px; line-height: inherit;"></i>Бесплатный fitness<i class="fa fa-star" aria-hidden="true" style="margin-left: 5px; line-height: inherit;"></i></a>
+                            <a href="#" target="_top" class="d-text-c-h">Интернет магазин</a>
                           </li>
                         </ul>
                         {% else %}
