@@ -328,6 +328,14 @@ def getPhoneForClub(clubslug):
         pass
 
 @register.simple_tag
+def getClubInfo(slug):
+    try:
+        club = Club.objects.get(slug=slug)
+        return club
+    except:
+        pass
+
+@register.simple_tag
 def getClubs():
     try:
         clubs = Club.objects.all()

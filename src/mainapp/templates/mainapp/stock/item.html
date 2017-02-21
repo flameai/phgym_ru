@@ -8,6 +8,7 @@
         <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
             <div class="news_item" >
                 <h4 class="news_item__title">{{stock.title}}</h4>
+                <div class="news_item__image"><img src="{{stock.image.url}}"></div>
                 <div class="news_item__text">{{stock.full_text | safe}}</div>
                 {% if stock.show_button %}
                 <a href="{{stock.url_button}}" class="btn btn-default">{{stock.text_button}}</a>
