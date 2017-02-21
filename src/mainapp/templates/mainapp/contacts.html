@@ -1,61 +1,61 @@
-{% extends 'mainapp/base.html' %}
+{% extends 'mainapp/base_clube.html' %}
 
 {% block title %} Контакты {% endblock title %}
 
 {% block body %}
 <div class="container content" style="padding-top: 30px;">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h4>Мы находимся по адресу</h4>
-      <div class="contacts-list">
-        <div class="row contacts-row">
-          <div class="col-md-3 contacts-col">
-            <div><i class="fa fa-map-marker red-text" aria-hidden="true"></i> {{club.address}}</div>
-          </div>
-          <div class="col-md-3 contacts-col">
-            <div><i class="fa fa-clock-o red-text" aria-hidden="true"></i> {{club.worktime}}</div>
-          </div>
-          <div class="col-md-3 contacts-col">
-            <div><i class="fa fa-phone red-text" aria-hidden="true"></i><span class="{{club.callibri}}">{{club.phone}}</span></div>
-          </div>
-          <div class="col-md-3 contacts-col">
-            <div><i class="fa fa-envelope red-text" aria-hidden="true"></i> <a href="mailto:{{club.email}}">{{club.email}}</a></div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
+  
+    
+  <h4>Мы находимся по адресу</h4>
+  <div class="contacts-list">
+    <div class="row contacts-row">
+      <div class="col-md-3 contacts-col">
+        <div><i class="fa fa-map-marker red-text" aria-hidden="true"></i> {{club.address}}</div>
       </div>
-      <br /><br />
-      <div id="map" class="contact-map"></div>
-      <script>
-        function initMap() {
-          var city = {lat: 56.8389261, lng: 60.6057025};
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: city
-          });
-          var positions = [
-            {map: {lat: {{ club.lat|stringformat:"f" }}, lng: {{club.lon|stringformat:"f" }}}, address: "{{ club.address }}"}
-          ];
-
-          positions.forEach(function(item){
-            var marker = new google.maps.Marker({
-                position: item.map,
-                map: map,
-                title:item.address
-            });
-            var infowindow = new google.maps.InfoWindow({
-              content: item.address
-            });
-            marker.addListener('click', function(){
-              infowindow.open(map,marker);
-            });
-          })
-        }
-      </script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtRKA4GEvvv9zd3dvLkiKobYI-yDfVR2E&callback=initMap"></script>
+      <div class="col-md-3 contacts-col">
+        <div><i class="fa fa-clock-o red-text" aria-hidden="true"></i> {{club.worktime}}</div>
+      </div>
+      <div class="col-md-3 contacts-col">
+        <div><i class="fa fa-phone red-text" aria-hidden="true"></i><span class="{{club.callibri}}">{{club.phone}}</span></div>
+      </div>
+      <div class="col-md-3 contacts-col">
+        <div><i class="fa fa-envelope red-text" aria-hidden="true"></i> <a href="mailto:{{club.email}}">{{club.email}}</a></div>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
   </div>
+  
+  <div id="map" class="contact-map" style="width: 100%"></div>
+  <script>
+    function initMap() {
+      var city = {lat: 56.8389261, lng: 60.6057025};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: city
+      });
+      var positions = [
+        {map: {lat: {{ club.lat|stringformat:"f" }}, lng: {{club.lon|stringformat:"f" }}}, address: "{{ club.address }}"}
+      ];
+
+      positions.forEach(function(item){
+        var marker = new google.maps.Marker({
+            position: item.map,
+            map: map,
+            title:item.address
+        });
+        var infowindow = new google.maps.InfoWindow({
+          content: item.address
+        });
+        marker.addListener('click', function(){
+          infowindow.open(map,marker);
+        });
+      })
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtRKA4GEvvv9zd3dvLkiKobYI-yDfVR2E&callback=initMap"></script>
+    
+    
+ 
 </div>
 
 {% endblock body %}
