@@ -14,7 +14,7 @@ def index(request, slug=""):
     if slug:    # Главная страница клуба
         try:
             club = Club.objects.get(slug=slug)
-        except DoesNotExist:
+        except:
             return  # обработать ошибку некорректного slug
 
         try:

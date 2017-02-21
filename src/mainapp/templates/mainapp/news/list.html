@@ -9,7 +9,7 @@
             <div class="news_item" >
                 <h4 class="news_item__title">{{news.title}}</h4>
                 <div class="news_item__image"><img src="{{news.image.url}}" /></div>
-                <div class="news_item__text">{{news.short_text | safe}}</div>
+                <div class="news_item__text">{{news.short_text}}</div>
                 <a href="{{news.slug}}">Подробнее</a>
             </div>
         {% endfor %}

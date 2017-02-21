@@ -7,6 +7,7 @@
         <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
             <div class="news_item" >
                 <h4 class="news_item__title">{{news.title}}</h4>
+                <div class="news_item__image"><img src="{{news.image.url}}"></div>
                 <div class="news_item__text">{{news.full_text | safe}}</div>
             </div>
         </div>

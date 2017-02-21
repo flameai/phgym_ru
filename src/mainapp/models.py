@@ -28,19 +28,6 @@ class FormRequest(models.Model):
         verbose_name_plural = u'заявки с форм'
 
 
-# class City(models.Model):
-#     name = models.CharField(verbose_name=u"Название",max_length=100)
-#
-#     def __str__(self):
-#         return "%s" % self.name
-#     def __unicode__(self):
-#         return "%s" % self.name
-#
-#     class Meta:
-#         verbose_name = u'город'
-#         verbose_name_plural = u'города'
-
-
 class Club(models.Model):
     address = models.CharField(verbose_name=u"Адрес",max_length=200)
     phone = models.CharField(verbose_name=u"Телефоны",max_length=200)
@@ -64,11 +51,11 @@ class Club(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(u'заголовок',max_length=128)
+    title = models.CharField(u'заголовок',max_length=65)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateTimeField(u'дата',default=datetime.now)
     image = models.ImageField(u'миниатюра',default="")
-    short_text = RichTextUploadingField(u'краткий текст новости',default="",)
+    short_text = models.TextField(u'краткий текст новости',default="",max_length=210, help_text="Максимальная длина анонса - 210 символов. Все остальные символы будут удалены.")
     full_text = RichTextUploadingField(u'полный текст новости',default="",)
 
     def __str__(self):
@@ -82,11 +69,11 @@ class News(models.Model):
 
 
 class Stock(models.Model):
-    title = models.CharField(verbose_name=u'заголовок', max_length=255)
+    title = models.CharField(verbose_name=u'заголовок', max_length=65)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateField(u'дата', default=date.today)
     image = models.ImageField(u'миниатюра',default="")
-    short_text = RichTextUploadingField(verbose_name=u'краткий текст')
+    short_text = models.TextField(verbose_name=u'краткий текст', default="", max_length=210, help_text="Максимальная длина анонса - 210 символов. Все остальные символы будут удалены.")
     full_text = RichTextUploadingField(verbose_name=u'полный текст')
     show_button = models.BooleanField(u'отображать кнопку', default=False)
     text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
