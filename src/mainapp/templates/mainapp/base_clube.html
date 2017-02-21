@@ -31,54 +31,58 @@
       <div class="top-header d-border-c">
           <div class="container">
             <div class="row top-header__row">
-              <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="logo">
-                    <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
-                  </div>
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="logo">
+                        <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
+                    </div>
 
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-8">
-                <select class="form-control" id="navigation" style="margin-top: 30px;">
-                  <option value="">Выберите клуб</option>
-                  <optgroup label="Реутов">
-                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
-                  </optgroup>
-                  <optgroup label="Казань">
-                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                  </optgroup>
-                  {% getClubs as clubs %}
-                  {% if clubs %}
-                  <optgroup label="Екатеринбург">
-                    {% for club in clubs %}
-                      <option value="/{{club.slug}}">{{club.address}}</option>
-                    {% endfor %}
-                  </optgroup>
-                  {% endif %}
-                  <optgroup label="Томск">
-                    <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
-                  </optgroup>
-                </select>
-                <div class="row" style="margin-top: 25px;">
-                  <div class="col-sm-6">
-                    <div style="font-size: 18px">
-                        <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                        <span class="{{club.callibri}}">{{club.phone}}</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div style="font-size: 18px">
-                        <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i> 
-                        {{club.address}}
-                    </div>
-                  </div>                  
                 </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div style="margin-top: 30px; position: relative;">
-                      <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
-                  </div>
-              </div>
-             
+                <div class="col-xs-6 visible-xs ">
+                    <div style="margin-top: 30px; position: relative;">
+                        <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <select class="form-control" id="navigation" style="margin-top: 30px;">
+                      <option value="">Выберите клуб</option>
+                      <optgroup label="Реутов">
+                        <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                      </optgroup>
+                      <optgroup label="Казань">
+                        <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                      </optgroup>
+                      {% getClubs as clubs %}
+                      {% if clubs %}
+                      <optgroup label="Екатеринбург">
+                        {% for club in clubs %}
+                          <option value="/{{club.slug}}">{{club.address}}</option>
+                        {% endfor %}
+                      </optgroup>
+                      {% endif %}
+                      <optgroup label="Томск">
+                        <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
+                      </optgroup>
+                    </select>
+                    <div class="row" style="margin-top: 25px;">
+                      <div class="col-sm-6">
+                        <div style="font-size: 18px">
+                            <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
+                            <span class="{{club.callibri}}">{{club.phone}}</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div style="font-size: 18px">
+                            <i class="fa fa-map-marker red-text" aria-hidden="true" style="margin-right: 10px"></i> 
+                            {{club.address}}
+                        </div>
+                      </div>                  
+                    </div>
+                </div>
+                <div class="hidden-xs col-sm-2 col-md-2">
+                    <div style="margin-top: 30px; position: relative;">
+                        <a href=""><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                    </div>
+                </div>
             </div>
           </div>
       </div>
