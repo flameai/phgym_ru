@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/8b519c62ae.css" media="all">
     <link rel="stylesheet" href="{% static 'css/jquery.arcticmodal-0.3.css' %}">
     <link rel="stylesheet" href="{% static 'css/themes/simple.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
     {% block styles %} {% endblock styles %}
 
 
@@ -64,7 +65,7 @@
                     </select>
                     <div style="margin-top: 25px;">
                         {% getClubInfo slug as club %}
-                         
+
                         <div style="font-size: 28px;
                                     font-weight: 700;
                                     text-align: center;
@@ -193,7 +194,7 @@
                             </a>
                         </div>
                     </div>
-                   
+
                 </div>
                 <div class="col-xs-12">
                     <p>© 2007-2017 Powerhouse Gym.</p>
@@ -211,6 +212,7 @@
 
 
       <script src="{% static 'plastic/js/jquery-3.1.1.min.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/jquery.arcticmodal-0.3.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/jquery.validate.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/localization/messages_ru.min.js' %}" type="text/javascript"></script>

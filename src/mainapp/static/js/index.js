@@ -31,11 +31,14 @@ $(function(){
   $("#navigation").change(function(){
     if($(this).val().indexOf("http://") != -1) {
       window.open($(this).val(),'_blank');
-
     } else {
       document.location.href = $(this).val();
     }
   });
+
+  $(".carousel-program").slick({
+    slidesToShow: 3
+  })
 
 });
 
