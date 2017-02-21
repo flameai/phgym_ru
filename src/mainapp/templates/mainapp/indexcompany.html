@@ -60,12 +60,12 @@
                                     <h5 style="margin: 0">{{news.title}}</h5>
                                 </div>
                             </div>
-                            <div class="card-content">                               
-                                <div>{{news.short_text | safe}}</div>
+                            <div class="card-content">
+                                <div>{{news.short_text}}</div>
                             </div>
                             <div class="card-action text-right">
                                 <u><a href="/news/{{news.slug}}">Подробнее</a></u>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
