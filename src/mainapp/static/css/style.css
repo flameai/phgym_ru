@@ -406,9 +406,7 @@ header .phone-with-logo{
 	background: #E31E24;
 }
 .slider-btn,
-header .btn {
-	background-color: #f9690e;
-	color: #fff;
+header .btn {		
 	text-transform: uppercase;
 	font-weight: 700;
 	margin: 15px 0;
@@ -416,8 +414,9 @@ header .btn {
 	padding: 13px 10px;
 }
 .slider-btn:hover,
-header .btn:hover {
-	background-color: #5863c5;
+header .btn:hover,
+.btn:hover {
+	background-color: #ab0c11;
 	color: #fff;
 }
 @media (max-width: 991px) {
@@ -693,12 +692,43 @@ footer div.social-i:hover {
 }
 
 /* main-news*/
-.news_photo {
+.card-news {
+	border: 1px solid #E31E24; 
+	height: 100%; 
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+    transition: box-shadow .25s;
+    margin-bottom: 20px;
+}
+.card-news:hover {
+	box-shadow: 7px 7px 7px 0px rgba(0, 0, 0, 0.6);
+}
+.card-img { position: relative; }
+.card-img .news_photo {
 	width: 100%; 
 	height: 250px; 
 	background-position: center; 
-	background-size: cover;	
+	background-size: cover;		
+}
+.card-img .card-title {
+	z-index: 1;
+    position: absolute;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);  
+   	bottom: 0;
+   	height: 85px;
+   	overflow: hidden;
+}
+.card-content {
+	padding: 10px;
+	height: 118px;
+	overflow: hidden;
 	margin-bottom: 10px;
+}
+.card-action {
+	padding: 10px;
 }
 /*@media (max-width: 767px) {
 	.news_photo {
@@ -4119,26 +4149,17 @@ list-style:none;
 }
 
 /* ========== NEWS ==========*/
-
-.news_item{
-	padding: 10px;
-	margin-bottom: 30px;
-}
 .news_item__title{
 	padding: 10px;
 	text-transform: uppercase;
-	border-left: 4px solid #f9690e;
+	border-left: 4px solid #E31E24;
 }
-
 .news_item__image{
 	padding: 10px;
 	width:400px;
 	height: auto;
 	display: inline;
-	border-left: 4px solid #f9690e;
-}
-.news_item__text{
-	padding: 10px;
+	border-left: 4px solid #E31E24;
 }
 
 /* ========== CONTACTS ==========*/

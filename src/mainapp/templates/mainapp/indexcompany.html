@@ -29,7 +29,7 @@
                             {{ slider.context | safe }}
                         </div>
                         {% if slider.button_text and slider.button_url %}
-                        <a class="slider-btn btn pull-left" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                        <a class="slider-btn btn pull-left red" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
                         {% endif %}
                     </div>
                   </div>
@@ -45,29 +45,34 @@
       <div class="main-news grey">
         <div class="padding">
             <div class="container">
-                <div class="row" style="margin-bottom: 20px">
+                <div class="row">
                     {% for news in news_list %}
-                    <div class="col-sm-4">
-                        {% if news.image %}
-                        <div class="news_photo" style="background-image: url({{news.image.url}});"></div>
-                        {% else %}
-                        <div class="news_photo" style="background-image: url({% static 'images/news/38373874ce.jpg' %});"></div>
-                        {% endif %}
-                        <h5 class="red-text">{{news.title}}</h5>
-                        <div>{{news.date|date:"d.m.Y"}}</div>
-
-
-                        <div>{{news.short_text | safe}}</div>
-
-
-                        <a href="/news/{{news.slug}}" class="pull-right">Подробнее</a>
-
+                    <div class="col-md-4">
+                        <div class="card-news">
+                            <div class="card-img">
+                                {% if news.image %}
+                                    <div class="news_photo" style="background-image: url({{news.image.url}});"></div>
+                                {% else %}
+                                    <div class="news_photo" style="background-image: url({% static 'images/news/38373874ce.jpg' %});"></div>
+                                {% endif %}
+                                <div class="card-title">
+                                    <h6 class="text-right">{{news.date|date:"d.m.Y"}}</h6>
+                                    <h5 style="margin: 0">{{news.title}}</h5>
+                                </div>
+                            </div>
+                            <div class="card-content">                               
+                                <div>{{news.short_text | safe}}</div>
+                            </div>
+                            <div class="card-action text-right">
+                                <u><a href="/news/{{news.slug}}">Подробнее</a></u>
+                            </div> 
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <a href="/news/">Все новости</a>
+                        <a href="/news/" class="btn red">Все новости</a>
                     </div>
                 </div>
             </div>
