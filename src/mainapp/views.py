@@ -75,6 +75,7 @@ def news(request, page=""):
         except:
             pass
 
+
 def stock(request, slug="", page=""):
     context = {}
     if page:    # вывод подробной статьи
@@ -96,16 +97,6 @@ def stock(request, slug="", page=""):
         except:
             pass
 
-
-# def fitness(request, slug="comsomoll"):
-#     context = getContext('fitness')
-#     try:
-#         title = u"Система Top Fitness®"
-#         subtitle = u"Система Top Fitness от Дмитрия Яшанькина"
-#         context.update({'title': title, 'subtitle': subtitle})
-#     except:
-#         pass
-#     return render(request,'mainapp/fitness.html',context)
 
 def program(request, slug="", page=""):
     context = {}
@@ -146,14 +137,6 @@ def schedule(request, slug="comsomoll", detail=None):
         pass
     return render(request,'mainapp/schedule.html', context)
 
-# def trainers(request, slug="comsomoll"):
-#     context = getContext('trainers')
-#     try:
-#         title = u"Тренеры"
-#         context.update({'title': title})
-#     except:
-#         pass
-#     return render(request,'mainapp/trainers.html',context)
 
 def comments(request, slug="comsomoll"):
     context = {}
@@ -164,14 +147,6 @@ def comments(request, slug="comsomoll"):
         pass
     return render(request,'mainapp/comments.html',context)
 
-# def about(request, slug="comsomoll"):
-#     context = getContext('about')
-#     try:
-#         title = u"О компании"
-#         context.update({'title': title})
-#     except:
-#         pass
-#     return render(request,'mainapp/about.html', context)
 
 def contacts(request, slug="comsomoll"):
     context = {}
@@ -182,6 +157,7 @@ def contacts(request, slug="comsomoll"):
     except:
         pass
     return render(request,'mainapp/contacts.html', context)
+
 
 def call(request, slug="comsomoll"):
     if request.POST:
@@ -210,10 +186,6 @@ def call(request, slug="comsomoll"):
     return render(request, 'mainapp/call.html', context)
 
 
-'''
-    required fields: Name, Tel, Email, Club, subject
-    another fields:
-'''
 def entry(request, slug="comsomoll"):
 
     if request.POST:
@@ -266,6 +238,7 @@ def entry(request, slug="comsomoll"):
 
     return render(request, 'mainapp/form_entry.html', context)
 
+
 def abonement(request, slug="comsomoll"):
     if request.POST:
         subject = request.POST.get('subject')
@@ -299,7 +272,8 @@ def page(request, slug):
     context = {}
     try:
         page = Page.objects.get(slug=slug)
-        context.update({"page": page, "title": page.title})
+        breadcrumbs = [{'title': page.title, 'url': request.path}]
+        context.update({"page": page, "breadcrumbs": breadcrumbs})
     except:
         pass
     return render(request, 'mainapp/page.html', context)
