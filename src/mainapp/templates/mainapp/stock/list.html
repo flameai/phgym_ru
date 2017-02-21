@@ -3,20 +3,27 @@
 {% block title %} Акции {% endblock title %}
 
 {% block body %}
-<div class="container content">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
-        {% for stock in stocks %}
-          <div class="news_item">
-            <h4 class="news_item__title">{{stock.title}}</h4>
-            <div class="news_item__image"><img src="{{stock.image.url}}" /></div>
-            <div class="news_item__text">{{stock.short_text}}</div>
-            <a href="{{stock.slug}}">Подробнее</a>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="clearfix"></div>
-    </div>
+<div class="grey" style="padding-top: 40px; padding-bottom: 30px">
+  <div class="container content">
+        <div class="row">        
+          {% for stock in stocks %}
+           <div class="col-md-4">
+                <a href="{{stock.slug}}">
+                    <div class="card-news">
+                        <div class="card-img">
+                            <div class="news_photo" style="background-image: url({{stock.image.url}});"></div>
+                            <div class="card-title">
+                                <h5 style="margin: 0">{{stock.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </a>  
+            </div>
+          {% endfor %}
+        </div>
+       
+  </div>
 </div>
 
 {% endblock body %}
