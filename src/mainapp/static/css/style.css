@@ -2319,6 +2319,9 @@ list-style:none;
 .blog-items {
 	overflow: hidden;
 }
+.blog-entry {
+	padding: 0 10px;
+}
 .blog-entry .entry-cover {
 	position: relative;
 	text-align: center;
@@ -4433,4 +4436,17 @@ list-style:none;
   }
 }
 
-
+.slick-prev {
+    left: 20px;
+}
+.slick-next {
+    right: 20px;
+}
+.slick-prev:before, .slick-next:before {    
+    font-size: 40px;    
+}
+.slick-prev, .slick-next {   
+    width: 35px;
+    height: 35px;  
+    z-index: 2;  
+}

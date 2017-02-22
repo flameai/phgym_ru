@@ -37,11 +37,29 @@ $(function(){
   });
 
 
-  $(".carousel-slick").slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  })
+    $(".carousel-slick").slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,            
+          }
+        },        
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+          }
+        }]
+    })
+
 });
 
 $(document).ready(function(){
