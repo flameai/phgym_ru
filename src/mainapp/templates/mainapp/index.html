@@ -113,9 +113,6 @@
                 <div class="col-md-12">
                     <span class="divider"></span>
                 </div>
-                <div class="col-md-12">
-                    <p>Фитнес-центр YASHANKIN FITNESS - это 1200 кв м пространства,<br> специально спроектированного с учетом специфики системы TOP FITNESS®</p>
-                </div>
             </div>
         </div>
     </div>
@@ -123,20 +120,19 @@
 
     <!-- CLASSES -->
     {% if fitneszones %}
-    <div class="lessons grey" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
+    <!-- <div class="lessons grey" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
         <div class="lessons-arrows">
             <span class="next"><i class="fa fa-chevron-right"></i></span>
             <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
-        </div>
+        </div> -->
+    <div class="grey">
         <div class="container">
-            <div class="row tesla-carousel-items">
+            <div class="row carousel-slick">
                 {% for fitzone in fitneszones %}
-                <div class="col-md-4 col-xs-12">
-                    <div class="lesson">
-                        <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
-                        <h4>{{fitzone.title}}</h4>
-                    </div>
-                </div>
+                  <div class="lesson">
+                      <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
+                      <h4>{{fitzone.title}}</h4>
+                  </div>
                 {% endfor %}
             </div>
         </div>
