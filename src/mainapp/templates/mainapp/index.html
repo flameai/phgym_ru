@@ -44,17 +44,6 @@
     </div>
     {% endif %}
 
-    <!-- TEXT -->
-    {% if staticpage %}
-    <div class="main-block">
-        <div class="padding">
-            <div class="container">
-                {{ staticpage.context | safe }}
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    <!-- /TEXT -->
 
     <!-- BLOG -->
     <div class="grey lessons blog-section__no-margin padding" id="blog" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
@@ -92,24 +81,17 @@
     </div>
     <!-- /BLOG -->
 
-    <!-- SEPARATOR INFO -->
-    <div class="only-in-yashankin">
+    <!-- TEXT -->
+    {% if staticpage %}
+    <div class="main-block">
         <div class="padding">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-left">
-                        <h2>Доступный фитнес !<br /><span style="font-size:1.5em">2500</span> р. все включено!</h2>
-                        <a href="{% url 'abonement' slug=slug %}" class="btn btn-abonement">Заказать</a>
-                    </div>
-                    <div class="col-md-6 text-left">
-                        <span class="divider divider-white"></span>
-                        <p class="blog-text">Только в декабре!<br />Персональная тренировка в подарок!</p>
-                    </div>
-                </div>
+                {{ staticpage.context | safe }}
             </div>
         </div>
     </div>
-    <!-- /SEPARATOR INFO -->
+    {% endif %}
+    <!-- /TEXT -->
 
     <!-- SEPARATOR INFO -->
     <div class="separator-info grey" id="classes">

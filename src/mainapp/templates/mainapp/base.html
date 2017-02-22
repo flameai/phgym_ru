@@ -40,26 +40,30 @@
               </div>
               <div class="col-xs-12 col-sm-6 col-md-10">
                 <div class="row">
-                  <select class="form-control" id="navigation" style="margin-top: 35px;">
-                    <option value="">Выберите клуб</option>
-                    <optgroup label="Реутов">
-                      <option value="http://phgreutov.ru/" target="blank">Юбилейная, 57</option>
-                    </optgroup>
-                    <optgroup label="Казань">
-                      <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                    </optgroup>
-                    {% getClubs as clubs %}
-                    {% if clubs %}
-                    <optgroup label="Екатеринбург">
-                      {% for club in clubs %}
-                        <option value="/{{club.slug}}">{{club.address}}</option>
-                      {% endfor %}
-                    </optgroup>
-                    {% endif %}
-                    <optgroup label="Томск">
-                      <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
-                    </optgroup>
-                  </select>
+                <div class="col-md-6">
+                    <select class="form-control" id="navigation" style="margin-top: 35px;">
+                        <option value="">Выберите клуб</option>
+                        <optgroup label="Реутов">
+                            <option value="http://phgreutov.ru/" target="blank">Юбилейная, 57</option>
+                        </optgroup>
+                        <optgroup label="Казань">
+                            <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                        </optgroup>
+                        {% getClubs as clubs %}
+                        {% if clubs %}
+                        <optgroup label="Екатеринбург">
+                            {% for club in clubs %}
+                            <option value="/{{club.slug}}">{{club.address}}</option>
+                            {% endfor %}
+                        </optgroup>
+                        {% endif %}
+                        <optgroup label="Томск">
+                            <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="col-md-6"></div>
+                    
                 </div>
                 {% if slug %}
                 <div class="row">

@@ -36,10 +36,12 @@ $(function(){
     }
   });
 
-  $(".carousel-slick").slick({
-    slidesToShow: 3
-  });
 
+  $(".carousel-slick").slick({
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  })
 });
 
 $(document).ready(function(){

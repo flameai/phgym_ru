@@ -44,35 +44,36 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-8">
-                    <select class="form-control" id="navigation" style="margin-top: 30px;">
-                      <option value="">Выберите клуб</option>
-                      <optgroup label="Реутов">
-                        <option value="http://phgreutov.ru/">Юбилейная, 57</option>
-                      </optgroup>
-                      <optgroup label="Казань">
-                        <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                      </optgroup>
-                      {% getClubs as clubs %}
-                      {% if clubs %}
-                      <optgroup label="Екатеринбург">
-                        {% for club in clubs %}
-                          <option value="/{{club.slug}}">{{club.address}}</option>
-                        {% endfor %}
-                      </optgroup>
-                      {% endif %}
-                      <optgroup label="Томск">
-                        <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
-                      </optgroup>
-                    </select>
-                    <div style="margin-top: 25px;">
-                        {% getClubInfo slug as club %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control" id="navigation" style="margin-top: 40px;">
+                                <option value="">Выберите клуб</option>
+                                <optgroup label="Реутов">
+                                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                                </optgroup>
+                                <optgroup label="Казань">
+                                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                                </optgroup>
+                                {% getClubs as clubs %}
+                                {% if clubs %}
+                                    <optgroup label="Екатеринбург">
+                                        {% for club in clubs %}
+                                          <option value="/{{club.slug}}">{{club.address}}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                {% endif %}
+                                <optgroup label="Томск">
+                                    <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            {% getClubInfo slug as club %}
 
-                        <div style="font-size: 28px;
-                                    font-weight: 700;
-                                    text-align: center;
-                                    letter-spacing: 4px;">
-                            <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                            <span class="{{club.callibri}}">{{club.phone}}</span>
+                            <div class="phone">
+                                <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
+                                <span class="{{club.callibri}}">{{club.phone}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
