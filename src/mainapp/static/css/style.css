@@ -998,7 +998,7 @@ footer .i:hover {
 	padding-bottom: 60px;
 	position: relative;
 }
-.lesson:hover {
+.lesson:hover h4 {
 	background-color: #E31E24;
 }
 .lessons .tesla-carousel-items {
