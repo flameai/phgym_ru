@@ -36,7 +36,7 @@ $(function(){
     }
   });
 
-  $(".carousel").slick({
+  $(".carousel-slick").slick({
     slidesToShow: 3
   });
 
