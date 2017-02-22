@@ -115,9 +115,16 @@ def program(request, slug="", page=""):
             progs = Program.objects.filter(club=club)
             breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": request.path }]
             context.update({"breadcrumbs": breadcrumbs, "programs": progs })
-            return render(request,'mainapp/program/list.html',context)
         except:
             pass
+            
+        try:
+            editfield = EditTextField.objects.get(club=club, page=1) # 1 - const program
+            context.update({'editfield': editfield})
+        except:
+            pass
+
+        return render(request,'mainapp/program/list.html',context)
 
 
 def schedule(request, slug="comsomoll", detail=None):

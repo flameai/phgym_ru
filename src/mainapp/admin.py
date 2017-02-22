@@ -111,3 +111,8 @@ class FitnesZoneAdmin(admin.ModelAdmin):
     list_display = ('title','club',)
 
 admin.site.register(FitnesZone, FitnesZoneAdmin)
+
+class EditTextFieldAdmin(admin.ModelAdmin):
+    list_display = ('club','page',)
+
+admin.site.register(EditTextField, EditTextFieldAdmin)

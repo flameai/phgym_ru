@@ -2,31 +2,11 @@
 {% block title %} Программы {% endblock title %}
 
 {% block body %}
-<!-- <div class="container content">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2" style="padding-top: 30px">
-        {%for program in programs %}
-            <div class="news_item" >
-                <h4 class="news_item__title">{{program.title}}</h4>
-                <a href="{{program.slug}}">Подробнее</a>
-            </div>
-        {% endfor %}
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div> -->
 
-<!-- <div class="lessons blog-section__no-margin padding grey" id="program" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
-
-    <div class="lessons-arrows">
-        <span class="next"><i class="fa fa-chevron-right"></i></span>
-        <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
-    </div> -->
-
-<div class="grey" style="padding-top: 40px; padding-bottom: 30px">  
+<div class="grey" style="padding-top: 40px; padding-bottom: 30px">
     <div class="container content" style="overflow: hidden; position: relative;">
         <div class="carousel-slick slick-slider" style="margin: 0 -10px">
-            {% for program in programs %} 
+            {% for program in programs %}
                 <div class="blog-entry">
                     <div class="entry-cover">
                       <h5>{{program.title}}</h5>
@@ -35,6 +15,9 @@
                 </div>
             {% endfor %}
         </div>
+        {% if editfield %}
+        {{editfield.context | safe}}
+        {% endif %}
     </div>
 </div>
 
