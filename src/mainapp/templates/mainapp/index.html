@@ -147,12 +147,10 @@
         <div class="container">
             <div class="row carousel">
                 {% for fitzone in fitneszones %}
-                <div class="col-md-4 col-xs-12">
-                    <div class="lesson">
-                        <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
-                        <h4>{{fitzone.title}}</h4>
-                    </div>
-                </div>
+                  <div class="lesson">
+                      <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
+                      <h4>{{fitzone.title}}</h4>
+                  </div>
                 {% endfor %}
             </div>
         </div>
