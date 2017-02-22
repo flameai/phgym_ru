@@ -36,9 +36,9 @@ $(function(){
     }
   });
 
-  $(".carousel-program").slick({
+  $(".carousel").slick({
     slidesToShow: 3
-  })
+  });
 
 });
 
