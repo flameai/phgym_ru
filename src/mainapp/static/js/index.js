@@ -41,7 +41,12 @@ $(function(){
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 3
-  })
+  });
+
+  $('.to_about').on('click', function(){
+    $('body').scrollTop(1285);
+    return false;
+  });
 });
 
 $(document).ready(function(){
