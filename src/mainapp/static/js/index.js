@@ -36,17 +36,34 @@ $(function(){
     }
   });
 
+    $(".carousel-slick").slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,            
+          }
+        },        
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+          }
+        }]
+    })
 
-  $(".carousel-slick").slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  });
+    $('.to_about').on('click', function(){
+        $('body').scrollTop(1285);
+        return false;
+    });
 
-  $('.to_about').on('click', function(){
-    $('body').scrollTop(1285);
-    return false;
-  });
 });
 
 $(document).ready(function(){
