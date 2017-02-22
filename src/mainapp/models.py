@@ -268,3 +268,24 @@ class FitnesZone(models.Model):
     class Meta:
         verbose_name = u'фитнес-зона'
         verbose_name_plural = u'фитнес-зоны'
+
+
+class EditTextField(models.Model):
+    PAGE_CHOICES = (
+        (1, "Программы"),
+    )
+
+    club = models.ForeignKey(Club, verbose_name=u'клуб', on_delete=models.CASCADE, )
+    page = models.IntegerField(u'страница', choices=PAGE_CHOICES, default=1)
+    context = RichTextUploadingField(u'содержание')
+
+    def __str__(self):
+        return u'%s' % self.club
+
+    def __unicode__(self):
+        return u'%s' % self.club
+
+    class Meta:
+        unique_together = ('club','page')
+        verbose_name = u'текстовый блок'
+        verbose_name_plural = u'текстовые блоки'
