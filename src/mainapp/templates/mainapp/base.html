@@ -150,11 +150,12 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
                             <h5>Екатеринбург</h5>
-                            <a>Родонитовая, 29</a><br>
-                            <a>Хохрякова, 10</a><br>
-                            <a>С.Дерябиной, 24</a><br>
-                            <a>Д.Сибирский тракт, 2</a><br>
-                            <a>Халтурина, 55</a>
+                             {% getClubs as clubs %}
+                              {% if clubs %}                               
+                                  {% for club in clubs %}
+                                  <a href="/{{club.slug}}">{{club.address}}</a><br>
+                                  {% endfor %}
+                              {% endif %}
                         </div>
                         <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
                             <h5>Реутов</h5>
