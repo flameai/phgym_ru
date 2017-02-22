@@ -618,8 +618,26 @@ header .menu ul li ul li a {
 	border-right: 25px solid transparent;
 	border-top: 12px solid #f9690e;
 }
-
-
+header .phone {
+	font-size: 24px;
+	font-weight: 700;
+	text-align: center;
+	letter-spacing: 3px;
+	margin-top: 45px;
+}
+@media (max-width: 991px) {
+	header .phone {
+		margin-top: 20px;
+	}
+	header #navigation {
+		margin-top: 30px !important;
+	}
+}
+@media (max-width: 767px) {
+	header #navigation {
+		margin-top: 0px !important;
+	}
+}
 
 
 /* FOOTER
