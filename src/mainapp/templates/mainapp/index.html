@@ -70,33 +70,23 @@
             </div>
         </div>
 
-        <div class="lessons-arrows">
-            <span class="next"><i class="fa fa-chevron-right"></i></span>
-            <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
-        </div>
         <div class="container blog-videos_padding-top ">
-            <div class="row tesla-carousel-items">
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                            <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                            <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                          <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
+            <div class="row carousel-slick">
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                      <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                      <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                    <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
@@ -147,10 +137,12 @@
         <div class="container">
             <div class="row carousel-slick">
                 {% for fitzone in fitneszones %}
+                <a href="{{fitzone.url}}">
                   <div class="lesson">
                       <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
                       <h4>{{fitzone.title}}</h4>
                   </div>
+                </a>
                 {% endfor %}
             </div>
         </div>
