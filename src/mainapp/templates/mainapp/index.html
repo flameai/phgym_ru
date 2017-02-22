@@ -44,6 +44,17 @@
     </div>
     {% endif %}
 
+    <!-- TEXT -->
+    {% if staticpage %}
+    <div class="main-block">
+        <div class="padding">
+            <div class="container">
+                {{ staticpage.context | safe }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- /TEXT -->
 
     <!-- BLOG -->
     <div class="grey lessons blog-section__no-margin padding" id="blog" data-tesla-plugin="carousel" data-tesla-container=".tesla-carousel-items" data-tesla-item=">div" data-tesla-rotate="false" data-tesla-autoplay="false" data-tesla-hide-effect="false">
@@ -59,49 +70,46 @@
             </div>
         </div>
 
-        <div class="lessons-arrows">
-            <span class="next"><i class="fa fa-chevron-right"></i></span>
-            <span class="prev disabled"><i class="fa fa-chevron-left"></i></span>
-        </div>
         <div class="container blog-videos_padding-top ">
-            <div class="row tesla-carousel-items">
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                            <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                            <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-xs-12">
-                    <div class="blog-entry">
-                        <div class="entry-cover">
-                          <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
+            <div class="row carousel-slick">
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                      <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                      <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="blog-entry">
+                  <div class="entry-cover">
+                    <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
     <!-- /BLOG -->
 
-    <!-- TEXT -->
-    {% if staticpage %}
-    <div class="main-block">
+    <!-- SEPARATOR INFO -->
+    <div class="only-in-yashankin">
         <div class="padding">
             <div class="container">
-                {{ staticpage.context | safe }}
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <h2>Доступный фитнес !<br /><span style="font-size:1.5em">2500</span> р. все включено!</h2>
+                        <a href="{% url 'abonement' slug=slug %}" class="btn btn-abonement">Заказать</a>
+                    </div>
+                    <div class="col-md-6 text-left">
+                        <span class="divider divider-white"></span>
+                        <p class="blog-text">Только в декабре!<br />Персональная тренировка в подарок!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    {% endif %}
-    <!-- /TEXT -->
+    <!-- /SEPARATOR INFO -->
 
     <!-- SEPARATOR INFO -->
     <div class="separator-info grey" id="classes">
@@ -130,8 +138,10 @@
             <div class="row carousel-slick">
                 {% for fitzone in fitneszones %}
                   <div class="lesson">
+                    <a href="{{fitzone.link}}">
                       <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
                       <h4>{{fitzone.title}}</h4>
+                    </a>
                   </div>
                 {% endfor %}
             </div>

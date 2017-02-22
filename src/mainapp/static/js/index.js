@@ -36,7 +36,6 @@ $(function(){
     }
   });
 
-
     $(".carousel-slick").slick({
         infinite: true,
         slidesToShow: 3,
@@ -59,6 +58,11 @@ $(function(){
           }
         }]
     })
+
+    $('.to_about').on('click', function(){
+        $('body').scrollTop(1285);
+        return false;
+    });
 
 });
 
