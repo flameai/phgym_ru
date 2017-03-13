@@ -74,7 +74,10 @@ class SliderAdmin(SortableModelAdmin):
 
 admin.site.register(Slider, SliderAdmin)
 
-admin.site.register(Form)
+class FormAdmin(admin.ModelAdmin):
+    readonly_fields = ('link',)
+
+admin.site.register(Form, FormAdmin)
 
 class FormRequestAdmin(admin.ModelAdmin):
     list_display = ('formname', 'daterequest')

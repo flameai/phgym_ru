@@ -5,6 +5,7 @@ from datetime import date, datetime
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
 from django.conf import settings
+from django.utils.safestring import mark_safe
 
 FORM_CHOICES = (
     (1, u"Бесплатный фитнес-день"),
@@ -210,6 +211,16 @@ class Form(models.Model):
     title = models.CharField(verbose_name=u"заголовок", max_length=200, default="")
     club = models.ForeignKey(Club, on_delete=models.CASCADE, verbose_name=u'Клуб')
     context = RichTextUploadingField()
+
+    def get_link(self):
+        if self.form == 1:
+            return mark_safe(u'<a href="/%s/entry/">Посмотреть</a>' % self.club.slug)
+        elif self.form == 2:
+            return mark_safe(u'<a href="/%s/call/">Посмотреть</a>' % self.club.slug)
+        elif self.form == 3:
+            return mark_safe(u'<a href="/%s/abonement/">Посмотреть</a>' % self.club.slug)
+    get_link.short_description = u'Ccылка'
+    link = property(get_link)
 
     def __str__(self):
         return u"%s" % self.title
