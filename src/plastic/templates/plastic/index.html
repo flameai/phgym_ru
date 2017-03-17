@@ -55,97 +55,99 @@
 
 <script type="text/html" id="site">
 <!-- ko if: page() == "site" -->
-    <div class="container content">
-        <div class="row">
-            <div class="input-field col-sm-12 clubselect" style="padding-top: 30px">
-                <label>Выберите клуб</label>
-                <select class="clubs-select" data-bind="options: clubs, optionsText: 'club', optionsValue: 'club', value: club"></select>
+    <div class="grey" style="padding-bottom: 50px;">
+        <div class="container content">
+            <div class="row">
+                <div class="input-field col-sm-12 clubselect" style="padding-top: 30px">
+                    <label>Выберите клуб</label>
+                    <select class="clubs-select" data-bind="options: clubs, optionsText: 'club', optionsValue: 'club', value: club"></select>
+                </div>
             </div>
-        </div>
 
-        <h4 style="text-align: center;">Продажа абонементов</h4>
+            <h4 style="text-align: center;">Продажа абонементов</h4>
 
-        <div class="row">
-            <!-- ko if: currentClub -->
-                <!-- ko foreach: currentClub().goods -->
-                    <div class="col-xs-12 col-sm-6 col-lg-4">
-                        <form method="post" action="/shop/payment">
-                            <input type="hidden" name="item_kod" data-bind="attr: {value: $data.item_kod}" />
-                            <input type="hidden" name="order_type" data-bind="attr: {value: $data.type}" />
-                            <input type="hidden" name="club" data-bind="attr: {value: $parent.club}" />
+            <div class="row">
+                <!-- ko if: currentClub -->
+                    <!-- ko foreach: currentClub().goods -->
+                        <div class="col-xs-12 col-sm-6 col-lg-4">
+                            <form method="post" action="/shop/payment">
+                                <input type="hidden" name="item_kod" data-bind="attr: {value: $data.item_kod}" />
+                                <input type="hidden" name="order_type" data-bind="attr: {value: $data.type}" />
+                                <input type="hidden" name="club" data-bind="attr: {value: $parent.club}" />
 
-                            <div class="card-news medium">
-                                <div class="card-img">
-                                    <!-- ko if: $data.picture -->
-                                        <img data-bind="attr: {src: $data.picture}">
-                                    <!-- /ko -->
-                                    <!-- ko ifnot: $data.picture -->
-                                        <img src="/static/plastic/img/default.jpg" />
-                                    <!-- /ko -->
-                                    <h4 class="card-title" data-bind="text: $data.item">Название карточки</h4>
+                                <div class="card-news medium">
+                                    <div class="card-img">
+                                        <!-- ko if: $data.picture -->
+                                            <img data-bind="attr: {src: $data.picture}">
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.picture -->
+                                            <img src="/static/plastic/img/default.jpg" />
+                                        <!-- /ko -->
+                                        <h4 class="card-title" data-bind="text: $data.item" style="margin: 0">Название карточки</h4>
+                                    </div>
+                                    <div class="card-content">      
+                                        <p data-bind="text: $data.description"></p>
+                                        <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
+                                        <button type="submit" class="btn red" data-bind="click: $parent.buyItem">Купить</buton>
+                                    </div>
                                 </div>
-                                <div class="card-content">      
-                                    <p data-bind="text: $data.description"></p>
-                                    <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
-                                    <button type="submit" class="btn" data-bind="click: $parent.buyItem">Купить</buton>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    <!-- /ko -->
                 <!-- /ko -->
-            <!-- /ko -->
-        </div>
+            </div>
 
+        </div>
     </div>
 <!-- /ko -->
 </script>
 
 <script type="text/html" id="registration">
 <!-- ko if: page() == "registration" -->
-    <div class="grey" style="padding-bottom: 50px;">
-        <div class="container content" style="padding-top: 30px">
-            <div class="row">
-              <!-- ko with: m_registration -->
-                <form class="regform card-panel  lighten-5">
-                    <h4 style="text-align: center">Регистрация нового пользователя</h4>
-                    <div class="row">
-                        <div class="input-field col-sm-12 col-md-6">
-                            <label for="last_name">ФИО</label>
-                            <input id="last_name" type="text" class="validate" data-bind="value: fio">
-                        </div>
-                        <div class="input-field col-sm-12 col-md-6">
-                            <label for="email">E-mail</label>
-                            <input id="email" type="email" class="validate" data-bind="value: email">
-                        </div>
-                        <!-- <div class="input-field col-sm-12 clubselect">
-                            <label>Выберите клуб</label>
-                            <select class="clubs-select" data-bind="options: app.clubs, optionsText: 'club', optionsValue: 'club', value: app.club"></select>
-                        </div> -->
+    
+    <div class="container content" style="padding-top: 30px">
+        <div class="row">
+          <!-- ko with: m_registration -->
+            <form class="regform card-panel  lighten-5">
+                <h4 style="text-align: center">Регистрация нового пользователя</h4>
+                <div class="row">
+                    <div class="input-field col-sm-12 col-md-6">
+                        <label for="last_name">ФИО</label>
+                        <input id="last_name" type="text" class="validate" data-bind="value: fio">
                     </div>
-                    <div class="row">
-                        <div class="textblock col-sm-12">
-                            <p class="flow-text oferta_context"></p>
-                        </div>
+                    <div class="input-field col-sm-12 col-md-6">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" class="validate" data-bind="value: email">
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>
-                                <input type="checkbox" id="test5" data-bind="checked: oferta" style="width: initial; margin-right: 5px;" />
-                                Я принимаю условия
-                            </p>
-                        </div>
+                    <!-- <div class="input-field col-sm-12 clubselect">
+                        <label>Выберите клуб</label>
+                        <select class="clubs-select" data-bind="options: app.clubs, optionsText: 'club', optionsValue: 'club', value: app.club"></select>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="textblock col-sm-12">
+                        <p class="flow-text oferta_context"></p>
                     </div>
-                    <div class="center row">
-                        <div class="col-sm-12">
-                            <button data-bind="enable: registerValidate, click: registration" class="btn entryform-btn" >Отправить</button>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>
+                            <input type="checkbox" id="test5" data-bind="checked: oferta" style="width: initial; margin-right: 5px;" />
+                            Я принимаю условия
+                        </p>
                     </div>
-                    <div style="display: none" id="hiddenForm"></div>
-                </form>
-                <!-- /ko -->
-            </div>
+                </div>
+                <div class="center row">
+                    <div class="col-sm-12">
+                        <button data-bind="enable: registerValidate, click: registration" class="btn entryform-btn" >Отправить</button>
+                    </div>
+                </div>
+                <div style="display: none" id="hiddenForm"></div>
+            </form>
+            <!-- /ko -->
         </div>
     </div>
+    
     
 <!-- /ko -->
 </script>
