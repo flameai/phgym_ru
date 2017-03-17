@@ -4281,7 +4281,7 @@ list-style:none;
 	margin-left: 10px !important;
 }
 .entryform-btn {
-    background-color: #f9690e;
+    background-color: #E31E24;
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
@@ -4291,7 +4291,7 @@ list-style:none;
     width: initial;
 }
 .entryform-btn:hover {
-    background-color: #5863c5;
+    background-color: #ab0c11;
     color: #fff;
 }
 .entry-form_checkbox-wrapper input[type=checkbox],
@@ -4325,10 +4325,12 @@ list-style:none;
 
 }
 .card {
-	background-color: #fff;
-    transition: box-shadow .25s;
+	border: 1px solid #E31E24;    
     border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+    position: relative;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+    transition: box-shadow .25s;
+    margin-bottom: 20px;
 }
 .card-content {
 	position: relative;
@@ -4338,7 +4340,7 @@ list-style:none;
 	position: absolute;
 	bottom: 20px;
 	right: 20px;
-	background-color: #f9690e;
+	
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
