@@ -37,7 +37,7 @@ def payment(request):
 
     try:
         r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
-                         headers={"Content-Type": "application/json"})
+                         headers={"Content-Type": "application/json"}, verify=False)
         r.encoding = 'utf-8'
         txt = u''.join(r.text).replace("\r\n", "").replace("\xa0", "").replace("\ufeff", "")
         clubs = json.loads(txt)
@@ -125,5 +125,6 @@ def send_sms(request):
         "to": phone,
         "text": u"Код для авторизации: " + pin
     }
-    r = requests.get(settings.SMS_URL, params=data)
-    return HttpResponse(r.text)
+    return HttpResponse(pin)
+    # r = requests.get(settings.SMS_URL, params=data)
+    # return HttpResponse(r.text)

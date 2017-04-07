@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.http import HttpResponse
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -22,4 +23,5 @@ urlpatterns = [
     url(r'^shop/', include('plastic.urls')),
 	url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include('mainapp.urls')),
+    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\r\nDisallow: /", content_type="text/plain")),
 ]
