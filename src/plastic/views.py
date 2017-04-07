@@ -125,6 +125,5 @@ def send_sms(request):
         "to": phone,
         "text": u"Код для авторизации: " + pin
     }
-    return HttpResponse(pin)
-    # r = requests.get(settings.SMS_URL, params=data)
-    # return HttpResponse(r.text)
+    r = requests.get(settings.SMS_URL, params=data)
+    return HttpResponse(r.text)
