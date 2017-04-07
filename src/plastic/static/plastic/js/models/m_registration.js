@@ -15,7 +15,7 @@ m_registration.registration = function() {
       "phone": m_auth.phone(),
       "passport": "",
       "birth": "",
-      "club": app.currentClub(),
+      "club": app.currentClub().club,
     }),
     success: function(data) {
       if(data.status == "ok") {
