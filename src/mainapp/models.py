@@ -311,10 +311,17 @@ class YouTubeChannel(models.Model):
     )
 
     def __str__(self):
-        return u'YouTube канал клуба %s' % self.club
+        if self.club:
+            return u'YouTube канал клуба %s' % self.club
+        else:
+            return u'YouTube канал по умолчанию'
 
     def __unicode__(self):
-        return u'YouTube канал клуба %s' % self.club
+        if self.club:
+            return u'YouTube канал клуба %s' % self.club
+        else:
+            return u'YouTube канал по умолчанию'
+
 
     def save(self, *args, **kwargs):
         if u"data-yt-key" not in self.html:
