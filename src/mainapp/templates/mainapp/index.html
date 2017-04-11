@@ -54,29 +54,13 @@
                 </div>
                 <div class="col-md-12">
                     <span class="divider"></span>
-                </div>
+                </div>{% if channel %}
+            {{ channel.html | safe }}
+        {% endif %}
             </div>
         </div>
 
-        <div class="container blog-videos_padding-top ">
-            <div class="row carousel-slick">
-              <div class="blog-entry">
-                  <div class="entry-cover">
-                      <iframe src="https://player.vimeo.com/video/175544170" width="360" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                  </div>
-              </div>
-              <div class="blog-entry">
-                  <div class="entry-cover">
-                      <iframe width="360" height="270" src="https://www.youtube.com/embed/yjH8Eo4pHM4" frameborder="0" allowfullscreen></iframe>
-                  </div>
-              </div>
-              <div class="blog-entry">
-                  <div class="entry-cover">
-                    <iframe width="360" height="270" src="https://www.youtube.com/embed/xUqCVxOyDPQ" frameborder="0" allowfullscreen></iframe>
-                  </div>
-              </div>
-            </div>
-        </div>
+        
     </div>
     <!-- /BLOG -->
 

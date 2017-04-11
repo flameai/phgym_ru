@@ -49,12 +49,6 @@
                         <div class="col-md-6">
                             <select class="form-control" id="navigation" style="margin-top: 40px;">
                                 <option value="">Выберите клуб</option>
-                                <optgroup label="Реутов">
-                                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
-                                </optgroup>
-                                <optgroup label="Казань">
-                                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                                </optgroup>
                                 {% getClubs as clubs %}
                                 {% if clubs %}
                                     <optgroup label="Екатеринбург">
@@ -63,6 +57,12 @@
                                         {% endfor %}
                                     </optgroup>
                                 {% endif %}
+                                <optgroup label="Реутов">
+                                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                                </optgroup>
+                                <optgroup label="Казань">
+                                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                                </optgroup>
                                 <optgroup label="Томск">
                                     <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
                                 </optgroup>
@@ -219,6 +219,7 @@
       <script src="{% static 'js/slick.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/jquery.arcticmodal-0.3.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/jquery.validate.min.js' %}" type="text/javascript"></script>
+      <script src="{% static 'js/yottie/jquery.yottie.bundled.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/localization/messages_ru.min.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/bootstrap.js' %}" type="text/javascript"></script>
       <script src="{% static 'js/placeholder.js' %}" type="text/javascript"></script>
