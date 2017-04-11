@@ -300,3 +300,28 @@ class EditTextField(models.Model):
         unique_together = ('club','page')
         verbose_name = u'текстовый блок'
         verbose_name_plural = u'текстовые блоки'
+
+
+class YouTubeChannel(models.Model):
+    club = models.OneToOneField(Club, verbose_name=u'клуб', on_delete=models.CASCADE, null=True, blank=True)
+    html = models.TextField(
+        help_text=u"""1. На странице <a href='https://elfsight.com/youtube-channel-plugin-yottie/jquery/#demo'>ссылка</a> настройте виджет.<br>
+                      2. В последнем пункте Get Code скопируйте полученный код виджета (2-ое поле).<br>
+                      3. Вставьте этот код в это поле."""
+    )
+
+    def __str__(self):
+        return u'YouTube канал клуба %s' % self.club
+
+    def __unicode__(self):
+        return u'YouTube канал клуба %s' % self.club
+
+    def save(self, *args, **kwargs):
+        if u"data-yt-key" not in self.html:
+            new = u'%s%s%s%s%s' % (self.html[:13], 'data-yt-key="', settings.YT_API_KEY, '" ', self.html[13:])
+            self.html = new
+        super(YouTubeChannel, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = u'YouTube канал'
+        verbose_name_plural = u'YouTube каналы'

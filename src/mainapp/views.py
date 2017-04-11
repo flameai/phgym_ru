@@ -35,6 +35,16 @@ def index(request, slug=""):
         except:
             pass
 
+        try:
+            channel = YouTubeChannel.objects.get(club=club)
+            context.update({'channel': channel})
+        except:
+            try:
+                channel = YouTubeChannel.objects.get(club__isnull=True)
+                context.update({'channel': channel})
+            except:
+                pass
+
         return render(request,'mainapp/index.html',context)
     else:   # Корпоративная страница
         try:

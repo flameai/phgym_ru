@@ -119,3 +119,6 @@ class EditTextFieldAdmin(admin.ModelAdmin):
     list_display = ('club','page',)
 
 admin.site.register(EditTextField, EditTextFieldAdmin)
+
+
+admin.site.register(YouTubeChannel)
