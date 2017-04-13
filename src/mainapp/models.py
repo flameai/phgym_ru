@@ -231,6 +231,7 @@ class Form(models.Model):
     class Meta:
         verbose_name = u'Форма'
         verbose_name_plural = u'Формы'
+        unique_together = ('form', 'club')
 
 
 class Page(models.Model):

@@ -54,9 +54,10 @@
                 </div>
                 <div class="col-md-12">
                     <span class="divider"></span>
-                </div>{% if channel %}
-            {{ channel.html | safe }}
-        {% endif %}
+                </div>
+                {% if channel %}
+                    {{ channel.html | safe }}
+                {% endif %}
             </div>
         </div>
 
