@@ -99,7 +99,7 @@ function sendform() {
           yaCounter38885450.reachGoal('card_success');
           ga('send', 'event', "card", "success");
           $('#form_modal').arcticmodal({
-            afterOpen: function() { setTimeout( function() {$.arcticmodal('close')}, 2000 ) }
+            afterOpen: function() { setTimeout( function() {$.arcticmodal('close'); window.location = window.location.href.split("call")[0];}, 2000 ) }
           });
         })
       case "ЗАКАЗ ЗВОНКА С САЙТА":                // call
@@ -113,7 +113,7 @@ function sendform() {
           yaCounter38885450.reachGoal('callback_success');
           ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
-            afterOpen: function() { setTimeout( function() {$.arcticmodal('close')}, 2000 ) }
+            afterOpen: function() { setTimeout( function() {$.arcticmodal('close'); }, 2000 ) }
           });
         })
         break;

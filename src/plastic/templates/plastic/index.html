@@ -87,7 +87,7 @@
                                         <h4 class="card-title" data-bind="text: $data.item" style="margin: 0">Название карточки</h4>
                                     </div>
                                     <div class="card-content">      
-                                        <p data-bind="text: $data.description"></p>
+                                        <p data-bind="html: $data.description"></p>
                                         <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
                                         <button type="submit" class="btn red" data-bind="click: $parent.buyItem">Купить</buton>
                                     </div>
