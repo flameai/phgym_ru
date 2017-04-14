@@ -4,7 +4,11 @@
             <div class="path-root">
               <a href="/">Главная</a>
               {% for item in breadcrumbs %}
-                | <a href="{{item.url}}">{{item.title}}</a>
+                {% if item.active %}
+                  | {{item.title}}
+                {% else %}
+                  | <a href="{{item.url}}">{{item.title}}</a>
+                {% endif %}
               {% endfor %}
             </div>
         </div>

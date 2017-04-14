@@ -70,7 +70,7 @@ def news(request, page=""):
     if page:    # вывод подробной статьи
         try:
             news = News.objects.get(slug=page)
-            breadcrumbs = [{"title": "Новости", "url": "/news/"}, {"title": news.title, "url": request.path }]
+            breadcrumbs = [{"title": "Новости", "url": "/news/"}, {"title": news.title, "url": request.path, "active": True }]
             print(request)
             context.update({'breadcrumbs': breadcrumbs, 'news': news})
             return render(request,'mainapp/news/item.html', context)
@@ -79,7 +79,7 @@ def news(request, page=""):
     else:   # вывод списка кратких статей
         try:
             news = News.objects.all().order_by("-date")
-            breadcrumbs = [{"title": "Новости", "url": request.path }]
+            breadcrumbs = [{"title": "Новости", "url": request.path, "active": True }]
             context.update({'breadcrumbs': breadcrumbs, 'news_list': news})
             return render(request,'mainapp/news/list.html', context)
         except:
@@ -92,7 +92,7 @@ def stock(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             stock = Stock.objects.get(slug=page, club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": "/"+ slug + "/stock/"}, {'title': stock.title, "url": request.path }]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": "/"+ slug + "/stock/"}, {'title': stock.title, "url": request.path, "active": True }]
             context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
             return render(request,'mainapp/stock/item.html', context)
         except:
@@ -101,7 +101,7 @@ def stock(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             stocks = Stock.objects.filter(club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": request.path }]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": request.path, "active": True }]
             context.update({'breadcrumbs': breadcrumbs, "stocks": stocks })
             return render(request,'mainapp/stock/list.html',context)
         except:
@@ -114,7 +114,7 @@ def program(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             prog = Program.objects.get(club=club, slug=page)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path}]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path, "active": True}]
             context.update({'breadcrumbs': breadcrumbs, "program": prog})
             return render(request,'mainapp/program/item.html', context)
         except:
@@ -123,7 +123,7 @@ def program(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             progs = Program.objects.filter(club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": request.path }]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": request.path, "active": True }]
             context.update({"breadcrumbs": breadcrumbs, "programs": progs })
         except:
             pass
@@ -169,7 +169,7 @@ def contacts(request, slug="comsomoll"):
     context = {}
     try:
         club = Club.objects.get(slug=slug)
-        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": "Контакты", "url": request.path}]
+        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": "Контакты", "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, 'club': club})
     except:
         pass
@@ -195,7 +195,7 @@ def call(request, slug=""):
     try:
         club = Club.objects.get(slug=slug)
         form = Form.objects.get(club=club,form=2)
-        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path}]
+        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path, "active": True}]
         context.update({"breadcrumbs": breadcrumbs, "form": form })
     except:
         pass
@@ -288,7 +288,7 @@ def page(request, slug):
     context = {}
     try:
         page = Page.objects.get(slug=slug)
-        breadcrumbs = [{'title': page.title, 'url': request.path}]
+        breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
         context.update({"page": page, "breadcrumbs": breadcrumbs})
     except:
         pass
