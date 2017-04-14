@@ -203,7 +203,7 @@ class Slider(models.Model):
 
 class Form(models.Model):
     FORM_CHOICES = (
-        (1, u"Бесплатный фитнес-день"),
+        # (1, u"Бесплатный фитнес-день"),
         (2, u"Заказать звонок"),
         (3, u"Заказать абонемент")
     )
