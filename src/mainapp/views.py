@@ -148,6 +148,14 @@ def schedule(request, slug="comsomoll", detail=None):
         title = u"Расписание"
         subtitle = u"Расписание"
         context.update({'title': title, 'subtitle': subtitle})
+        try:
+            club = Club.objects.get(slug=slug)
+            gym = Gym.objects.filter(club=club,pk=schedule_num)
+            breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                           {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
+            context.update({'breadcrumbs': breadcrumbs})
+        except:
+            pass
         print('work it')
     except:
         print('not work')
@@ -270,11 +278,11 @@ def abonement(request, slug="comsomoll"):
         elif slug == "comsomoll":
             send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
 
-
     try:
         club = Club.objects.get(slug=slug)
         form = Form.objects.get(club=club,form=3)
-        context.update({"form": form })
+        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path, "active": True}]
+        context.update({"breadcrumbs": breadcrumbs, "form": form })
     except:
         pass
 
