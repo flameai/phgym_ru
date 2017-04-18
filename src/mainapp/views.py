@@ -127,7 +127,7 @@ def program(request, slug="", page=""):
             context.update({"breadcrumbs": breadcrumbs, "programs": progs })
         except:
             pass
-            
+
         try:
             editfield = EditTextField.objects.get(club=club, page=1) # 1 - const program
             context.update({'editfield': editfield})
@@ -405,6 +405,8 @@ def timeByNum(num):
         11: "18:00 - 19:00",
         12: "19:00 - 20:00",
         13: "20:00 - 21:00",
+        14: "21:00 - 22:00",
+        15: "22:00 - 23:00",
     }
     return time[num]
 
