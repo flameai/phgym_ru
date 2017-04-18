@@ -148,9 +148,7 @@ def schedule(request, slug="comsomoll", detail=None):
         title = u"Расписание"
         subtitle = u"Расписание"
         context.update({'title': title, 'subtitle': subtitle})
-        print('work it')
     except:
-        print('not work')
         pass
     return render(request,'mainapp/schedule.html', context)
 
