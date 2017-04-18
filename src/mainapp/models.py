@@ -167,16 +167,10 @@ class Entry(models.Model):
         (14,u"21:00 - 22:00"),
         (15,u"22:00 - 23:00"),
     )
-    PROGRAM_CHOICES = (
-        (1,u"TOP-FITNESS"),
-        (2,u"Studio"),
-        (3,u"Прочее"),
-    )
+    
     weekday = models.ForeignKey(WeekDay, on_delete=models.CASCADE, default=None,)
     time = models.IntegerField(verbose_name=u"Время",choices=TIME_CHOICES,)
     content = models.CharField(verbose_name=u"Занятие",max_length=200,)
-    program = models.IntegerField(verbose_name=u"Программа",choices=PROGRAM_CHOICES,)
-
 
     class Meta:
         unique_together = ('weekday','time')
