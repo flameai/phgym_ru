@@ -340,7 +340,7 @@ def getDataByDays(clubnum,gymnum):
      entries = []
      for weekday in weekdays:
          entry = []
-         for time in range(1,14):
+         for time in range(1,16):
              obj = Entry.objects.filter(weekday=weekday,time=time)
              if obj.exists():
                  obj = obj.get()
@@ -356,7 +356,7 @@ def getDataByTime(clubnum,gymnum):
     gym = Gym.objects.filter(club=club,pk=gymnum)
     weekdays = WeekDay.objects.filter(gym=gym)
     entries = []
-    for time in range(1,14):
+    for time in range(1,16):
         entry = []
         for weekday in weekdays:
             obj = Entry.objects.filter(weekday=weekday,time=time)
