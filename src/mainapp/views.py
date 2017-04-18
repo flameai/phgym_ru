@@ -150,7 +150,7 @@ def schedule(request, slug="comsomoll", detail=None):
         context.update({'title': title, 'subtitle': subtitle})
         try:
             club = Club.objects.get(slug=slug)
-            gym = Gym.objects.filter(club=club,pk=schedule_num)
+            gym = Gym.objects.get(club=club,pk=schedule_num)
             breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                            {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
             context.update({'breadcrumbs': breadcrumbs})
