@@ -127,7 +127,7 @@ def program(request, slug="", page=""):
             context.update({"breadcrumbs": breadcrumbs, "programs": progs })
         except:
             pass
-            
+
         try:
             editfield = EditTextField.objects.get(club=club, page=1) # 1 - const program
             context.update({'editfield': editfield})
@@ -158,7 +158,6 @@ def schedule(request, slug="comsomoll", detail=None):
             pass
         print('work it')
     except:
-        print('not work')
         pass
     return render(request,'mainapp/schedule.html', context)
 
@@ -348,7 +347,7 @@ def getDataByDays(clubnum,gymnum):
      entries = []
      for weekday in weekdays:
          entry = []
-         for time in range(1,14):
+         for time in range(1,16):
              obj = Entry.objects.filter(weekday=weekday,time=time)
              if obj.exists():
                  obj = obj.get()
@@ -364,7 +363,7 @@ def getDataByTime(clubnum,gymnum):
     gym = Gym.objects.filter(club=club,pk=gymnum)
     weekdays = WeekDay.objects.filter(gym=gym)
     entries = []
-    for time in range(1,14):
+    for time in range(1,16):
         entry = []
         for weekday in weekdays:
             obj = Entry.objects.filter(weekday=weekday,time=time)
@@ -413,6 +412,8 @@ def timeByNum(num):
         11: "18:00 - 19:00",
         12: "19:00 - 20:00",
         13: "20:00 - 21:00",
+        14: "21:00 - 22:00",
+        15: "22:00 - 23:00",
     }
     return time[num]
 
