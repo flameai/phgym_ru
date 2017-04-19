@@ -40,7 +40,7 @@ class GymInline(admin.TabularInline):
 
 class EntryInline(admin.TabularInline):
     model = Entry
-    max_num = 12
+    max_num = 15
 
 
 class ClubAdmin(SortableModelAdmin):
