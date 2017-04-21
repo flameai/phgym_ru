@@ -296,7 +296,7 @@ def page(request, slug):
     try:
         page = Page.objects.get(slug=slug)
         breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
-        context.update({"page": page, "breadcrumbs": breadcrumbs})
+        context.update({"page": page, "breadcrumbs": breadcrumbs, "title": page.title})
     except:
         pass
     return render(request, 'mainapp/page.html', context)
