@@ -341,22 +341,22 @@ def getClubs():
         pass
 
 def getDataByDays(clubnum,gymnum):
-     club = Club.objects.get(pk=clubnum)
-     gym = Gym.objects.filter(club=club,pk=gymnum)
-     weekdays = WeekDay.objects.filter(gym=gym)
-     entries = []
-     for weekday in weekdays:
-         entry = []
-         for time in range(1,16):
-             obj = Entry.objects.filter(weekday=weekday,time=time)
-             if obj.exists():
-                 obj = obj.get()
-                 entry.append({"content": obj.content, "program": programByNum(obj.program), "time": timeByNum(obj.time)})
-             else:
-                 entry.append({"content": "", "program": "", "time": timeByNum(time)})
-         obj = {"day": weekDayByNum(weekday.day), "data": entry}
-         entries.append(obj)
-     return entries
+    club = Club.objects.get(pk=clubnum)
+    gym = Gym.objects.filter(club=club,pk=gymnum)
+    weekdays = WeekDay.objects.filter(gym=gym)
+    entries = []
+    for weekday in weekdays:
+        entry = []
+        for time in range(1,16):
+            obj = Entry.objects.filter(weekday=weekday,time=time)
+            if obj.exists():
+                obj = obj.get()
+                entry.append({"content": obj.content, "time": timeByNum(obj.time)})
+            else:
+                entry.append({"content": "", "time": timeByNum(time)})
+        obj = {"day": weekDayByNum(weekday.day), "data": entry}
+        entries.append(obj)
+    return entries
 
 def getDataByTime(clubnum,gymnum):
     club = Club.objects.get(pk=clubnum)
@@ -369,9 +369,9 @@ def getDataByTime(clubnum,gymnum):
             obj = Entry.objects.filter(weekday=weekday,time=time)
             if obj.exists():
                 obj = obj.get()
-                entry.append({"content": obj.content, "program": obj.program})
+                entry.append({"content": obj.content})
             else:
-                entry.append({"content": "", "program": ""})
+                entry.append({"content": ""})
         obj = {"time": timeByNum(time), "data": entry}
         entries.append(obj)
     return entries
@@ -388,14 +388,6 @@ def weekDayByNum(num):
         7: "Воскресенье"
     }
     return day_of_week[num]
-
-def programByNum(num):
-    program = {
-        1: "topfitness",
-        2: "studio",
-        3: "other"
-    }
-    return program[num]
 
 def timeByNum(num):
     time = {

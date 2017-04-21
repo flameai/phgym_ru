@@ -540,7 +540,7 @@ header .menu ul li ul {
 	display: none;
 	left: 0;
 	z-index: 99;
-	background: #f9690e;
+	background: #E31E24;
 	border: 1px solid #ccc;
 	padding: 0;
 	margin: 45px auto 0;
@@ -1577,7 +1577,7 @@ footer .i:hover {
 }
 
 .timetable .timetable-text {
-	color: #fff;
+	color: #454345;
 }
 
   /* ============================================================================
