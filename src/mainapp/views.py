@@ -332,7 +332,8 @@ def getClubInfo(slug):
         club = Club.objects.get(slug=slug)
         return club
     except:
-        pass
+        info = MainInfo.objects.first()
+        return info
 
 
 @register.simple_tag
