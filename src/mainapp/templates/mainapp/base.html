@@ -32,56 +32,55 @@
       <div class="top-header d-border-c">
           <div class="container">
             <div class="row top-header__row">
-              <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="logo">
-                    <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
-                  </div>
-
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-10">
-
-                <div class="row">                
-                 
-                  <div class="col-md-6">
-                      <select class="form-control" id="navigation" style="margin-top: 35px;">
-                          <option value="" selected>Выберите клуб</option>
-                          {% getClubs as clubs %}
-                          {% if clubs %}
-                          <optgroup label="Екатеринбург">
-                              {% for club in clubs %}
-                              <option value="/{{club.slug}}">{{club.address}}</option>
-                              {% endfor %}
-                          </optgroup>
-                          {% endif %}
-                          <optgroup label="Реутов">
-                              <option value="http://phgreutov.ru/" target="blank">Юбилейная, 57</option>
-                          </optgroup>
-                          <optgroup label="Казань">
-                              <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
-                          </optgroup>
-                          <optgroup label="Томск">
-                              <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
-                          </optgroup>
-                      </select>
-                  </div>
-
-                  <div class="col-md-6">
-                      {% getMainPhone as phone %}
-
-                      <div class="phone">
-                          <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                          <span>{{ phone }}</span>
-                      </div>
-                  </div>
-
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <div class="logo">
+                        <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
+                    </div>
                 </div>
-              
+                <div class="col-xs-6 visible-xs ">
+                    <div style="margin-top: 30px; position: relative;">
+                        <a href="{% url 'call' slug=slug %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control" id="navigation" style="margin-top: 40px;">
+                                <option value="">Выберите клуб</option>
+                                {% getClubs as clubs %}
+                                {% if clubs %}
+                                    <optgroup label="Екатеринбург">
+                                        {% for club in clubs %}
+                                          <option value="/{{club.slug}}">{{club.address}}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                {% endif %}
+                                <optgroup label="Реутов">
+                                    <option value="http://phgreutov.ru/">Юбилейная, 57</option>
+                                </optgroup>
+                                <optgroup label="Казань">
+                                    <option value="http://powerhousegymkazan.ru/">Краснококшайская, 119</option>
+                                </optgroup>
+                                <optgroup label="Томск">
+                                    <option value="http://power.tomsk.ru/">Красноармейская, 120</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            {% getMainPhone as phone %}
+
+                            <div class="phone">
+                                <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
+                                <span>{{ phone }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="hidden-xs col-sm-2 col-md-2">
                     <div style="margin-top: 30px; position: relative;">
                         <a href="{% url 'call' %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" style="width: 60px;" class="test"></a>
                     </div>
                 </div>
-              </div>
             </div>
           </div>
       </div>
