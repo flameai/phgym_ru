@@ -23,6 +23,7 @@ urlpatterns = [
     # url(r'^(?P<slug>[\w-]+)/about/$', views.about, name="about"),
     url(r'^(?P<slug>[\w-]+)/contacts/$', views.contacts, name="contacts"),
     url(r'^(?P<slug>[\w-]+)/call/$', views.call, name='call'),
+    url(r'^call/$', views.call, name='call'),
     url(r'^(?P<slug>[\w-]+)/entry/$', views.entry, name='entry'),
     url(r'^(?P<slug>[\w-]+)/abonement/$', views.abonement, name='abonement'),
 

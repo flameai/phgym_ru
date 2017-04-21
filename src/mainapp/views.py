@@ -205,7 +205,9 @@ def call(request, slug=""):
         breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path, "active": True}]
         context.update({"breadcrumbs": breadcrumbs, "form": form })
     except:
-        pass
+        form = Form.objects.filter(club__isnull=True, form=2)[0]
+        breadcrumbs = [{"title": form.title, "url": request.path, "active": True}]
+        context.update({"breadcrumbs": breadcrumbs, "form": form })
     return render(request, 'mainapp/call.html', context)
 
 
@@ -331,6 +333,16 @@ def getClubInfo(slug):
         return club
     except:
         pass
+
+
+@register.simple_tag
+def getMainPhone():
+    try:
+        info = MainInfo.objects.first()
+        return info.phone
+    except:
+        pass
+
 
 @register.simple_tag
 def getClubs():
