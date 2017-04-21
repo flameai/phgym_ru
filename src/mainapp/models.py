@@ -205,7 +205,7 @@ class Form(models.Model):
     )
     form = models.IntegerField(verbose_name=u"Форма", choices=FORM_CHOICES,)
     title = models.CharField(verbose_name=u"заголовок", max_length=200, default="")
-    club = models.ForeignKey(Club, on_delete=models.CASCADE, verbose_name=u'Клуб')
+    club = models.ForeignKey(Club, null=True, blank=True, on_delete=models.CASCADE, verbose_name=u'Клуб')
     context = RichTextUploadingField()
 
     def get_link(self):
@@ -329,3 +329,17 @@ class YouTubeChannel(models.Model):
     class Meta:
         verbose_name = u'YouTube канал'
         verbose_name_plural = u'YouTube каналы'
+
+
+class MainInfo(models.Model):
+    phone = models.CharField(verbose_name=u"телефон", max_length=200)
+
+    def __str__(self):
+        return u'Основная информация'
+
+    def __unicode__(self):
+        return u'Основная информация'
+
+    class Meta:
+        verbose_name = u'основная информация'
+        verbose_name_plural = u'основная информация'
