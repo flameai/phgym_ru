@@ -122,3 +122,4 @@ admin.site.register(EditTextField, EditTextFieldAdmin)
 
 
 admin.site.register(YouTubeChannel)
+admin.site.register(MainInfo)
