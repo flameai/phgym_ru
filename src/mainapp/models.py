@@ -177,13 +177,15 @@ class Entry(models.Model):
         verbose_name = u'занятие'
         verbose_name_plural = u'занятия'
 
+
 class Slider(models.Model):
-    image = models.ImageField(verbose_name=u'Рисунок')
-    title = models.CharField(verbose_name=u'Заголовок', max_length=200)
-    subtitle = models.CharField(verbose_name=u'Подзаголовок', max_length=200, default="")
-    context = RichTextField(verbose_name=u'Текст')
+    image = models.ImageField(verbose_name=u'Изображение')
+    title_internal = models.CharField(verbose_name=u'Название', max_length=200, help_text=u"Отображается только в адм.части")
+    title = models.CharField(verbose_name=u'Заголовок', max_length=200, blank=True)
+    subtitle = models.CharField(verbose_name=u'Подзаголовок', max_length=200, blank=True)
+    context = RichTextField(verbose_name=u'Текст', blank=True)
     button_url = models.URLField(verbose_name=u'Ссылка кнопки', blank=True)
-    button_text = models.CharField(verbose_name=u'Текст на кнопке', max_length=100, blank=True)
+    button_text = models.CharField(verbose_name=u'Текст на кнопке', max_length=100, blank=True, help_text=u"Если нет текста для кнопки, то весь слайдер будет ссылкой")
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -192,10 +194,11 @@ class Slider(models.Model):
         verbose_name_plural = u'слайдеры'
 
     def __str__(self):
-        return "%s" % self.title
+        return "%s" % self.title_internal
 
     def __unicode__(self):
-        return "%s" % self.title
+        return "%s" % self.title_internal
+
 
 class Form(models.Model):
     FORM_CHOICES = (
