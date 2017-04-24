@@ -74,7 +74,7 @@ admin.site.register(WeekDay, WeekDayAdmin)
 
 
 class SliderAdmin(SortableModelAdmin):
-    list_display = ('title', 'club', 'order')
+    list_display = ('title_internal', 'club', 'order')
     sortable = 'order'
     exclude = ('order',)
 
