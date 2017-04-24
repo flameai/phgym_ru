@@ -12,32 +12,44 @@
     {% if sliders %}
     <div class="main-slider">
         <div id="main-slider" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-          {% for slider in sliders %}
-              <li data-target="#main-slider" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active" {% endif %}></li>
-          {% endfor %}
-          </ol>
-          <div class="carousel-inner">
+            <ol class="carousel-indicators">
             {% for slider in sliders %}
-              <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-md-8 col-sm-12">
-                              <h1 class="main-slider__item-header">{{ slider.title }}</h1>
-                              <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
-                              <div class="text-left">
-                                  <span class="divider"></span>
-                              </div>
-                              <div class="main-slider__item-text">
-                                  {{ slider.context | safe }}
-                              </div>
-                              {% if slider.button_text and slider.button_url %}
-                              <a class="slider-btn btn pull-left red" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
-                              {% endif %}
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <li data-target="#main-slider" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active" {% endif %}></li>
+            {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for slider in sliders %}
+                <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
+                    {% if slider.button_text is False and slider.button_url %}
+                        <a href="{{ slider.button_url }}">
+                    {% endif %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12">
+                                {% if slider.title %}
+                                    <h1 class="main-slider__item-header">{{ slider.title }}</h1>
+                                {% endif %}
+                                {% if slider.subtitle %}
+                                    <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
+                                {% endif %}
+                                {% if slider.context %}
+                                    <div class="text-left">
+                                        <span class="divider"></span>
+                                    </div>
+                                    <div class="main-slider__item-text">
+                                        {{ slider.context | safe }}
+                                    </div>
+                                {% endif %}
+                                {% if slider.button_text and slider.button_url %}
+                                    <a class="slider-btn btn pull-left red" href="{{ slider.button_url }}">{{ slider.button_text }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if slider.button_text is False and slider.button_url %}
+                        </a>
+                    {% endif %}
+                </div>
               {% endfor %}
           </div>
         </div>
