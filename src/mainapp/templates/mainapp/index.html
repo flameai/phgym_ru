@@ -20,7 +20,7 @@
             <div class="carousel-inner">
                 {% for slider in sliders %}
                 <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
-                    {% if slider.button_text is False and slider.button_url %}
+                    {% if slider.button_text == "" and slider.button_url %}
                         <a href="{{ slider.button_url }}">
                     {% endif %}
                     <div class="container">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    {% if slider.button_text is False and slider.button_url %}
+                    {% if slider.button_text == "" and slider.button_url %}
                         </a>
                     {% endif %}
                 </div>
