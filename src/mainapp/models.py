@@ -78,6 +78,7 @@ class Stock(models.Model):
     text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
     url_button = models.URLField(u'ссылка кнопки', default='', blank=True, null=True )
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -87,6 +88,7 @@ class Stock(models.Model):
     class Meta:
         verbose_name = u'акция'
         verbose_name_plural = u'акции'
+        ordering = ('order',)
 
 
 class Program(models.Model):
