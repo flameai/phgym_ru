@@ -3036,7 +3036,7 @@ list-style:none;
 		width: 100%;
 	}
 }
-@media (max-width: 450px) {
+@media (max-width: 1024px) {
 	.timetable {
 		display: none;
 	}
