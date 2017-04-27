@@ -527,6 +527,7 @@ header .btn:hover,
 	background-color: #ab0c11;
 	color: #fff;
 }
+
 @media (max-width: 991px) {
 	header .top-header__phone,
 	header .top-header__adress{
@@ -537,6 +538,10 @@ header .btn:hover,
 	}
 }
 @media (max-width: 767px) {
+	header .logo {
+		max-width: 70px;
+		position: absolute;		
+	}
 	header .logo img {
 		margin: 0 auto;
 		margin-bottom: 20px;
@@ -4367,7 +4372,7 @@ list-style:none;
 }
 @media(max-width: 767px){
 	.fixed-margin {
-	  margin-top: 292px ;
+	  margin-top: 164px ;
 	}
 }
 
@@ -4491,8 +4496,14 @@ list-style:none;
 		display: inline-block;
 	}
 }
-
-.circle {
+.throbbing-btn {
+	margin-top: 30px; 
+	position: relative;
+}
+.throbbing-btn img{
+	width: 60px;
+}
+.throbbing-btn .circle {
 	width: 76px;
 	height: 76px;
 	position: absolute;
@@ -4506,7 +4517,7 @@ list-style:none;
 	-webkit-animation: pulsing 3s infinite;
   	animation: pulsing 3s infinite;
 }
-.circle-1 {
+.throbbing-btn .circle-1 {
 	width: 90px;
 	height: 90px;
 	position: absolute;
@@ -4519,6 +4530,27 @@ list-style:none;
 	background-color: rgba(227, 30, 36, 0.40);
 	-webkit-animation: pulsing 3s infinite;
   	animation: pulsing 3s infinite;
+}
+
+@media (max-width: 767px) {
+	.throbbing-btn {
+		margin-top: 0;
+		width: 55px;
+		float: right;
+	}
+	.throbbing-btn img{
+		width: 40px;
+	}
+	.throbbing-btn .circle {
+		width: 48px;
+		height: 48px;
+		top: -4px;
+	}
+	.throbbing-btn .circle-1 {
+		width: 55px;
+		height: 55px;
+		top: -8px;
+	}
 }
 @-webkit-keyframes pulsing {
   0% {
