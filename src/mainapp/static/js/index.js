@@ -69,8 +69,8 @@ $(function(){
 $(document).ready(function(){
     var url = location.pathname.split('/')[1];
     if(url && url != 'news' && url != 'pages') {
-      if ($("#navigation option[value='/"+url+"']").length > 0)
-        $('#navigation').val('/'+url);
+      if ($(".navigation option[value='/"+url+"']").length > 0)
+        $('.navigation').val('/'+url);
     }
 });
 
