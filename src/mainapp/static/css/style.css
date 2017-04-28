@@ -1,4 +1,24 @@
 @charset "UTF-8";
+@font-face {
+	font-family: "MuseoSansRegular";
+	src: url("/media/fonts/MuseoSansRegular/MuseoSansRegular.eot");
+	src: url("/media/fonts/MuseoSansRegular/MuseoSansRegular.eot?#iefix")format("embedded-opentype"),
+	url("/media/fonts/MuseoSansRegular/MuseoSansRegular.woff") format("woff"),
+	url("/media/fonts/MuseoSansRegular/MuseoSansRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "MuseoSansBold";
+	src: url("/media/fonts/MuseoSansBold/MuseoSansBold.eot");
+	src: url("/media/fonts/MuseoSansBold/MuseoSansBold.eot?#iefix")format("embedded-opentype"),
+	url("/media/fonts/MuseoSansBold/MuseoSansBold.woff") format("woff"),
+	url("/media/fonts/MuseoSansBold/MuseoSansBold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -33,7 +53,7 @@ body {
 	color: #fff;
 	line-height: 1.5em;
 	font-weight: 400;
-	font-family: 'Open Sans', sans-serif;
+	font-family: MuseoSansRegular;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
