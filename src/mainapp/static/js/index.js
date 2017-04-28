@@ -28,7 +28,7 @@ $(function(){
     interval: 6000
   });
 
-  $("#navigation").change(function(){
+  $(".navigation").change(function(){
     if($(this).val().indexOf("http://") != -1) {
       window.open($(this).val(),'_blank');
     } else {

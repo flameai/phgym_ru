@@ -37,7 +37,7 @@
                         <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
                     </div>
                     <div class="div visible-xs" style="margin-left: 85px; margin-top: 10px">
-                      <select class="form-control" id="navigation" style="margin-top: 40px;">
+                      <select class="form-control navigation" style="margin-top: 40px;">
                           <option value="">Выберите клуб</option>
                           {% getClubs as clubs %}
                           {% if clubs %}
@@ -62,7 +62,7 @@
                 <div class="col-sm-6 col-md-8 hidden-xs">
                     <div class="row">
                         <div class="col-md-6">
-                            <select class="form-control" id="navigation" style="margin-top: 40px;">
+                            <select class="form-control navigation" style="margin-top: 40px;">
                                 <option value="">Выберите клуб</option>
                                 {% getClubs as clubs %}
                                 {% if clubs %}
