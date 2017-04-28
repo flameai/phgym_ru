@@ -1,0 +1,34 @@
+{% extends 'mainapp/base.html' %}
+{% block title %} Новости {% endblock title %}
+
+{% block body %}
+<div class="grey" style="padding-top: 40px; padding-bottom: 30px">
+    <div class="container content">
+        <div class="row">
+        {%for news in news_list %}
+             <div class="col-md-4">
+                <a href="/news/{{news.slug}}">
+                    <div class="card-news">
+                        <div class="card-img">
+                            <div class="news_photo" style="background-image: url({{news.image.url}});"></div>
+                            <div class="card-title">
+                                <h6 class="text-right white-text">{{news.date|date:"d.m.Y"}}</h6>
+                                <h5 style="margin: 0">{{news.title}}</h5>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div>{{news.short_text}}</div>
+                        </div>
+                        <div class="card-action text-right">
+                            <u><a href="/news/{{news.slug}}">Подробнее</a></u>
+                        </div>
+                    </div>
+                </a>
+            </div>
+         {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

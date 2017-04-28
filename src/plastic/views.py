@@ -20,10 +20,12 @@ from yandex_cash_register import conf
 from .models import Order, Code
 from . import signals
 
+
 @ensure_csrf_cookie
 def index(request):
     context = {"title": "Продажа абонементов"}
-    return render(request,'plastic/index.html', context)
+    return render(request, 'plastic/index.html', context)
+
 
 def payment(request):
     phone = request.POST.get('phone')
@@ -35,9 +37,9 @@ def payment(request):
 
     try:
         r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
-            headers={"Content-Type": "application/json"})
+                         headers={"Content-Type": "application/json"}, verify=False)
         r.encoding = 'utf-8'
-        txt = u''.join(r.text).replace("\r\n","").replace("\xa0","").replace("\ufeff","")
+        txt = u''.join(r.text).replace("\r\n", "").replace("\xa0", "").replace("\ufeff", "")
         clubs = json.loads(txt)
         for obj in clubs['clubs']:
             if obj['club'] == club:
@@ -53,60 +55,64 @@ def payment(request):
         order_id = 1
 
     payment = Payment(
-        order_sum = Decimal(price),
-        order_id = order_id,
-        cps_phone = phone,
-        cps_email = email,
-        payment_type = 'AC'
+        order_sum=Decimal(price),
+        order_id=order_id,
+        cps_phone=phone,
+        cps_email=email,
+        payment_type='AC'
     )
 
     payment.save()
 
     order = Order(
-        order_id = order_id,
-        phone = phone,
-        user_id = user_id,
-        club = club,
-        order_type = order_type,
-        item_kod = item_kod,
+        order_id=order_id,
+        phone=phone,
+        user_id=user_id,
+        club=club,
+        order_type=order_type,
+        item_kod=item_kod,
     )
 
     order.save()
 
     form = payment.form()
 
-    return render(request,'plastic/payment.html',{'form': form, 'url': conf.TARGET})
+    return render(request, 'plastic/payment.html', {'form': form, 'url': conf.TARGET})
+
 
 def save_code(phone, pin):
     try:
         code = Code(
-         phone = phone,
-         code = pin,
+            phone=phone,
+            code=pin,
         )
         code.save()
         return True
     except:
         return False
 
+
 def check_pin(request):
     pin = request.GET.get('pin')
     phone = request.GET.get('phone')
-    try:
-        code = Code.objects.get(daterequest__gt=timezone.now()-datetime.timedelta(minutes=5),phone=phone)
-        if int(pin) == code.code:
-            code.delete()
-            return JsonResponse({"status": "ok"})
-        else:
-            return JsonResponse({"status": "invalid"})
-    except:
-        return JsonResponse({"status": "error"})
+    # try:
+    code = Code.objects.filter(daterequest__gt=timezone.now() - datetime.timedelta(minutes=5), phone=phone).last()
+    if int(pin) == code.code:
+        code.delete()
+        return JsonResponse({"status": "ok"})
+    else:
+        return JsonResponse({"status": "invalid"})
+    # except:
+    #     return JsonResponse({"status": "error"})
+
 
 def send_email(request):
     email = request.POST.get('email')
     subject = u'Регистрация на сайте plastic.yashankin.com'
     msg = u"Текст регистрации"
-    send_mail(subject,msg,settings.EMAIL_HOST_USER,[email])
+    send_mail(subject, msg, settings.EMAIL_HOST_USER ,[email])
     return HttpResponse('success')
+
 
 def send_sms(request):
     phone = request.POST.get('phone')

@@ -28,6 +28,50 @@ $(function(){
     interval: 6000
   });
 
+  $(".navigation").change(function(){
+    if($(this).val().indexOf("http://") != -1) {
+      window.open($(this).val(),'_blank');
+    } else {
+      document.location.href = $(this).val();
+    }
+  });
+
+    $(".carousel-slick").slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,            
+          }
+        },        
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+          }
+        }]
+    })
+
+    $('.to_about').on('click', function(){
+        $('body').scrollTop(1285);
+        return false;
+    });
+
+});
+
+$(document).ready(function(){
+    var url = location.pathname.split('/')[1];
+    if(url && url != 'news' && url != 'pages') {
+      if ($(".navigation option[value='/"+url+"']").length > 0)
+        $('.navigation').val('/'+url);
+    }
 });
 
 function sendData(url, data) {
@@ -55,7 +99,14 @@ function sendform() {
           yaCounter38885450.reachGoal('card_success');
           ga('send', 'event', "card", "success");
           $('#form_modal').arcticmodal({
-            afterOpen: function() { setTimeout( function() {$.arcticmodal('close')}, 2000 ) }
+            afterOpen: function() { 
+              setTimeout( 
+                function() {
+                  $.arcticmodal('close');
+                  window.location = window.location.href.split("abonement")[0];
+                },
+              2000 )
+            }
           });
         })
       case "ЗАКАЗ ЗВОНКА С САЙТА":                // call
@@ -69,7 +120,14 @@ function sendform() {
           yaCounter38885450.reachGoal('callback_success');
           ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
-            afterOpen: function() { setTimeout( function() {$.arcticmodal('close')}, 2000 ) }
+            afterOpen: function() {
+              setTimeout( 
+                function() {
+                  $.arcticmodal('close');
+                  window.location = window.location.href.split("call")[0];
+                }
+              , 2000 ) 
+            }
           });
         })
         break;
@@ -102,7 +160,14 @@ function sendform() {
          yaCounter38885450.reachGoal('freetrain_success');
          ga('send', 'event', "freetrain", "success");
          $('#form_modal').arcticmodal({
-           afterOpen: function() { setTimeout( function() {$.arcticmodal('close')}, 2000 ) }
+            afterOpen: function() { 
+              setTimeout( 
+                function() {
+                  $.arcticmodal('close');
+                  window.location = window.location.href.split("entry")[0];
+                }
+              , 2000 ) 
+            }
          });
        })
        break;

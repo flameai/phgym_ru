@@ -1,0 +1,15 @@
+{% extends 'mainapp/base_clube.html' %}
+
+{% block title %} {{stock.title}} {% endblock title %}
+
+{% block body %}
+<div class="grey" style="padding-top: 40px; padding-bottom: 40px">
+    <div class="container content">        
+        <h4 class="news_item__title">{{stock.title}}</h4>
+        <div class="news_item__text">{{stock.full_text | safe}}</div>
+        {% if stock.show_button %}
+        <a href="{{stock.url_button}}" class="btn red">{{stock.text_button}}</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

@@ -7,6 +7,7 @@ var app = {
     getClubs: function(done) {
       $.ajax({
         url: 'https://api.wge.ru/sportclub/hs/fitnes_mob/clubs',
+        // url: '/static/plastic/clubs.json',
         dataType: 'json',
         success: function(data) {
           if(data.status == "ok") {

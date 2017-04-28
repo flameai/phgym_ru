@@ -1,0 +1,12 @@
+{% extends 'mainapp/base_clube.html' %}
+{% block title %} {{program.title}} {% endblock title %}
+
+{% block body %}
+<div class="grey" style="padding-top: 40px; padding-bottom: 40px">
+	<div class="container content">
+        <h4 class="news_item__title">{{program.title}}</h4>
+        <div class="news_item__text">{{program.full_text | safe}}</div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -26,6 +26,6 @@ def my_callback(instance, **kwargs):
 
         url = "https://api.wge.ru/sportclub/hs/fitnes_mob/payment"
 
-        r = requests.post(url,json=data)
+        r = requests.post(url,json=data, verify=False)
 
         mail_admins("Test",r.text,fail_silently=False)

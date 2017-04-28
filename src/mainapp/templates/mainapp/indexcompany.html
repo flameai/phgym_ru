@@ -1,0 +1,168 @@
+{% extends 'mainapp/base.html' %}
+{% load static from staticfiles %}
+{% block title %} Корпоративная страница {% endblock title %}
+
+{% block body %}
+<div class="content" style="margin: 0px;padding-right: 0px; padding-left:0px;">
+  <div id="c3" class="csc-default" >
+    <div class="content">
+      {% if sliders %}  <!-- Slider -->
+      <div class="main-slider hidden-xs">
+        <div id="main-slider" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+          {% for slider in sliders %}
+              <li data-target="#main-slider" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active" {% endif %}></li>
+          {% endfor %}
+          </ol>
+          <div class="carousel-inner">
+            {% for slider in sliders %}
+              <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <h1 class="main-slider__item-header">{{ slider.title }}</h1>
+                        <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
+                        <div class="text-left">
+                            <span class="divider"></span>
+                        </div>
+                        <div class="main-slider__item-text">
+                            {{ slider.context | safe }}
+                        </div>
+                        {% if slider.button_text and slider.button_url %}
+                        <a class="slider-btn btn pull-left red" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div> <!-- /Slider -->
+      {% endif %}
+
+      {% if news_list %}
+      <div class="main-news grey">
+        <div class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Новости</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="divider"></span>
+                    </div>
+                    {% for news in news_list %}
+                    <div class="col-md-4">
+                        <div class="card-news">
+                          <a href="/news/{{news.slug}}">
+                            <div class="card-img">
+                                {% if news.image %}
+                                    <div class="news_photo" style="background-image: url({{news.image.url}});"></div>
+                                {% else %}
+                                    <div class="news_photo" style="background-image: url({% static 'images/news/38373874ce.jpg' %});"></div>
+                                {% endif %}
+                                <div class="card-title">
+                                    <h6 class="text-right white-text">{{news.date|date:"d.m.Y"}}</h6>
+                                    <h5 style="margin: 0">{{news.title}}</h5>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div>{{news.short_text}}</div>
+                            </div>
+                            <div class="card-action text-right">
+                                <u><a href="/news/{{news.slug}}">Подробнее</a></u>
+                            </div>
+                          </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="/news/" class="btn red">Все новости</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if staticpage %}
+      <div class="main-block"> <!-- StaticPage -->
+        <div class="padding">
+            <div class="container">
+                {{ staticpage.context | safe }}
+            </div>
+        </div>
+      </div>  <!-- /StaticPage -->
+      {% endif %}
+
+      <div class="application grey"> <!-- APPLICATION -->
+          <div class="padding">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-6 application__left-side">
+                          <h2>Скачай мобильное<br> приложение и будь в курсе:</h2>
+                          <span class="divider"></span>
+
+                          <div class="row" style="margin-top: 15px;">
+                              <div class="col-sm-6">
+                                  <span class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/events.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Событий</span>
+                                  </span>
+                              </div>
+                              <div class="col-sm-6">
+                                  <span class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/offers.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Спецпредложений</span>
+                                  </span>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-sm-6 ">
+                                  <span class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/news.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Новостей</span>
+                                  </span>
+                              </div>
+                              <div class="col-sm-6 ">
+                                  <span class="application__link">
+                                      <span class="application__icon-container">
+                                          <img src="{% static 'images/app/shedule.svg' %}" alt="" class="application__icon">
+                                      </span>
+                                      <span class="application__text">Расписания</span>
+                                  </span>
+                              </div>
+                          </div>
+
+                          <span class="app_img">
+                              <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                                  <img src="{% static 'images/app/googleplay.svg' %}" style="width:140px">
+                              </a>
+                          </span>
+                          <span class="app_img">
+                              <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                                  <img src="{% static 'images/app/app_store.svg' %}" width="140px">
+                              </a>
+                          </span>
+                      </div>
+                      <div class="col-md-6 col-sm-6 application__right-side hidden-xs">
+                          <img src="../../static/images/app/yash_phone1.png" class="app_photo" alt="Приложение Powerhouse Gym для мобильного">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>  <!-- APPLICATION -->
+    </div>
+  </div>
+</div>
+{% endblock body %}

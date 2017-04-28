@@ -1,6 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static from staticfiles %}
-{% block title %} Продажа абонементов {% endblock title %}
+{% block title %} Продажа клубных карт {% endblock title %}
 
 {% block body %}
 
@@ -56,54 +56,56 @@
 
 <script type="text/html" id="site">
 <!-- ko if: page() == "site" -->
-    <div class="container content">
-        <div class="row">
-            <div class="input-field col-sm-12 clubselect" style="padding-top: 30px">
-                <label>Выберите клуб</label>
-                <select class="clubs-select" data-bind="options: clubs, optionsText: 'club', optionsValue: 'club', value: club"></select>
-
+    <div class="grey" style="padding-bottom: 50px;">
+        <div class="container content">
+            <div class="row">
+                <div class="input-field col-sm-12 clubselect" style="padding-top: 30px">
+                    <label>Выберите клуб</label>
+                    <select class="clubs-select" data-bind="options: clubs, optionsText: 'club', optionsValue: 'club', value: club"></select>
+                </div>
             </div>
-        </div>
 
-        <h4 style="text-align: center;">Продажа абонементов</h4>
+            <h4 style="text-align: center;">Продажа клубных карт</h4>
 
-        <div class="row">
-            <!-- ko if: currentClub -->
-                <!-- ko foreach: currentClub().goods -->
-                    <div class="col-xs-12 col-sm-6 col-lg-4">
-                        <form method="post" action="/shop/payment">
-                            <input type="hidden" name="item_kod" data-bind="attr: {value: $data.item_kod}" />
-                            <input type="hidden" name="order_type" data-bind="attr: {value: $data.type}" />
-                            <input type="hidden" name="club" data-bind="attr: {value: $parent.club}" />
+            <div class="row">
+                <!-- ko if: currentClub -->
+                    <!-- ko foreach: currentClub().goods -->
+                        <div class="col-xs-12 col-sm-6 col-lg-4">
+                            <form method="post" action="/shop/payment">
+                                <input type="hidden" name="item_kod" data-bind="attr: {value: $data.item_kod}" />
+                                <input type="hidden" name="order_type" data-bind="attr: {value: $data.type}" />
+                                <input type="hidden" name="club" data-bind="attr: {value: $parent.club}" />
 
-                            <div class="card medium">
-                                <div class="card-image">
-                                  <!-- ko if: $data.picture -->
-                                    <img data-bind="attr: {src: $data.picture}">
-                                  <!-- /ko -->
-                                  <!-- ko ifnot: $data.picture -->
-                                    <img src="/static/plastic/img/default.jpg" />
-                                  <!-- /ko -->
+                                <div class="card-news medium">
+                                    <div class="card-img">
+                                        <!-- ko if: $data.picture -->
+                                            <img data-bind="attr: {src: $data.picture}">
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.picture -->
+                                            <img src="/static/plastic/img/default.jpg" />
+                                        <!-- /ko -->
+                                        <h4 class="card-title" data-bind="text: $data.item" style="margin: 0">Название карточки</h4>
+                                    </div>
+                                    <div class="card-content">      
+                                        <p data-bind="html: $data.description"></p>
+                                        <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
+                                        <button type="submit" class="btn red" data-bind="click: $parent.buyItem">Купить</buton>
+                                    </div>
                                 </div>
-                                <div class="card-content">
-                                    <h4 class="card-title" data-bind="text: $data.item">Название карточки</h4>
-                                    <p data-bind="text: $data.description"></p>
-                                    <h3 class="d-text-c" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
-                                    <button type="submit" class="btn" data-bind="click: $parent.buyItem">Купить</buton>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    <!-- /ko -->
                 <!-- /ko -->
-            <!-- /ko -->
-        </div>
+            </div>
 
+        </div>
     </div>
 <!-- /ko -->
 </script>
 
 <script type="text/html" id="registration">
 <!-- ko if: page() == "registration" -->
+    
     <div class="container content" style="padding-top: 30px">
         <div class="row">
           <!-- ko with: m_registration -->
@@ -141,10 +143,13 @@
                         <button data-bind="enable: registerValidate, click: registration" class="btn entryform-btn" >Отправить</button>
                     </div>
                 </div>
+                <div style="display: none" id="hiddenForm"></div>
             </form>
             <!-- /ko -->
         </div>
     </div>
+    
+    
 <!-- /ko -->
 </script>
 

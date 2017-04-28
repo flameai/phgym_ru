@@ -1,0 +1,24 @@
+{% extends 'mainapp/base_clube.html' %}
+{% block title %} Программы {% endblock title %}
+
+{% block body %}
+
+<div class="grey" style="padding-top: 40px; padding-bottom: 30px">
+    <div class="container content" style="overflow: hidden; position: relative;">
+        <div class="carousel-slick slick-slider" style="margin: 0 -10px 40px">
+            {% for program in programs %}
+                <div class="blog-entry">
+                    <div class="entry-cover">
+                      <h5>{{program.title}}</h5>
+                      <a href="{{program.slug}}"><img src="{{ program.image.url }}"/></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if editfield %}
+        {{editfield.context | safe}}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock body %}
