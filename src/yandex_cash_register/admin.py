@@ -51,6 +51,6 @@ class PaymentAdmin(admin.ModelAdmin):
 class CashRegisterAdmin(admin.ModelAdmin):
     list_display = ('name', 'scid',)
     fields = (
-        'scid', 'shop_id', 'shop_password', 'payment_type',
+        'name', 'scid', 'shop_id', 'shop_password', 'payment_type',
         'order_model', 'shop_domain'
     )
