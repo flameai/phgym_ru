@@ -59,7 +59,8 @@ def payment(request):
         order_id=order_id,
         cps_phone=phone,
         cps_email=email,
-        payment_type='AC'
+        payment_type='AC',
+        cash_register=1
     )
 
     payment.save()
