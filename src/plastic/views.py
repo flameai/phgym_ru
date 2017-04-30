@@ -36,7 +36,8 @@ def payment(request):
     order_type = request.POST.get('order_type')
 
     try:
-        r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
+        # r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
+        r = requests.get('/static/plastic/clubs.json', \
                          headers={"Content-Type": "application/json"}, verify=False)
         r.encoding = 'utf-8'
         txt = u''.join(r.text).replace("\r\n", "").replace("\xa0", "").replace("\ufeff", "")
