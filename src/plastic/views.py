@@ -61,7 +61,7 @@ def payment(request):
         cps_phone=phone,
         cps_email=email,
         payment_type='AC',
-        cash_register=1
+        cash_register__pk=1
     )
 
     payment.save()
