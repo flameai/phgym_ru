@@ -24,9 +24,10 @@ if SUCCESS_URL is None:
 else:
     SHOP_DOMAIN = getattr(settings, 'YANDEX_CR_SHOP_DOMAIN', None)
 
-SCID = getattr(settings, 'YANDEX_CR_SCID')
-SHOP_ID = getattr(settings, 'YANDEX_CR_SHOP_ID')
-SHOP_PASSWORD = getattr(settings, 'YANDEX_CR_SHOP_PASSWORD')
+if not MULTIPLE:
+    SCID = getattr(settings, 'YANDEX_CR_SCID')
+    SHOP_ID = getattr(settings, 'YANDEX_CR_SHOP_ID')
+    SHOP_PASSWORD = getattr(settings, 'YANDEX_CR_SHOP_PASSWORD')
 
 DISPLAY_FIELDS = getattr(settings, 'YANDEX_CR_DISPLAY_FIELDS',
                          ['paymentType'])
