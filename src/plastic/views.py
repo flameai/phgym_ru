@@ -14,7 +14,7 @@ import datetime
 import requests
 import json
 
-from yandex_cash_register.models import Payment
+from yandex_cash_register.models import Payment, CashRegister
 from yandex_cash_register import conf
 
 from .models import Order, Code
@@ -61,7 +61,7 @@ def payment(request):
         cps_phone=phone,
         cps_email=email,
         payment_type='AC',
-        cash_register_pk=1
+        cash_register=CashRegister.objects.first()
     )
 
     payment.save()
