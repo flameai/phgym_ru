@@ -4589,9 +4589,12 @@ list-style:none;
     right: 20px;
 }
 .slick-prev:before, .slick-next:before {
-    font-size: 40px;
+    font-size: 80px;
 }
 .slick-prev, .slick-next {
+	margin-left:-35px;
+	margin-top:-35px;
+
     width: 35px;
     height: 35px;
     z-index: 2;
