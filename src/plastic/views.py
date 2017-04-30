@@ -37,7 +37,7 @@ def payment(request):
 
     try:
         # r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
-        r = requests.get('/static/plastic/clubs.json', \
+        r = requests.get('http://2017test.u46521.netangels.ru/static/plastic/clubs.json', \
                          headers={"Content-Type": "application/json"}, verify=False)
         r.encoding = 'utf-8'
         txt = u''.join(r.text).replace("\r\n", "").replace("\xa0", "").replace("\ufeff", "")
