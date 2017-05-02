@@ -131,6 +131,9 @@ textarea:focus {
 optgroup {
 	font-family: MuseoSansBold;
 }
+option {
+	font-family: MuseoSansRegular;	
+}
 iframe,
 img {
   max-width: 100%;
