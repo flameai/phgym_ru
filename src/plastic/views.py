@@ -14,7 +14,7 @@ import datetime
 import requests
 import json
 
-from yandex_cash_register.models import Payment
+from yandex_cash_register.models import Payment, CashRegister
 from yandex_cash_register import conf
 
 from .models import Order, Code
@@ -36,7 +36,8 @@ def payment(request):
     order_type = request.POST.get('order_type')
 
     try:
-        r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
+        # r = requests.get('https://api.wge.ru/sportclub/hs/fitnes_mob/clubs/', \
+        r = requests.get('http://2017test.u46521.netangels.ru/static/plastic/clubs.json', \
                          headers={"Content-Type": "application/json"}, verify=False)
         r.encoding = 'utf-8'
         txt = u''.join(r.text).replace("\r\n", "").replace("\xa0", "").replace("\ufeff", "")
@@ -59,7 +60,8 @@ def payment(request):
         order_id=order_id,
         cps_phone=phone,
         cps_email=email,
-        payment_type='AC'
+        payment_type='AC',
+        cash_register=CashRegister.objects.first()
     )
 
     payment.save()

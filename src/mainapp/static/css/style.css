@@ -102,6 +102,7 @@ ul, ol {
 }
 .bold {
 	font-weight: 700;
+	font-family: MuseoSansBold;
 }
 input,
 textarea,
@@ -126,6 +127,12 @@ select:focus {
 input:focus,
 textarea:focus {
 	border: 1px solid #E31E24;
+}
+optgroup {
+	font-family: MuseoSansBold;
+}
+option {
+	font-family: MuseoSansRegular;	
 }
 iframe,
 img {
@@ -367,7 +374,7 @@ header .address-wraper {
 header .top-header__adress {
 	font-size: 12px;
 	color: #868484;
-	font-weight: bold;
+	font-family: MuseoSansBold;
 }
 header .address-wraper.active:before {
 	content: '';
@@ -551,6 +558,7 @@ header .menu ul li a {
 	font-weight: bold !important;
 	text-transform: uppercase;
 	font-weight: 400;
+	font-family: MuseoSansBold;
 }
 header .menu ul li a:hover,
 header .menu ul li.active {
@@ -4355,7 +4363,7 @@ list-style:none;
 	background-color: #E31E24;
 	padding: 10px 30px;
 	font-size: 18px;
-	font-weight: bold;
+	font-family: MuseoSansBold;
 	text-transform: uppercase;
 
 }
