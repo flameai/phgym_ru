@@ -5,7 +5,13 @@
 {% block body %}
 <div class="grey" style="padding-top: 40px; padding-bottom: 30px">
   <div class="container content">
-        <div class="row">        
+        <div class="row">
+          <div class="col-md-12">
+              <h3>Акции</h3>
+          </div>
+          <div class="col-md-12">
+              <span class="divider"></span>
+          </div>
           {% for stock in stocks %}
            <div class="col-md-4">
                 <a href="{{stock.slug}}">
@@ -17,12 +23,12 @@
                             </div>
                         </div>
                     </div>
-                   
-                </a>  
+
+                </a>
             </div>
           {% endfor %}
         </div>
-       
+
   </div>
 </div>
 
