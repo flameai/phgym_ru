@@ -49,6 +49,7 @@ def payment(request):
                 for good in obj['goods']:
                     if good['item_kod'] == item_kod:
                         price = good['price']
+                        price = price.replace(" ", "")
     except:
         price = 0
 
