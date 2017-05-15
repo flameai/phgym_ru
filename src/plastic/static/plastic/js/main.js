@@ -31,13 +31,19 @@ var app = {
        }
      });
    },
-   buyItem: function(a) {
-     m_payment.item_kod(a.item_kod);
-     m_payment.order_type(a.type);
-     m_payment.club(app.club());
+  buyItem: function(a) {
+    m_payment.item_kod(a.item_kod);
+    m_payment.order_type(a.type);
+    m_payment.club(app.club());
+    app.clubs().forEach(function(cl){
+      cl.goods.forEach(function(go){
+        if (go.item_kod === m_payment.item_kod())
+          m_payment.club_code(cl.club_code);
+      })
+    })
 
-     app.page('phone');
-   },
+    app.page('phone');
+  },
    startPayment: function() {
      data = ko.mapping.toJS(m_payment);
      $.post("/shop/payment/",data,function(response){

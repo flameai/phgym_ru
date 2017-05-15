@@ -16,6 +16,7 @@ import json
 
 from yandex_cash_register.models import Payment, CashRegister
 from yandex_cash_register import conf
+from mainapp.models import Club
 
 from .models import Order, Code
 from . import signals
@@ -33,6 +34,7 @@ def payment(request):
     user_id = request.POST.get('user_id')
     email = request.POST.get('email')
     club = request.POST.get('club')
+    club_code = request.POST.get('club_code')
     order_type = request.POST.get('order_type')
 
     try:
@@ -55,13 +57,15 @@ def payment(request):
     except:
         order_id = 1
 
+    club_obj = Club.objects.get(code=club_code)
+
     payment = Payment(
         order_sum=Decimal(price),
         order_id=order_id,
         cps_phone=phone,
         cps_email=email,
         payment_type='AC',
-        cash_register=CashRegister.objects.first()
+        cash_register=club_obj.cash_register
     )
 
     payment.save()
