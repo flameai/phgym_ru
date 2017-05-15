@@ -130,7 +130,7 @@
                             <ul>
                               {% for gym in gyms %}
                               <li>
-                                <a href="{% url 'schedule' detail=gym.id slug=slug %}" target="_top" class="d-text-c-h">Зал {{ gym.name }}</a>
+                                <a href="{% url 'schedule' detail=gym.id slug=slug %}" target="_top" class="d-text-c-h">{{ gym.name }}</a>
                               </li>
                               {% endfor %}
                             </ul>
