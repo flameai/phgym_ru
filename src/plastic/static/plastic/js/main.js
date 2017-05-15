@@ -38,7 +38,7 @@ var app = {
     app.clubs().forEach(function(cl){
       cl.goods.forEach(function(go){
         if (go.item_kod === m_payment.item_kod())
-          m_payment.club_code(cl.club_code);
+          m_payment.club_code(cl.club_kod);
       })
     })
 
