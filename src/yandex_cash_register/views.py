@@ -208,7 +208,7 @@ class PaymentFinishView(FormView):
             payment.fail()
 
         if conf.MULTIPLE:
-            model = apps.get_model(*payment.order_model)
+            model = apps.get_model(*payment.cash_register.order_model)
         else:
             model = apps.get_model(*conf.MODEL)
         order = model.get_by_order_id(payment.order_id)
