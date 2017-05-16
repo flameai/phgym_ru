@@ -12,6 +12,10 @@ var app = {
         success: function(data) {
           if(data.status == "ok") {
             app.clubs(data.clubs);
+            app.clubs().forEach(function(cl){
+                if (cl.club_kod === slug)
+                  app.club(cl.club);
+            })
             done && done();
           } else {
             alert('Произошла ошибка. Повторите попытку позже.');

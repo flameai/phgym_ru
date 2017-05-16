@@ -114,7 +114,7 @@ def program(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             prog = Program.objects.get(club=club, slug=page)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path, "active": True}]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Услуги", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path, "active": True}]
             context.update({'breadcrumbs': breadcrumbs, "program": prog})
             return render(request,'mainapp/program/item.html', context)
         except:
@@ -123,7 +123,7 @@ def program(request, slug="", page=""):
         try:
             club = Club.objects.get(slug=slug)
             progs = Program.objects.filter(club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Программы", "url": request.path, "active": True }]
+            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Услуги", "url": request.path, "active": True }]
             context.update({"breadcrumbs": breadcrumbs, "programs": progs })
         except:
             pass

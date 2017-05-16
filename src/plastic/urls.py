@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^(?P<slug>[\w-]+)/$', views.index, name='index'),
     url(r'^money/', include('yandex_cash_register.urls',
                             namespace='yandex_cash_register',
                             app_name='yandex_cash_register')),
