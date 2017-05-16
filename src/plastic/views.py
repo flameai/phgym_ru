@@ -23,8 +23,8 @@ from . import signals
 
 
 @ensure_csrf_cookie
-def index(request):
-    context = {"title": "Продажа абонементов"}
+def index(request, slug=""):
+    context = {"title": "Продажа абонементов", "slug": slug}
     return render(request, 'plastic/index.html', context)
 
 
