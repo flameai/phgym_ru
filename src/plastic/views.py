@@ -24,7 +24,9 @@ from . import signals
 
 @ensure_csrf_cookie
 def index(request, slug=""):
-    context = {"title": "Продажа абонементов", "slug": slug}
+    try:
+        club = Club.objects.get(slug=slug)
+    context = {"title": "Продажа абонементов", "club_code": club.code}
     return render(request, 'plastic/index.html', context)
 
 
