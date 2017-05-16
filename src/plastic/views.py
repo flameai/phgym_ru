@@ -26,7 +26,10 @@ from . import signals
 def index(request, slug=""):
     try:
         club = Club.objects.get(slug=slug)
-    context = {"title": "Продажа абонементов", "club_code": club.code}
+        code = club.code
+    except:
+        code = ""
+    context = {"title": "Продажа абонементов", "club_code": code}
     return render(request, 'plastic/index.html', context)
 
 
