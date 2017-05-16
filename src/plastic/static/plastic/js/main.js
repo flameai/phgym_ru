@@ -13,7 +13,7 @@ var app = {
           if(data.status == "ok") {
             app.clubs(data.clubs);
             app.clubs().forEach(function(cl){
-                if (cl.club_kod === slug)
+                if (cl.club_kod === club_code)
                   app.club(cl.club);
             })
             done && done();
