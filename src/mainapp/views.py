@@ -194,7 +194,7 @@ def call(request, slug=""):
         FormRequest(formname=2, content=msg).save()
 
         try:
-            emails = Club.objects.get(slug=slug).email.split(',')
+            emails = Club.objects.get(slug=slug).emails_send.split(',')
             email = [x.strip() for x in emails]
             send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
         except:
@@ -249,7 +249,7 @@ def entry(request, slug="comsomoll"):
         FormRequest(formname=1, content=msg).save()
 
         try:
-            emails = Club.objects.get(slug=slug).email.split(',')
+            emails = Club.objects.get(slug=slug).emails_send.split(',')
             email = [x.strip() for x in emails]
             send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
         except:
@@ -280,7 +280,7 @@ def abonement(request, slug="comsomoll"):
         FormRequest(formname=3, content=msg).save()
 
         try:
-            emails = Club.objects.get(slug=slug).email.split(',')
+            emails = Club.objects.get(slug=slug).emails_send.split(',')
             email = [x.strip() for x in emails]
             send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
         except:

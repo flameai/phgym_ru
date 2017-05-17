@@ -32,7 +32,8 @@ class FormRequest(models.Model):
 class Club(models.Model):
     address = models.CharField(verbose_name=u"Адрес",max_length=200)
     phone = models.CharField(verbose_name=u"Телефоны",max_length=200)
-    email = models.CharField(verbose_name=u"E-mail",max_length=200)
+    email = models.CharField(verbose_name=u"E-mail для контактов",max_length=200)
+    emails_send = models.CharField(verbose_name=u'E-майл для отправок', help_text=u'Можно указывать несколько значений через запятую.', max_length=200, default='')
     worktime = models.CharField(verbose_name=u"Время работы",max_length=200)
     slug = models.SlugField(verbose_name=u"Слаг", default="")
     callibri = models.CharField(verbose_name=u"Callibri", max_length=50, default="", blank=True)
@@ -169,7 +170,7 @@ class Entry(models.Model):
         (14,u"21:00 - 22:00"),
         (15,u"22:00 - 23:00"),
     )
-    
+
     weekday = models.ForeignKey(WeekDay, on_delete=models.CASCADE, default=None,)
     time = models.IntegerField(verbose_name=u"Время",choices=TIME_CHOICES,)
     content = models.CharField(verbose_name=u"Занятие",max_length=200,)
