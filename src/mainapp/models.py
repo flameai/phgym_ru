@@ -33,7 +33,7 @@ class Club(models.Model):
     address = models.CharField(verbose_name=u"Адрес",max_length=200)
     phone = models.CharField(verbose_name=u"Телефоны",max_length=200)
     email = models.CharField(verbose_name=u"E-mail для контактов",max_length=200)
-    emails_send = models.CharField(verbose_name=u'E-майл для отправок', help_text=u'Можно указывать несколько значений через запятую.', max_length=200, default='')
+    emails_send = models.CharField(verbose_name=u'E-майл для заявок', help_text=u'Можно указывать несколько значений через запятую.', max_length=200, default='')
     worktime = models.CharField(verbose_name=u"Время работы",max_length=200)
     slug = models.SlugField(verbose_name=u"Слаг", default="")
     callibri = models.CharField(verbose_name=u"Callibri", max_length=50, default="", blank=True)
