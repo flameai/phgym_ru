@@ -46,9 +46,9 @@ $(function(){
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            infinite: true,            
+            infinite: true,
           }
-        },        
+        },
         {
           breakpoint: 480,
           settings: {
@@ -96,11 +96,11 @@ function sendform() {
         }
         sendData(url,data).done(() => {
           // ga & yandex for abonement
-          yaCounter38885450.reachGoal('card_success');
-          ga('send', 'event', "card", "success");
+          // yaCounter38885450.reachGoal('card_success');
+          // ga('send', 'event', "card", "success");
           $('#form_modal').arcticmodal({
-            afterOpen: function() { 
-              setTimeout( 
+            afterOpen: function() {
+              setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("abonement")[0];
@@ -117,16 +117,16 @@ function sendform() {
         }
         sendData(url,data).done(() => {
           // ga & yandex for call
-          yaCounter38885450.reachGoal('callback_success');
-          ga('send', 'event', "callback", "success");
+          // yaCounter38885450.reachGoal('callback_success');
+          // ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
             afterOpen: function() {
-              setTimeout( 
+              setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("call")[0];
                 }
-              , 2000 ) 
+              , 2000 )
             }
           });
         })
@@ -157,16 +157,16 @@ function sendform() {
        }
        sendData(url,data).done(() => {
          // ga & yandex for entry
-         yaCounter38885450.reachGoal('freetrain_success');
-         ga('send', 'event', "freetrain", "success");
+        //  yaCounter38885450.reachGoal('freetrain_success');
+        //  ga('send', 'event', "freetrain", "success");
          $('#form_modal').arcticmodal({
-            afterOpen: function() { 
-              setTimeout( 
+            afterOpen: function() {
+              setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("entry")[0];
                 }
-              , 2000 ) 
+              , 2000 )
             }
          });
        })
