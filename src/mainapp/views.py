@@ -183,7 +183,7 @@ def contacts(request, slug="comsomoll"):
     return render(request,'mainapp/contacts.html', context)
 
 
-def call(request, slug=""):
+def call(request, slug="rodonit29"):
     if request.POST:
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
