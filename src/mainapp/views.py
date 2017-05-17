@@ -193,10 +193,12 @@ def call(request, slug=""):
 
         FormRequest(formname=2, content=msg).save()
 
-        if slug == "furmanova":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif slug == "comsomoll":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
+        try:
+            emails = Club.objects.get(slug=slug).email.split(',')
+            email = [x.strip() for x in emails]
+            send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
+        except:
+            pass
 
     context = {}
     try:
@@ -246,10 +248,13 @@ def entry(request, slug="comsomoll"):
 
         FormRequest(formname=1, content=msg).save()
 
-        if club == u"Фурманова, 117":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif club == u"ТРК КомсоМОЛЛ":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
+        try:
+            emails = Club.objects.get(slug=slug).email.split(',')
+            email = [x.strip() for x in emails]
+            send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
+        except:
+            pass
+
 
 
     title = u"Заявка на бесплатный фитнес-день"
@@ -274,10 +279,12 @@ def abonement(request, slug="comsomoll"):
 
         FormRequest(formname=3, content=msg).save()
 
-        if slug == "furmanova":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif slug == "comsomoll":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
+        try:
+            emails = Club.objects.get(slug=slug).email.split(',')
+            email = [x.strip() for x in emails]
+            send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=False)
+        except:
+            pass
 
     try:
         club = Club.objects.get(slug=slug)
