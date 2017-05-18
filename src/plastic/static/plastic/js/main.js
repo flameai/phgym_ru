@@ -6,12 +6,16 @@ var app = {
 
     getClubs: function(done) {
       $.ajax({
-        // url: 'https://api.wge.ru/sportclub/hs/fitnes_mob/clubs',
-        url: '/static/plastic/clubs.json',
+        url: 'https://api.wge.ru/sportclub/hs/fitnes_mob/clubs',
+        // url: '/static/plastic/clubs.json',
         dataType: 'json',
         success: function(data) {
           if(data.status == "ok") {
             app.clubs(data.clubs);
+            app.clubs().forEach(function(cl){
+                if (cl.club_kod === club_code)
+                  app.club(cl.club);
+            })
             done && done();
           } else {
             alert('Произошла ошибка. Повторите попытку позже.');
@@ -31,13 +35,19 @@ var app = {
        }
      });
    },
-   buyItem: function(a) {
-     m_payment.item_kod(a.item_kod);
-     m_payment.order_type(a.type);
-     m_payment.club(app.club());
+  buyItem: function(a) {
+    m_payment.item_kod(a.item_kod);
+    m_payment.order_type(a.type);
+    m_payment.club(app.club());
+    app.clubs().forEach(function(cl){
+      cl.goods.forEach(function(go){
+        if (go.item_kod === m_payment.item_kod())
+          m_payment.club_code(cl.club_kod);
+      })
+    })
 
-     app.page('phone');
-   },
+    app.page('phone');
+  },
    startPayment: function() {
      data = ko.mapping.toJS(m_payment);
      $.post("/shop/payment/",data,function(response){

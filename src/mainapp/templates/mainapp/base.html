@@ -39,7 +39,7 @@
                         <a href="/"> <img src="{% static 'images/powerhouse.png' %}" width="150px" height="auto"></a>
                     </div>
                     <div class="div visible-xs" style="margin-left: 85px; margin-top: 10px">
-                      <select class="form-control navigation" style="margin-top: 40px;">
+                      <select class="form-control navigation">
                           <option value="">Выберите клуб</option>
                           {% getClubs as clubs %}
                           {% if clubs %}
@@ -90,7 +90,7 @@
 
                             <div class="phone">
                                 <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                                <span>{{ phone }}</span>
+                                <span style="letter-spacing: 0.2rem">{{ phone }}</span>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     {% getMainPhone as phone %}
                     <div class="phone visible-xs" style="float: right; margin-top: 10px; font-size: 16px;">
                         <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 5px"></i>
-                        <span>{{ phone }}</span>
+                        <span style="letter-spacing: 0.2rem">{{ phone }}</span>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                             <a href="{% url 'stock' slug=slug %}" target="_top" class="d-text-c-h">Акции</a>
                           </li>
                           <li>
-                            <a href="{% url 'program' slug=slug %}" target="_top" class="d-text-c-h">Программы</a>
+                            <a href="{% url 'program' slug=slug %}" target="_top" class="d-text-c-h">Услуги</a>
                           </li>
                           <li>
                             <a href="#" target="_top">Расписание</a>

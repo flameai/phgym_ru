@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^send_register_email', views.send_email, name='send_email'),
     url(r'^send_sms', views.send_sms, name="send_sms"),
     url(r'^check_pin', views.check_pin, name="check_pin"),
+    url(r'^(?P<slug>[\w-]+)/$', views.index, name='index'),
 ]
