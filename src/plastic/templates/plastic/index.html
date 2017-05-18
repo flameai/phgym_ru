@@ -20,7 +20,7 @@
                     <p>Мы отправим вам SMS с PIN-кодом для авторизации на нашем сервисе.<br />Для вас эта операция бесплатна!</p>
                     <div class="input-field">
                         <span>+</span>
-                        <input id="username" type="text" class="validate" data-bind="masked: phone, mask: '70000000000'">
+                        <input id="username" type="text" class="validate" data-bind="masked: phone, mask: '70000000000'" autofocus>
                     </div>
                     <button data-bind="click: sendPhone" class="btn entryform-btn" style="width: 100%">Отправить код</button>  <!-- отправить запрос на sms -->
                 </div>
@@ -41,7 +41,7 @@
                     <div class=" phoneform card-panel  lighten-5">
                         <div class="input-field ">
                             <h4>Введите код из СМС</h4>
-                            <input id="username" type="text" class="validate" data-bind="value: pin">
+                            <input id="username" type="text" class="validate" data-bind="value: pin" autofocus>
                             <p data-bind="visible: error" class="text-danger" >Неправильный PIN</p>
                             <button data-bind="click: authorization" class="btn entryform-btn" style="width: 100%">Готово</button>
                         </div>
