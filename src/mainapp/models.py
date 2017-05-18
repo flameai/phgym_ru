@@ -40,9 +40,15 @@ class Club(models.Model):
     lat = models.FloatField(verbose_name=u'широта', default=0.,)
     lon = models.FloatField(verbose_name=u'долгота', default=0.,)
     order = models.PositiveIntegerField(default=0)
+    code = models.CharField(verbose_name=u'код в системе 1С', max_length=200,
+                            unique=True, null=True, blank=True,
+                            help_text=u"Должен совпадать с кодом из API https://api.wge.ru/sportclub/hs/fitnes_mob/clubs")
+    cash_register = models.ForeignKey('yandex_cash_register.CashRegister',
+                                      null=True, blank=True)
 
     def __str__(self):
         return self.address
+
     def __unicode__(self):
         return self.address
 

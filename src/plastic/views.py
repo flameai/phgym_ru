@@ -16,14 +16,20 @@ import json
 
 from yandex_cash_register.models import Payment, CashRegister
 from yandex_cash_register import conf
+from mainapp.models import Club
 
 from .models import Order, Code
 from . import signals
 
 
 @ensure_csrf_cookie
-def index(request):
-    context = {"title": "Продажа абонементов"}
+def index(request, slug=""):
+    try:
+        club = Club.objects.get(slug=slug)
+        code = club.code
+    except:
+        code = ""
+    context = {"title": "Продажа абонементов", "club_code": code}
     return render(request, 'plastic/index.html', context)
 
 
@@ -33,6 +39,7 @@ def payment(request):
     user_id = request.POST.get('user_id')
     email = request.POST.get('email')
     club = request.POST.get('club')
+    club_code = request.POST.get('club_code')
     order_type = request.POST.get('order_type')
 
     try:
@@ -47,6 +54,7 @@ def payment(request):
                 for good in obj['goods']:
                     if good['item_kod'] == item_kod:
                         price = good['price']
+                        price = price.replace(" ", "")
     except:
         price = 0
 
@@ -55,13 +63,15 @@ def payment(request):
     except:
         order_id = 1
 
+    club_obj = Club.objects.get(code=club_code)
+
     payment = Payment(
         order_sum=Decimal(price),
         order_id=order_id,
         cps_phone=phone,
         cps_email=email,
         payment_type='AC',
-        cash_register=CashRegister.objects.first()
+        cash_register=club_obj.cash_register
     )
 
     payment.save()

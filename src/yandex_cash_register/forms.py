@@ -52,8 +52,9 @@ class ShopIdForm(forms.Form):
 
     def clean_shopId(self):
         shop_id = self.cleaned_data['shopId']
-        if int(shop_id) != int(conf.SHOP_ID):
-            raise forms.ValidationError(_('Unknown shop ID'))
+        if not conf.MULTIPLE:
+            if int(shop_id) != int(conf.SHOP_ID):
+                raise forms.ValidationError(_('Unknown shop ID'))
         return shop_id
 
     def _clean_customerNumber(self):
