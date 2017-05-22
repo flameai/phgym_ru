@@ -20,16 +20,22 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-8 col-sm-12">
-                        <h1 class="main-slider__item-header">{{ slider.title }}</h1>
-                        <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
-                        <div class="text-left">
-                            <span class="divider"></span>
-                        </div>
-                        <div class="main-slider__item-text">
-                            {{ slider.context | safe }}
-                        </div>
+                        <{% if slider.title %}
+                            <h1 class="main-slider__item-header">{{ slider.title }}</h1>
+                        {% endif %}
+                        {% if slider.subtitle %}
+                            <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
+                        {% endif %}
+                        {% if slider.context %}
+                            <div class="text-left">
+                                <span class="divider"></span>
+                            </div>
+                            <div class="main-slider__item-text">
+                                {{ slider.context | safe }}
+                            </div>
+                        {% endif %}
                         {% if slider.button_text and slider.button_url %}
-                        <a class="slider-btn btn pull-left red" href="{{ slider.button_url}}">{{ slider.button_text }}</a>
+                            <a class="slider-btn btn pull-left red" href="{{ slider.button_url }}">{{ slider.button_text }}</a>
                         {% endif %}
                     </div>
                   </div>
