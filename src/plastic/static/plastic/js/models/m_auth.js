@@ -36,8 +36,8 @@ m_auth.authorization = function() {
       if(data.status !== "error") {
         $.ajax({
           type: "POST",
-          // url: "https://api.wge.ru/sportclub/hs/fitnes_mob/client_check",
-          url: '/static/plastic/client_check.json',
+          url: "https://api.wge.ru/sportclub/hs/fitnes_mob/client_check",
+          // url: '/static/plastic/client_check.json',
           data: JSON.stringify({"phone": m_auth.phone()}),
           success: function(data) {
             if(data.status == "exist") {
