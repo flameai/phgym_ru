@@ -7,8 +7,8 @@ m_registration = {
 m_registration.registration = function() {
   $.ajax({
     type: "POST",
-    // url: "https://api.wge.ru/sportclub/hs/fitnes_mob/client_new",
-    url: '/static/plastic/client_new.json',
+    url: "https://api.wge.ru/sportclub/hs/fitnes_mob/client_new",
+    // url: '/static/plastic/client_new.json',
     data: JSON.stringify({
       "fio": m_registration.fio(),
       "email": m_registration.email(),
