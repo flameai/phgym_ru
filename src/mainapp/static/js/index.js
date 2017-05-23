@@ -96,8 +96,9 @@ function sendform() {
         }
         sendData(url,data).done(() => {
           // ga & yandex for abonement
-          // yaCounter38885450.reachGoal('card_success');
+          yaCounter29959819.reachGoal('order'); 
           // ga('send', 'event', "card", "success");
+          
           $('#form_modal').arcticmodal({
             afterOpen: function() {
               setTimeout(
@@ -117,7 +118,7 @@ function sendform() {
         }
         sendData(url,data).done(() => {
           // ga & yandex for call
-          // yaCounter38885450.reachGoal('callback_success');
+          yaCounter29959819.reachGoal('callorder');
           // ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
             afterOpen: function() {
