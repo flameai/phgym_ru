@@ -120,19 +120,19 @@
                             <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
                           </li>
                           <li>
-                            <a href="/shop/{{ slug }}/" style="display: none" target="_top" class="d-text-c-h">Интернет магазин</a>
+                            <a href="/shop/{{ slug }}/" target="_top" class="d-text-c-h">Интернет магазин</a>
                           </li>
                         </ul>
                         {% else %}
                         <ul>
                           <li>
-                            <a href="#" class="d-text-c-h">О cети Powerhouse Gym</a>
+                            <a href="/" class="d-text-c-h">О cети Powerhouse Gym</a>
                           </li>
                           <li>
-                            <a href="#" class="d-text-c-h">Франшиза</a>
+                            <a href="/pages/franshiza/" class="d-text-c-h">Франшиза</a>
                           </li>
                           <li>
-                            <a href="#" style="display: none" class="d-text-c-h">Интернет-магазин</a>
+                            <a href="/shop/{{ slug }}/" class="d-text-c-h">Интернет-магазин</a>
                           </li>
                         </ul>
                         {% endif %}
