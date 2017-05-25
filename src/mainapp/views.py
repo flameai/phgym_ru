@@ -16,7 +16,7 @@ def handler404(request):
     return render(request, 'mainapp/page.html', context)
 
 
-def index(request, slug=""):
+def index(request, slug):
     context = {'indexpage': True}
 
     if slug:    # Главная страница клуба
@@ -195,7 +195,7 @@ def contacts(request, slug="comsomoll"):
     return render(request, 'mainapp/contacts.html', context)
 
 
-def call(request, slug):
+def call(request, slug=None):
     if request.POST:
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
