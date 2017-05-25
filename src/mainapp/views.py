@@ -16,7 +16,7 @@ def handler404(request):
     return render(request, 'mainapp/page.html', context)
 
 
-def index(request, slug):
+def index(request, slug=None):
     context = {'indexpage': True}
 
     if slug:    # Главная страница клуба
