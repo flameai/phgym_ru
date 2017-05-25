@@ -304,7 +304,7 @@ def page(request, slug):
 def getGymsForClubSlug(clubslug):
     gyms = []
     try:
-        club = get_object_or_404(Club, slug=slug)
+        club = Club.objects.get(slug=clubslug)
         gyms_obj = Gym.objects.filter(club=club)
         for gym in gyms_obj:
             gyms.append({"name": gym.title, "id": gym.id})
