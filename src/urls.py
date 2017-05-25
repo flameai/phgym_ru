@@ -21,7 +21,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^oferta/', include('oferta.urls')),
     url(r'^shop/', include('plastic.urls')),
-	url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include('mainapp.urls')),
     url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\r\nDisallow: /", content_type="text/plain")),
 ]
+handler404 = 'mainapp.views.handler404'

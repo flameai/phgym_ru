@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
@@ -7,6 +7,17 @@ from django.conf import settings
 from .templatetags.mainapp_extras import register
 
 from .models import *
+
+
+def handler404(request):
+    context = {}
+    try:
+        page = Page.objects.get(slug='404')
+        context.update({"page": page, "title": page.title})
+    except:
+        pass
+    return render(request, 'mainapp/page.html', context)
+
 
 def index(request, slug=""):
     context = {'indexpage': True}
