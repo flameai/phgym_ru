@@ -216,7 +216,7 @@ def call(request, slug=None):
                        {"title": form.title, "url": request.path, "active": True}]
         context.update({"breadcrumbs": breadcrumbs, "form": form})
     else:
-        form = get_list_or_404(Form, form=2).first()
+        form = get_list_or_404(Form, form=2)[0]
         breadcrumbs = [{"title": form.title, "url": request.path, "active": True}]
         context.update({"breadcrumbs": breadcrumbs, "form": form})
     return render(request, 'mainapp/call.html', context)
@@ -263,7 +263,7 @@ def entry(request, slug="comsomoll"):
     title = u"Заявка на бесплатный фитнес-день"
     context = {"title": title}
     club = get_object_or_404(Club, slug=slug)
-    form = get_list_or_404(Form, club=club, form=1).first()
+    form = get_list_or_404(Form, club=club, form=1)[0]
     context.update({"form": form})
     return render(request, 'mainapp/form_entry.html', context)
 
