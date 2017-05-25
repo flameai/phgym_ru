@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
@@ -11,11 +11,8 @@ from .models import *
 
 def handler404(request):
     context = {}
-    try:
-        page = Page.objects.get(slug='404')
-        context.update({"page": page, "title": page.title})
-    except:
-        pass
+    page = get_object_or_404(Page, slug='404')
+    context.update({"page": page, "title": page.title})
     return render(request, 'mainapp/page.html', context)
 
 
@@ -313,12 +310,9 @@ def abonement(request, slug="comsomoll"):
 
 def page(request, slug):
     context = {}
-    try:
-        page = Page.objects.get(slug=slug)
-        breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
-        context.update({"page": page, "breadcrumbs": breadcrumbs, "title": page.title})
-    except:
-        pass
+    page = get_object_or_404(Page, slug=slug)
+    breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
+    context.update({"page": page, "breadcrumbs": breadcrumbs, "title": page.title})
     return render(request, 'mainapp/page.html', context)
 
 
