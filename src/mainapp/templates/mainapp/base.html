@@ -208,16 +208,22 @@
                         <li style="margin-right: 5px"><a href="https://vk.com/phgym" target="_blank" class="vk"></a></li>
                         <li><a href="https://www.instagram.com/powerhouse_gym_russia/" target="_blank" class="i"></a></li>
                     </ul>
+                    <div class="apps">
+                        <div class="app-icon">
+                            <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                                <img src="{% static 'images/app/googleplay.svg' %}" style="width:140px">
+                            </a>
+                        </div>
+                        <div class="app-icon">
+                            <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                                <img src="{% static 'images/app/app_store.svg' %}" width="140px">
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-12">
                     <p>© 2007-2017 Powerhouse Gym.</p>
                 </div>
-                {% if slug %}
-                <div class="col-xs-12">
-                  <img src="" alt="Google play">
-                  <img src="" alt="App Store">
-                </div>
-                {% endif %}
             </div>
         </div>
     </footer>
