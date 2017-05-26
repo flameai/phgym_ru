@@ -286,9 +286,9 @@ def abonement(request, slug="comsomoll"):
     form = get_object_or_404(Form, club=club, form=3)
     breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                    {"title": form.title, "url": request.path, "active": True}]
-    context.update({"breadcrumbs": breadcrumbs, "form": form})
     title = u"Заказать абонемент"
     context = {"title": title, "form": form}
+    context.update({"breadcrumbs": breadcrumbs, "form": form})
     return render(request, 'mainapp/form_abonement.html', context)
 
 
