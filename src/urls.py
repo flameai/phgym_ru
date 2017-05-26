@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.views.generic import TemplateView
 from django.contrib import admin
 from django.http import HttpResponse
 
@@ -23,6 +24,6 @@ urlpatterns = [
     url(r'^shop/', include('plastic.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include('mainapp.urls')),
-    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\r\nDisallow: /", content_type="text/plain")),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name="mainapp/robots.txt", content_type="text/plain"))
 ]
 handler404 = 'mainapp.views.handler404'

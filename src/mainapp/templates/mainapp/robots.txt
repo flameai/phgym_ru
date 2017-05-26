@@ -1,0 +1,43 @@
+User-agent: *
+Allow: /*
+Disallow: /call/
+Disallow: /rodonit29/call/
+Disallow: /rodonit29/abonement/
+Disallow: /palladium/call/
+Disallow: /palladium/abonement/
+Disallow: /deryabina24/call/
+Disallow: /deryabina24/abonement/
+Disallow: /sibtrakt2/call/
+Disallow: /sibtrakt2/abonement/
+Disallow: /karnaval/call/
+Disallow: /karnaval/abonement/
+
+User-agent: Yandex
+Allow: /*
+Disallow: /call/
+Disallow: /rodonit29/call/
+Disallow: /rodonit29/abonement/
+Disallow: /palladium/call/
+Disallow: /palladium/abonement/
+Disallow: /deryabina24/call/
+Disallow: /deryabina24/abonement/
+Disallow: /sibtrakt2/call/
+Disallow: /sibtrakt2/abonement/
+Disallow: /karnaval/call/
+Disallow: /karnaval/abonement/
+
+Host: powerhousegym.ru
+
+User-agent: Googlebot
+Allow: /*
+Disallow: /call/
+Disallow: /rodonit29/call/
+Disallow: /rodonit29/abonement/
+Disallow: /palladium/call/
+Disallow: /palladium/abonement/
+Disallow: /deryabina24/call/
+Disallow: /deryabina24/abonement/
+Disallow: /sibtrakt2/call/
+Disallow: /sibtrakt2/abonement/
+Disallow: /karnaval/call/
+Disallow: /karnaval/abonement/
