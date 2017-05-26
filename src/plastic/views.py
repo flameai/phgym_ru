@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -120,16 +120,18 @@ def check_pin(request):
 
 def send_email(request):
     email = request.POST.get('email')
-    subject = u'Регистрация на сайте plastic.yashankin.com'
-    msg = u"Текст регистрации"
-    send_mail(subject, msg, settings.EMAIL_HOST_USER ,[email])
+    subject = u'Регистрация в интернет-магазине powerhousegym.ru'
+    html_template = render_to_string('plastic/event_registration_email.html', {})
+    send_mail(subject, '',
+              settings.EMAIL_HOST_USER,
+              [email], html_message=html_template)
     return HttpResponse('success')
 
 
 def send_sms(request):
     phone = request.POST.get('phone')
-    pin = str(randrange(1000,9999))
-    save_code(phone,pin)
+    pin = str(randrange(1000, 9999))
+    save_code(phone, pin)
     data = {
         "login": settings.SMS_LOGIN,
         "pass": settings.SMS_PASS,
