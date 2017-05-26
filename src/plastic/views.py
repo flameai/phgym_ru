@@ -122,7 +122,7 @@ def check_pin(request):
 def send_email(request):
     email = request.POST.get('email')
     subject = u'Регистрация в интернет-магазине powerhousegym.ru'
-    html_template = render_to_string('plastic/event_registration_email.html', {})
+    html_template = render_to_string('plastic/registration_email.html', {})
     send_mail(subject, '',
               settings.EMAIL_HOST_USER,
               [email], html_message=html_template)
