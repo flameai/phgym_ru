@@ -91,14 +91,14 @@ def stock(request, slug="", page=""):
     if page:  # вывод подробной статьи
         stock = get_object_or_404(Stock, slug=page, club=club)
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
-                       {'title': "Акции", "url": "/" + slug + "/stock/"},
+                       {'title': "Новости и акции", "url": "/" + slug + "/stock/"},
                        {'title': stock.title, "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
         return render(request, 'mainapp/stock/item.html', context)
     else:  # Вывод списка акций
         stocks = get_list_or_404(Stock, club=club)
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
-                       {'title': "Акции", "url": request.path, "active": True}]
+                       {'title': "Новости и акции", "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, "stocks": stocks})
         return render(request, 'mainapp/stock/list.html', context)
 
