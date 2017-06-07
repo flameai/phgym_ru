@@ -90,7 +90,7 @@
 
                             <div class="phone">
                                 <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                                <a href="tel:{{ phone }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
+                                <a href="tel:{{ phone|callable }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     {% getMainPhone as phone %}
                     <div class="phone visible-xs" style="float: right; margin-top: 10px; font-size: 16px;">
                         <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 5px"></i>
-                        <a href="tel:{{ phone }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
+                        <a href="tel:{{ phone|callable }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
                     </div>
                 </div>
             </div>
