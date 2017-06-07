@@ -92,7 +92,7 @@
 
                             <div class="phone">
                                 <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                                <a href="tel:{{ phone }}" class="{{club.callibri}}" style="letter-spacing: 0.2rem">{{ club.phone }}</a>
+                                <a href="tel:{{ phone|callable }}" class="{{club.callibri}}" style="letter-spacing: 0.2rem">{{ club.phone }}</a>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                     {% getClubInfo slug as club %}
                     <div class="phone visible-xs" style="float: right; margin-top: 10px; font-size: 16px;">
                         <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 5px"></i>
-                        <a href="tel:{{ phone }}" class="{{club.callibri}}" style="letter-spacing: 0.2rem">{{ club.phone }}</a>
+                        <a href="tel:{{ phone|callable }}" class="{{club.callibri}}" style="letter-spacing: 0.2rem">{{ club.phone }}</a>
                     </div>
                 </div>
             </div>
