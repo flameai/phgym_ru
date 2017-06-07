@@ -31,6 +31,8 @@ def index(request, slug=""):
     except:
         code = ""
     context = {"title": "Продажа абонементов", "club_code": code}
+    if slug:
+        context.update({'slug': slug})
     return render(request, 'plastic/index.html', context)
 
 

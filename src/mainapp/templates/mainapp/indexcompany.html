@@ -17,6 +17,9 @@
           <div class="carousel-inner">
             {% for slider in sliders %}
               <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
+                {% if slider.button_text == "" and slider.button_url %}
+                    <a href="{{ slider.button_url }}"><span class="link-spanner"></span></a>
+                {% endif %}
                 <div class="container">
                   <div class="row">
                     <div class="col-md-8 col-sm-12">
