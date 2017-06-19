@@ -16,33 +16,9 @@
           </ol>
           <div class="carousel-inner">
             {% for slider in sliders %}
-              <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="background-image: url('{{ slider.image.url }}');">
-                {% if slider.button_text == "" and slider.button_url %}
-                    <a href="{{ slider.button_url }}"><span class="link-spanner"></span></a>
-                {% endif %}
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-8 col-sm-12">
-                        {% if slider.title %}
-                            <h1 class="main-slider__item-header">{{ slider.title }}</h1>
-                        {% endif %}
-                        {% if slider.subtitle %}
-                            <h1 class="main-slider__item-header red-text">{{ slider.subtitle }}</h1>
-                        {% endif %}
-                        {% if slider.context %}
-                            <div class="text-left">
-                                <span class="divider"></span>
-                            </div>
-                            <div class="main-slider__item-text">
-                                {{ slider.context | safe }}
-                            </div>
-                        {% endif %}
-                        {% if slider.button_text and slider.button_url %}
-                            <a class="slider-btn btn pull-left red" href="{{ slider.button_url }}">{{ slider.button_text }}</a>
-                        {% endif %}
-                    </div>
-                  </div>
-                </div>
+              <div class="response-slider main-slider__item item {% if forloop.first %} active {% endif %}">
+                <a href="{{ slider.button_url}}" style="position: absolute; top: 0; bottom: 0; left:0; right: 0; z-index: 1"></a>
+                <img src="{{ slider.image.url }}" alt="" style="position: absolute; top: 50%; transform: translateY(-50%); width: 100%; z-index: 0">
               </div>
               {% endfor %}
           </div>
