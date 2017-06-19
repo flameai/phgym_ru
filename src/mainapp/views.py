@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
@@ -8,14 +8,19 @@ from .templatetags.mainapp_extras import register
 
 from .models import *
 
-def index(request, slug=""):
+
+def handler404(request):
+    context = {}
+    page = get_object_or_404(Page, slug='404')
+    context.update({"page": page, "title": page.title})
+    return render(request, 'mainapp/page.html', context)
+
+
+def index(request, slug=None):
     context = {'indexpage': True}
 
     if slug:    # Главная страница клуба
-        try:
-            club = Club.objects.get(slug=slug)
-        except:
-            return  # обработать ошибку некорректного slug
+        club = get_object_or_404(Club, slug=slug)
 
         try:
             sliders = Slider.objects.filter(club=club).order_by('order')
@@ -45,7 +50,7 @@ def index(request, slug=""):
             except:
                 pass
 
-        return render(request,'mainapp/index.html',context)
+        return render(request, 'mainapp/index.html', context)
     else:   # Корпоративная страница
         try:
             sliders = Slider.objects.filter(club__isnull=True).order_by('order')
@@ -62,128 +67,135 @@ def index(request, slug=""):
             context.update({'staticpage': staticpage})
         except:
             pass
-        return render(request,'mainapp/indexcompany.html',context)
+        return render(request, 'mainapp/indexcompany.html', context)
 
 
 def news(request, page=""):
     context = {}
-    if page:    # вывод подробной статьи
-        try:
-            news = News.objects.get(slug=page)
-            breadcrumbs = [{"title": "Новости", "url": "/news/"}, {"title": news.title, "url": request.path, "active": True }]
-            print(request)
-            context.update({'breadcrumbs': breadcrumbs, 'news': news})
-            return render(request,'mainapp/news/item.html', context)
-        except:
-            pass
-    else:   # вывод списка кратких статей
-        try:
-            news = News.objects.all().order_by("-date")
-            breadcrumbs = [{"title": "Новости", "url": request.path, "active": True }]
-            context.update({'breadcrumbs': breadcrumbs, 'news_list': news})
-            return render(request,'mainapp/news/list.html', context)
-        except:
-            pass
+    if page:  # вывод подробной статьи
+        news = get_object_or_404(News, slug=page)
+        breadcrumbs = [{"title": "Новости", "url": "/news/"},
+                       {"title": news.title, "url": request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs, 'news': news})
+        return render(request, 'mainapp/news/item.html', context)
+    else:  # вывод списка кратких статей
+        news = News.objects.all().order_by("-date")
+        breadcrumbs = [{"title": "Новости", "url": request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs, 'news_list': news})
+        return render(request, 'mainapp/news/list.html', context)
 
 
 def stock(request, slug="", page=""):
     context = {}
-    if page:    # вывод подробной статьи
-        try:
-            club = Club.objects.get(slug=slug)
-            stock = Stock.objects.get(slug=page, club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": "/"+ slug + "/stock/"}, {'title': stock.title, "url": request.path, "active": True }]
-            context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
-            return render(request,'mainapp/stock/item.html', context)
-        except:
-            pass
-    else:   # Вывод списка акций
-        try:
-            club = Club.objects.get(slug=slug)
-            stocks = Stock.objects.filter(club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Акции", "url": request.path, "active": True }]
-            context.update({'breadcrumbs': breadcrumbs, "stocks": stocks })
-            return render(request,'mainapp/stock/list.html',context)
-        except:
-            pass
+    club = get_object_or_404(Club, slug=slug)
+    if page:  # вывод подробной статьи
+        stock = get_object_or_404(Stock, slug=page, club=club)
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {'title': "Новости и акции", "url": "/" + slug + "/stock/"},
+                       {'title': stock.title, "url": request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
+        return render(request, 'mainapp/stock/item.html', context)
+    else:  # Вывод списка акций
+        stocks = get_list_or_404(Stock, club=club)
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {'title': "Новости и акции", "url": request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs, "stocks": stocks})
+        return render(request, 'mainapp/stock/list.html', context)
 
 
 def program(request, slug="", page=""):
     context = {}
-    if page:    # подробная статья
+    club = get_object_or_404(Club, slug=slug)
+    if page:  # подробная статья
+        prog = get_object_or_404(Program, club=club, slug=page)
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {'title': "Услуги", "url": '/' + slug + "/program/"},
+                       {'title': prog.title, 'url': request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs, "program": prog})
+        return render(request, 'mainapp/program/item.html', context)
+    else:  # список статей
+        progs = get_list_or_404(Program, club=club)
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {'title': "Услуги", "url": request.path, "active": True}]
+        context.update({"breadcrumbs": breadcrumbs, "programs": progs})
         try:
-            club = Club.objects.get(slug=slug)
-            prog = Program.objects.get(club=club, slug=page)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Услуги", "url": '/'+slug+"/program/"},{'title': prog.title, 'url': request.path, "active": True}]
-            context.update({'breadcrumbs': breadcrumbs, "program": prog})
-            return render(request,'mainapp/program/item.html', context)
-        except:
-            pass
-    else:       # список статей
-        try:
-            club = Club.objects.get(slug=slug)
-            progs = Program.objects.filter(club=club)
-            breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{'title': "Услуги", "url": request.path, "active": True }]
-            context.update({"breadcrumbs": breadcrumbs, "programs": progs })
-        except:
-            pass
-
-        try:
-            editfield = EditTextField.objects.get(club=club, page=1) # 1 - const program
+            editfield = EditTextField.objects.get(club=club, page=1)  # 1 - const program
             context.update({'editfield': editfield})
         except:
             pass
-
-        return render(request,'mainapp/program/list.html',context)
+        return render(request, 'mainapp/program/list.html', context)
 
 
 def schedule(request, slug="comsomoll", detail=None):
     schedule_num = detail
-    club_num = getClubByName(slug)
+    club = get_object_or_404(Club, slug=slug)
+    gym = get_object_or_404(Gym, club=club, pk=schedule_num)
     context = {}
     try:
-        mobile = getDataByDays(club_num,schedule_num)
-        desktop = getDataByTime(club_num,schedule_num)
+        mobile = getDataByDays(gym)
+        desktop = getDataByTime(gym)
         context.update({"desktop": desktop, "mobile": mobile})
         title = u"Расписание"
         subtitle = u"Расписание"
         context.update({'title': title, 'subtitle': subtitle})
-        try:
-            club = Club.objects.get(slug=slug)
-            gym = Gym.objects.get(club=club,pk=schedule_num)
-            breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
-                           {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
-            context.update({'breadcrumbs': breadcrumbs})
-        except:
-            pass
-        print('work it')
+        
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
+        context.update({'breadcrumbs': breadcrumbs})
     except:
         pass
-    return render(request,'mainapp/schedule.html', context)
+    return render(request, 'mainapp/schedule.html', context)
+
+
+def getDataByDays(gym):
+    weekdays = WeekDay.objects.filter(gym=gym)
+    entries = []
+    for weekday in weekdays:
+        entry = []
+        for time in range(1, 16):
+            obj = Entry.objects.filter(weekday=weekday, time=time)
+            if obj.exists():
+                obj = obj.get()
+                entry.append({"content": obj.content, "time": timeByNum(obj.time)})
+            else:
+                entry.append({"content": "", "time": timeByNum(time)})
+        obj = {"day": weekDayByNum(weekday.day), "data": entry}
+        entries.append(obj)
+    return entries
+
+
+def getDataByTime(gym):
+    weekdays = WeekDay.objects.filter(gym=gym)
+    entries = []
+    for time in range(1, 16):
+        entry = []
+        for weekday in weekdays:
+            obj = Entry.objects.filter(weekday=weekday, time=time)
+            if obj.exists():
+                obj = obj.get()
+                entry.append({"content": obj.content})
+            else:
+                entry.append({"content": ""})
+        obj = {"time": timeByNum(time), "data": entry}
+        entries.append(obj)
+    return entries
 
 
 def comments(request, slug="comsomoll"):
-    context = {}
-    try:
-        title = u"Видеоблоги и отзывы"
-        context.update({'title': title})
-    except:
-        pass
-    return render(request,'mainapp/comments.html',context)
+    context = {'title': u"Видеоблоги и отзывы"}
+    return render(request, 'mainapp/comments.html', context)
 
 
 def contacts(request, slug="comsomoll"):
     context = {}
-    try:
-        club = Club.objects.get(slug=slug)
-        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": "Контакты", "url": request.path, "active": True}]
-        context.update({'breadcrumbs': breadcrumbs, 'club': club})
-    except:
-        pass
-    return render(request,'mainapp/contacts.html', context)
+    club = get_object_or_404(Club, slug=slug)
+    breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                   {"title": "Контакты", "url": request.path, "active": True}]
+    context.update({'breadcrumbs': breadcrumbs, 'club': club})
+    return render(request, 'mainapp/contacts.html', context)
 
 
-def call(request, slug=""):
+def call(request, slug=None):
     if request.POST:
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
@@ -192,22 +204,21 @@ def call(request, slug=""):
         msg = u"Телефон: " + tel + u" \r\nИмя: " + name
 
         FormRequest(formname=2, content=msg).save()
-
-        if slug == "furmanova":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif slug == "comsomoll":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
+        emails = get_object_or_404(Club, slug=slug).emails_send.split(',')
+        email = [x.strip() for x in emails]
+        send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=True)
 
     context = {}
-    try:
-        club = Club.objects.get(slug=slug)
-        form = Form.objects.get(club=club,form=2)
-        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path, "active": True}]
-        context.update({"breadcrumbs": breadcrumbs, "form": form })
-    except:
-        form = Form.objects.filter(club__isnull=True, form=2)[0]
+    if slug:
+        club = get_object_or_404(Club, slug=slug)
+        form = get_object_or_404(Form, club=club, form=2)
+        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                       {"title": form.title, "url": request.path, "active": True}]
+        context.update({"breadcrumbs": breadcrumbs, "form": form})
+    else:
+        form = get_list_or_404(Form, form=2)[0]
         breadcrumbs = [{"title": form.title, "url": request.path, "active": True}]
-        context.update({"breadcrumbs": breadcrumbs, "form": form })
+        context.update({"breadcrumbs": breadcrumbs, "form": form})
     return render(request, 'mainapp/call.html', context)
 
 
@@ -245,22 +256,15 @@ def entry(request, slug="comsomoll"):
                 msg += u" \r\nОпределяющий параметр: " + parametr
 
         FormRequest(formname=1, content=msg).save()
-
-        if club == u"Фурманова, 117":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif club == u"ТРК КомсоМОЛЛ":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
-
+        emails = get_object_or_404(Club, slug=slug).emails_send.split(',')
+        email = [x.strip() for x in emails]
+        send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=True)
 
     title = u"Заявка на бесплатный фитнес-день"
     context = {"title": title}
-    try:
-        club = Club.objects.get(slug=slug)
-        form = Form.objects.get(club=club,form=1)
-        context.update({"form": form })
-    except:
-        pass
-
+    club = get_object_or_404(Club, slug=slug)
+    form = get_list_or_404(Form, club=club, form=1)[0]
+    context.update({"form": form})
     return render(request, 'mainapp/form_entry.html', context)
 
 
@@ -274,35 +278,26 @@ def abonement(request, slug="comsomoll"):
 
         FormRequest(formname=3, content=msg).save()
 
-        if slug == "furmanova":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['xservking@gmail.com','skif1976@gmail.com'], fail_silently=False)
-        elif slug == "comsomoll":
-            send_mail(subject, msg, settings.EMAIL_HOST_USER, ['smog_king@mail.ru','skif1976@gmail.com'], fail_silently=False)
+        emails = get_object_or_404(Club, slug=slug).emails_send.split(',')
+        email = [x.strip() for x in emails]
+        send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=True)
 
-    try:
-        club = Club.objects.get(slug=slug)
-        form = Form.objects.get(club=club,form=3)
-        breadcrumbs = [{'title': club.address, "url": "/"+slug+"/"},{"title": form.title, "url": request.path, "active": True}]
-        context.update({"breadcrumbs": breadcrumbs, "form": form })
-    except:
-        pass
-
+    club = get_object_or_404(Club, slug=slug)
+    form = get_object_or_404(Form, club=club, form=3)
+    breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                   {"title": form.title, "url": request.path, "active": True}]
     title = u"Заказать абонемент"
     context = {"title": title, "form": form}
-
+    context.update({"breadcrumbs": breadcrumbs, "form": form})
     return render(request, 'mainapp/form_abonement.html', context)
 
 
 def page(request, slug):
     context = {}
-    try:
-        page = Page.objects.get(slug=slug)
-        breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
-        context.update({"page": page, "breadcrumbs": breadcrumbs, "title": page.title})
-    except:
-        pass
+    page = get_object_or_404(Page, slug=slug)
+    breadcrumbs = [{'title': page.title, 'url': request.path, "active": True }]
+    context.update({"page": page, "breadcrumbs": breadcrumbs, "title": page.title})
     return render(request, 'mainapp/page.html', context)
-
 
 
 @register.simple_tag
@@ -317,6 +312,7 @@ def getGymsForClubSlug(clubslug):
         pass
     return gyms
 
+
 @register.simple_tag
 def getPhoneForClub(clubslug):
     try:
@@ -325,6 +321,7 @@ def getPhoneForClub(clubslug):
         return phone
     except:
         pass
+
 
 @register.simple_tag
 def getClubInfo(slug):
@@ -353,42 +350,6 @@ def getClubs():
     except:
         pass
 
-def getDataByDays(clubnum,gymnum):
-    club = Club.objects.get(pk=clubnum)
-    gym = Gym.objects.filter(club=club,pk=gymnum)
-    weekdays = WeekDay.objects.filter(gym=gym)
-    entries = []
-    for weekday in weekdays:
-        entry = []
-        for time in range(1,16):
-            obj = Entry.objects.filter(weekday=weekday,time=time)
-            if obj.exists():
-                obj = obj.get()
-                entry.append({"content": obj.content, "time": timeByNum(obj.time)})
-            else:
-                entry.append({"content": "", "time": timeByNum(time)})
-        obj = {"day": weekDayByNum(weekday.day), "data": entry}
-        entries.append(obj)
-    return entries
-
-def getDataByTime(clubnum,gymnum):
-    club = Club.objects.get(pk=clubnum)
-    gym = Gym.objects.filter(club=club,pk=gymnum)
-    weekdays = WeekDay.objects.filter(gym=gym)
-    entries = []
-    for time in range(1,16):
-        entry = []
-        for weekday in weekdays:
-            obj = Entry.objects.filter(weekday=weekday,time=time)
-            if obj.exists():
-                obj = obj.get()
-                entry.append({"content": obj.content})
-            else:
-                entry.append({"content": ""})
-        obj = {"time": timeByNum(time), "data": entry}
-        entries.append(obj)
-    return entries
-
 
 def weekDayByNum(num):
     day_of_week = {
@@ -401,6 +362,7 @@ def weekDayByNum(num):
         7: "Воскресенье"
     }
     return day_of_week[num]
+
 
 def timeByNum(num):
     time = {
@@ -430,7 +392,3 @@ def timeByNum(num):
 #     except:
 #         pass
 #     return context
-
-def getClubByName(name):
-    club = Club.objects.get(slug=name)
-    return club.pk
