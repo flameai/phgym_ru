@@ -90,7 +90,7 @@
 
                             <div class="phone">
                                 <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 10px"></i>
-                                <span style="letter-spacing: 0.2rem">{{ phone }}</span>
+                                <a href="tel:{{ phone|callable }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                     {% getMainPhone as phone %}
                     <div class="phone visible-xs" style="float: right; margin-top: 10px; font-size: 16px;">
                         <i class="fa fa-phone red-text" aria-hidden="true" style="margin-right: 5px"></i>
-                        <span style="letter-spacing: 0.2rem">{{ phone }}</span>
+                        <a href="tel:{{ phone|callable }}" style="letter-spacing: 0.2rem">{{ phone }}</a>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                         {% if slug %}
                         <ul>
                           <li>
-                            <a href="{% url 'stock' slug=slug %}" target="_top" class="d-text-c-h">Акции</a>
+                            <a href="{% url 'stock' slug=slug %}" target="_top" class="d-text-c-h">Новости и акции</a>
                           </li>
                           <li>
                             <a href="{% url 'program' slug=slug %}" target="_top" class="d-text-c-h">Услуги</a>
@@ -137,7 +137,7 @@
                             {% endif %}
                           </li>
                           <li>
-                            <a href="#" class="d-text-c-h">Интернет-магазин</a>
+                            <a href="https://powerhousegym.ru/shop/" class="d-text-c-h">Интернет-магазин</a>
                           </li>
                           <li>
                             <a href="{% url 'contacts' slug=slug %}" target="_top" class="d-text-c-h">Контакты</a>
@@ -152,7 +152,7 @@
                             <a href="/pages/franshiza/" class="d-text-c-h">Франшиза</a>
                           </li>
                           <li>
-                            <a href="/shop/" class="d-text-c-h">Интернет-магазин</a>
+                            <a href="https://powerhousegym.ru/shop/" class="d-text-c-h">Интернет-магазин</a>
                           </li>
                         </ul>
                         {% endif %}
@@ -208,16 +208,22 @@
                         <li style="margin-right: 5px"><a href="https://vk.com/phgym" target="_blank" class="vk"></a></li>
                         <li><a href="https://www.instagram.com/powerhouse_gym_russia/" target="_blank" class="i"></a></li>
                     </ul>
+                    <div class="apps">
+                        <div class="app-icon">
+                            <a href="https://play.google.com/store/apps/details?id=ru.powerhousegym.yekaterinburg&hl=ru">
+                                <img src="{% static 'images/app/googleplay.svg' %}" style="width:140px">
+                            </a>
+                        </div>
+                        <div class="app-icon">
+                            <a href="https://itunes.apple.com/us/app/powerhouse-gym/id1105012151?l=ru&ls=1&mt=8">
+                                <img src="{% static 'images/app/app_store.svg' %}" width="140px">
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-12">
                     <p>© 2007-2017 Powerhouse Gym.</p>
                 </div>
-                {% if slug %}
-                <div class="col-xs-12">
-                  <img src="" alt="Google play">
-                  <img src="" alt="App Store">
-                </div>
-                {% endif %}
             </div>
         </div>
     </footer>
