@@ -831,7 +831,7 @@ footer .i:hover {
     z-index: 1;
 }
 .main-slider__item {
-	background-position: center;
+	background-position: right;
 	background-repeat: no-repeat;
 	background-color: black;
 	height: 600px;
@@ -866,6 +866,19 @@ footer .i:hover {
 	left: 0;
 	z-index: 1;
 	background-image: url('../images/empty.gif');
+}
+.main-slider__content-wrapper {
+	background-color: rgba(0,0,0,0.5);
+}
+@media (max-width: 1200px) {
+	.response-slider {
+		height: 500px;
+	}
+}
+@media (max-width: 992px) {
+	.response-slider {
+		height: 400px;
+	}
 }
 
 /* main-news*/

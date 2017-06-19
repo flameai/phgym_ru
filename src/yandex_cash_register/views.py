@@ -82,12 +82,6 @@ class BaseFormView(FormView):
         """
         :type form: yandex_cash_register.forms.PaymentProcessingForm
         """
-        import re
-        keys = sorted(filter(lambda k: re.match(r'(HTTP_|CONTENT_)', k), self.request.META))
-        keys = ['REMOTE_ADDR'] + keys
-        meta = ''.join("%s=%s\n" % (k, self.request.META[k]) for k in keys)
-        logger.info('%s %s %s' % (self.request.method, self.request.build_absolute_uri(), meta))
-
         logger.info('Payment form validated correctly')
         logger.info('Form data: %s', dict(form.cleaned_data))
 
