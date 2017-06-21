@@ -19,9 +19,9 @@
             </ol>
             <div class="carousel-inner">
                 {% for slider in sliders %}
-                    <div class="response-slider main-slider__item item {% if forloop.first %} active {% endif %}">
+                    <div class="main-slider__item item {% if forloop.first %} active {% endif %}" style="padding: 0">
                         <a href="{{ slider.button_url}}" style="position: absolute; top: 0; bottom: 0; left:0; right: 0; z-index: 1"></a>
-                        <img src="{{ slider.image.url }}" alt="" style="position: absolute; top: 50%; transform: translateY(-50%); width: 100%; z-index: 0">
+                        <img src="{{ slider.image.url }}" alt="">
                     </div>
               {% endfor %}
           </div>
