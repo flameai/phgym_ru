@@ -173,6 +173,11 @@ CKEDITOR_CONFIGS = {
             ['Styles', 'Format', 'Font', 'FontSize'],
             ['TextColor', 'BGColor'],
         ]
+    },
+    'links_only': {
+        'width': '100%',
+        'toolbar': "OnlyLinks",
+        'toolbar_OnlyLinks': ['Link', 'Unlink']
     }
 }
 
