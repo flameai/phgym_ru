@@ -156,7 +156,8 @@ class WeekDay(models.Model):
 
     class Meta:
         unique_together = ('gym', 'day')
-        verbose_name_plural = u'расписание'
+        verbose_name = u'расписание'
+        verbose_name_plural = u'расписания'
 
 class Entry(models.Model):
     TIME_CHOICES = (
