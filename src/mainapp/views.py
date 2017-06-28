@@ -130,55 +130,26 @@ def schedule(request, slug="comsomoll", detail=None):
     schedule_num = detail
     club = get_object_or_404(Club, slug=slug)
     gym = get_object_or_404(Gym, club=club, pk=schedule_num)
+
     context = {}
-    try:
-        mobile = getDataByDays(gym)
-        desktop = getDataByTime(gym)
-        context.update({"desktop": desktop, "mobile": mobile})
-        title = u"Расписание"
-        subtitle = u"Расписание"
-        context.update({'title': title, 'subtitle': subtitle})
-        
-        breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
-                       {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
-        context.update({'breadcrumbs': breadcrumbs})
-    except:
-        pass
+    gym_schedule = getDataByDays(gym)
+    context.update({"gym_schedule": gym_schedule})
+    
+    breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
+                   {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
+    context.update({'breadcrumbs': breadcrumbs})
+
     return render(request, 'mainapp/schedule.html', context)
 
 
 def getDataByDays(gym):
-    weekdays = WeekDay.objects.filter(gym=gym)
-    entries = []
+    weekdays = WeekDay.objects.filter(gym=gym).order_by('day')
+    output = []
     for weekday in weekdays:
-        entry = []
-        for time in range(1, 16):
-            obj = Entry.objects.filter(weekday=weekday, time=time)
-            if obj.exists():
-                obj = obj.get()
-                entry.append({"content": obj.content, "time": timeByNum(obj.time)})
-            else:
-                entry.append({"content": "", "time": timeByNum(time)})
-        obj = {"day": weekDayByNum(weekday.day), "data": entry}
-        entries.append(obj)
-    return entries
-
-
-def getDataByTime(gym):
-    weekdays = WeekDay.objects.filter(gym=gym)
-    entries = []
-    for time in range(1, 16):
-        entry = []
-        for weekday in weekdays:
-            obj = Entry.objects.filter(weekday=weekday, time=time)
-            if obj.exists():
-                obj = obj.get()
-                entry.append({"content": obj.content})
-            else:
-                entry.append({"content": ""})
-        obj = {"time": timeByNum(time), "data": entry}
-        entries.append(obj)
-    return entries
+        entries = Entry.objects.filter(weekday=weekday).order_by('time')
+        day = {"day": weekday.get_day_display(), "data": entries}
+        output.append(day)
+    return output
 
 
 def comments(request, slug="comsomoll"):
