@@ -690,9 +690,6 @@ header .menu ul li ul li a{
 	padding: 10px !important;
 	white-space: initial;
 }
-header .menu ul li ul li:hover{
-	background: #5863c5;
-}
 @media (max-width: 991px) {
 	header .menu ul li ul {
 		background-color: #fff;
@@ -703,9 +700,6 @@ header .menu ul li ul li:hover{
 	}
 	header .menu ul li ul li a{
 	    padding: 5px !important;
-	}
-	header .menu ul li ul li:hover{
-		background: #5863c5;
 	}
 	header .menu ul li ul li:hover a{
 		color: #fff;
@@ -4641,4 +4635,13 @@ list-style:none;
 }
 .pb0 {
 	padding-bottom: 0;
+}
+@media (max-width: 520px) {
+	div[id^="timer"]{
+		zoom:60%; -moz-transform: scale(0.6);
+		-moz-transform-origin: left center 0px;
+	}
+	span[id^="timer-text"] {
+		font-size: 120% !important;
+	}
 }
