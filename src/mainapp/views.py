@@ -132,8 +132,9 @@ def schedule(request, slug="comsomoll", detail=None):
     gym = get_object_or_404(Gym, club=club, pk=schedule_num)
 
     context = {}
-    gym_schedule = getDataByDays(gym)
-    context.update({"gym_schedule": gym_schedule})
+    desktop = getDataByDays(gym)
+    mobile = getDataByTime(gym)
+    context.update({"desktop": desktop, "mobile": mobile})
     
     breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                    {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
@@ -148,6 +149,20 @@ def getDataByDays(gym):
     for weekday in weekdays:
         entries = Entry.objects.filter(weekday=weekday).order_by('time')
         day = {"day": weekday.get_day_display(), "data": entries}
+        output.append(day)
+    return output
+
+
+def getDataByTime(gym):
+    weekdays = WeekDay.objects.filter(gym=gym)
+    output = []
+    for weekday in weekdays:
+        day_data = []
+        for time in range(7, 23):
+            entries = Entry.objects.filter(weekday=weekday, time__gt=time*10, time_lt=(time+1)*10)
+            hour_data = {"time": str(time) + u":00 - " + str(time+1) + ":00", "data": entries}
+            day_data.append(hour_data)
+        day = {"day": weekday.get_day_display(), "data": day_data}
         output.append(day)
     return output
 
