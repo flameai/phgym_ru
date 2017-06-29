@@ -148,7 +148,9 @@ def getDataByDays(gym):
     output = []
     for weekday in weekdays:
         entries = Entry.objects.filter(weekday=weekday).order_by('time')
-        day = {"day": weekday.get_day_display(), "data": entries}
+        num = entries.count() / 2 + 1
+        new_entries = [entries[x:x+num] for x in xrange(0, len(entries), num)]
+        day = {"day": weekday.get_day_display(), "data": new_entries}
         output.append(day)
     return output
 
@@ -159,7 +161,7 @@ def getDataByTime(gym):
     for weekday in weekdays:
         day_data = []
         for time in range(7, 23):
-            entries = Entry.objects.filter(weekday=weekday, time__gt=time*10, time_lt=(time+1)*10)
+            entries = Entry.objects.filter(weekday=weekday, time__gt=time*10, time__lt=(time+1)*10)
             hour_data = {"time": str(time) + u":00 - " + str(time+1) + ":00", "data": entries}
             day_data.append(hour_data)
         day = {"day": weekday.get_day_display(), "data": day_data}

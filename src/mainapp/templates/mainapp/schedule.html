@@ -4,47 +4,112 @@
 
 {% block body %}
     <div class="container content" style="padding-top: 30px;">
-     <div class="csc-default" >
-       <div class="timetable">
-           <div class="container">
+        <div class="csc-default" >
+            <div class="timetable">
+                <div class="container">
+                    {% for day in desktop %}
+                    <div class="timetable-content">
+                        <table class="timetable-day">
+                            <tbody>
+                                <tr>
+                                    <td class="timetable-day-name">{{ day.day }}</td>
+                                    <td>
+                                        {% for entries in day.data %}
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    {% for entry in entries %}
+                                                    <td id="entry-{{ entry.id }}" class="timetable-entry">
+                                                        <div class="timetable-entry-time">{{ entry.get_time_display }}</div>
+                                                        <div class="timetable-entry-name">{{ entry.content }}</div>
+                                                    </td>
+                                                    {% endfor %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-               <ul class="timetable-head">
-                   <li>Расписание</li>
-                   <li>Понедельник</li>
-                   <li>Вторник</li>
-                   <li>Среда</li>
-                   <li>Четверг</li>
-                   <li>Пятница</li>
-                   <li>Суббота</li>
-                   <li>Воскресенье</li>
-               </ul>
+            {% for day in mobile %}
+            <table class="schedule-table">
+                <thead><tr><th colspan="2">{{day.day}}</th></tr></thead>
+                <tbody>
+                    {% for hour in day.data %}
+                        <tr>
+                            <td>{{ hour.time }}</td>
+                            <td>
+                                {% for entry in hour.data %}
+                                <div id="entry-mobile-{{ entry.id }}" class="schedule-table-entry-text">
+                                    {{ entry.content }}
+                                </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
 
-               {% for day in desktop %}
-               <ul class="timetable-content">
-                 <li>{{day.time}}</li>
-                 {% for time in day.data %}
-                  {% if time.content %}
-                  <li class="timetable-text">{{time.content}}</li>
-                  {% else %}
-                  <li>&nbsp;</li>
-                  {% endif %}
-                 {% endfor %}
-               </ul>
-               {% endfor %}
-           </div>
-       </div>
+    <!-- Entries Data -->
+    <div class="hide entries-data">
+    {% for day in desktop %}
+        {% for entries in day.data %}
+            {% for entry in entries %}
+                <div id="entry-data-{{ entry.id }}">
+                    <div class="entry-data-content">{{ entry.content }}</div>
+                    <div class="entry-data-time">{{ entry.get_time_display }}</div>
+                    <div class="entry-data-weekday">{{ entry.weekday }}</div>
+                    <div class="entry-data-duration">{{ entry.duration }}</div>
+                    <div class="entry-data-description">{{ entry.description | striptags }}</div>
+                    <div class="entry-data-image">{{MEDIA_URL}}{{ entry.image }}</div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+    </div>
 
-       {% for day in mobile %}
-       <table class="schedule-table">
-         <thead><tr><th colspan="2">{{day.day}}</th></tr></thead>
-         <tbody>
-           {% for time in day.data %}
-           <tr><td>{{time.time}}</td><td>{{time.content}}</td></tr>
-           {% endfor %}
-         </tbody>
-       </table>
-       {% endfor %}
+    <!-- Modal -->
+    <div class="timetable-modal modal fade" id="timetable-modal" tabindex="-1" role="dialog" aria-labelledby="timetable-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h3 class="modal-title" id="timetable-modal-content"></h3>
+                </div>
 
-     </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 img-container">
+                            <img id="timetable-modal-image" src="">
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <p id="timetable-modal-description"></p>
+                            <div class="timetable-modal-time-info visible-xs">
+                                <span class="timetable-modal-weekday"></span>
+                                <span class="timetable-modal-duration"></span>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="timetable-modal-time-info hidden-xs">
+                        <span class="timetable-modal-weekday"></span>
+                        <span class="timetable-modal-duration"></span>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock body %}

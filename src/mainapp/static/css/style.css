@@ -1677,7 +1677,7 @@ footer .i:hover {
 .timetable {
 	margin-bottom: 80px;
 }
-.timetable ul {
+.timetable .timetable-content {
 	margin: 0;
 	padding: 0;
 	font-size: 0;
@@ -1685,38 +1685,40 @@ footer .i:hover {
 	border: 1px solid #ccc;
 	margin-top: -1px;
 }
-.timetable ul li {
-	display: inline-block;
+.timetable table {
+	width: 100%;
+	min-height: 95px;
+	table-layout: fixed;
+}
+.timetable table td {
+	vertical-align: middle;
+	border-right: 1px solid black;
+}
+.timetable table td:last-child {
+	border-right: 0px;
+}
+.timetable .timetable-content .timetable-day {
 	*zoom: 1;
 	*display: inline;
-	font-size: 13px;
+	font-size: 16px;
 	line-height: 1.5em;
-	width: 12%;
 	color: #454345;
 	font-weight: 700;
 	text-align: center;
 	text-transform: uppercase;
 	padding: 15px 0;
-	min-height: 108px;
-	border: 1px solid #fff;
+	border: 1px solid black;
+	overflow: hidden;
+    text-overflow: ellipsis;
 }
-.timetable ul li span {
-	display: block;
-	font-weight: 400;
+.timetable .timetable-content .timetable-day table {
+	border-bottom: 1px solid black;
 }
-.timetable ul li:first-child {
+.timetable .timetable-content .timetable-day table:last-child {
+	border-bottom: 0;
+}
+.timetable .timetable-day .timetable-day-name {
 	width: 16%;
-}
-.timetable .timetable-head {
-	font-weight: 700;
-	color: #454345;
-	border: 0;
-	background: #c3c3c3;
-}
-.timetable .timetable-head li {
-	font-size: 16px;
-	min-height: 30px;
-	max-height: 50px;
 }
 .timetable .timetable-content:nth-child(odd) {
   background: #c3c3c3;
@@ -1725,9 +1727,84 @@ footer .i:hover {
 .timetable .timetable-content:nth-child(even) {
   background: #fff;
 }
+.timetable .timetable-entry {
+	position: relative;
+	transition-duration: 0.3s;
+	letter-spacing: 0.75px;
+	padding: 25px 5px 5px 5px;
+}
 
-.timetable .timetable-text {
-	color: #454345;
+.timetable .timetable-entry:hover {
+	background-color: rgba(0,0,0,0.4);
+	/*background-color: #E31E24;*/
+	color: white;
+	cursor: pointer;
+}
+.timetable .timetable-entry-time {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	line-height: 1.15em;
+}
+.timetable .timetable-entry-name {
+	width: 100%;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+  /* ============================================================================
+  /* Модальное окно на странице с расписанием */
+
+.timetable-modal .modal-content {
+  background-color: rgba(0,0,0,0.9);
+  border-radius: 0; 
+}
+.timetable-modal .modal-body {
+	position: relative;
+	min-height: 300px;
+	letter-spacing: 0.5px;
+}
+.timetable-modal #timetable-modal-content {
+  color: #E31E24;
+}
+.timetable-modal .modal-body {
+  font-size: 1.25em;
+  color: white;
+}
+.timetable-modal .img-container {
+	float: right !important;
+	margin-bottom: 1em;
+}
+.timetable-modal #timetable-modal-description {
+  margin-bottom: 60px;
+}
+.timetable-modal-time-info {
+	margin: 2em 0;
+}
+.timetable-modal-time-info.hidden-xs {
+	position: absolute;
+	bottom: 0;
+}
+.timetable-modal .timetable-modal-weekday {
+  color: #E31E24;
+  text-transform: uppercase;
+  margin-right: 1em;
+}
+.timetable-modal img {
+  width: 100%;
+  min-width: 250px;
+}
+@media (max-width: 1024px) {
+	.timetable-modal-time-info {
+		position: relative;
+	}
+}
+@media (max-width: 767px) {
+	.timetable-modal .modal-body {
+		min-height: auto;
+	}
+	.timetable-modal #timetable-modal-description {
+	  margin-bottom: 0px;
+	}
 }
 
   /* ============================================================================
@@ -1771,7 +1848,7 @@ footer .i:hover {
   }
 
   .schedule-table td:first-child {
-	width: 40%;
+	width: 35%;
   }
 
   .schedule-table td:last-child {
@@ -1790,6 +1867,14 @@ footer .i:hover {
 
   .schedule-table .other {
 	color: black;
+  }
+  .schedule-table-entry-text {
+	padding: 0 5%;
+	line-height: 2em;
+	border-bottom: 1px solid white;
+  }
+  .schedule-table-entry-text:last-child {
+	border-bottom: 0px;
   }
 
 }
@@ -3087,9 +3172,6 @@ list-style:none;
 	.timetable ul li {
 		width: 25%;
 		border: 1px solid #e1e1e1;
-	}
-	.timetable .timetable-head li {
-		border: 0px solid #e1e1e1;
 	}
 }
 
