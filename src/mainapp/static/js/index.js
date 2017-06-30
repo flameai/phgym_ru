@@ -241,11 +241,11 @@ $(document).ready(function() {
     if(data.image) {
       var img = $(shedule_modal).find("#timetable-modal-image")
       $(img).attr("src", data.image)
-      $(img).parent().removeClass("hide")
-      //$(shedule_modal).find("#timetable-modal-description").parent().addClass("col-sm-6")
+      $(img).removeClass("hide")
+      $(shedule_modal).find("#timetable-modal-description").parent().removeClass("wide")
     } else {
-      $(shedule_modal).find("#timetable-modal-image").parent().addClass("hide")
-      //$(shedule_modal).find("#timetable-modal-description").parent().removeClass("col-sm-6")
+      $(shedule_modal).find("#timetable-modal-image").addClass("hide")
+      $(shedule_modal).find("#timetable-modal-description").parent().addClass("wide")
     }
   }
 

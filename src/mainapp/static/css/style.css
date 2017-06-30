@@ -1777,6 +1777,9 @@ footer .i:hover {
 	height: 100%;
 	padding: 15px;
 }
+.timetable-modal .text-container.wide {
+	width: 100%;
+}
 .timetable-modal #timetable-modal-description {
   margin-bottom: 60px;
 }
@@ -1811,6 +1814,7 @@ footer .i:hover {
 	}
 	.timetable-modal img {
 	  min-height: 200px;
+	  max-width: 100%;
 	}
 }
 
