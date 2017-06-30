@@ -242,18 +242,18 @@ $(document).ready(function() {
       var img = $(shedule_modal).find("#timetable-modal-image")
       $(img).attr("src", data.image)
       $(img).parent().removeClass("hide")
-      $(shedule_modal).find("#timetable-modal-description").parent().addClass("col-sm-6")
+      //$(shedule_modal).find("#timetable-modal-description").parent().addClass("col-sm-6")
     } else {
       $(shedule_modal).find("#timetable-modal-image").parent().addClass("hide")
-      $(shedule_modal).find("#timetable-modal-description").parent().removeClass("col-sm-6")
+      //$(shedule_modal).find("#timetable-modal-description").parent().removeClass("col-sm-6")
     }
   }
 
-  $(".timetable td[id*='entry-']").click(function() {
+  $(".timetable *[id*='entry-']").click(function() {
     prepareModal(getId(this))
     $(shedule_modal).modal('show')
   })
-  $(".schedule-table div[id*='entry-mobile-'").click(function() {
+  $(".schedule-table *[id*='entry-mobile-'").click(function() {
     if(this.textContent) {
       prepareModal(getId(this))
       $(shedule_modal).modal('show')

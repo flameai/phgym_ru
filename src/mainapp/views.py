@@ -148,9 +148,9 @@ def getDataByDays(gym):
     output = []
     for weekday in weekdays:
         entries = Entry.objects.filter(weekday=weekday).order_by('time')
-        num = entries.count() / 2 + 1
-        new_entries = [entries[x:x+num] for x in xrange(0, len(entries), num)]
-        day = {"day": weekday.get_day_display(), "data": new_entries}
+        # num = entries.count() / 2 + 1
+        # new_entries = [entries[x:x+num] for x in xrange(0, len(entries), num)]
+        day = {"day": weekday.get_day_display(), "data": entries}
         output.append(day)
     return output
 

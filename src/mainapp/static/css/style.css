@@ -1680,76 +1680,58 @@ footer .i:hover {
 .timetable .timetable-content {
 	margin: 0;
 	padding: 0;
-	font-size: 0;
-	line-height: 0;
-	border: 1px solid #ccc;
-	margin-top: -1px;
+	letter-spacing: 0.5px;
+	border: 3px solid rgba(255,255,255,0.5);
 }
 .timetable table {
 	width: 100%;
-	min-height: 95px;
 	table-layout: fixed;
 }
 .timetable table td {
-	vertical-align: middle;
-	border-right: 1px solid black;
+	vertical-align: top;
+	border-right: 3px solid rgba(255,255,255,0.5);
 }
-.timetable table td:last-child {
-	border-right: 0px;
-}
-.timetable .timetable-content .timetable-day {
-	*zoom: 1;
-	*display: inline;
-	font-size: 16px;
-	line-height: 1.5em;
-	color: #454345;
-	font-weight: 700;
-	text-align: center;
-	text-transform: uppercase;
-	padding: 15px 0;
-	border: 1px solid black;
-	overflow: hidden;
+.timetable .timetable-column-header {
+    color: white;
+    line-height: 3em;
+    text-transform: uppercase;
+    padding: 5px;
+    border-bottom: 3px solid #E31E24;
+    border-right: 3px solid rgba(255,255,255,0.5);
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-align: center;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
-.timetable .timetable-content .timetable-day table {
-	border-bottom: 1px solid black;
-}
-.timetable .timetable-content .timetable-day table:last-child {
-	border-bottom: 0;
-}
-.timetable .timetable-day .timetable-day-name {
-	width: 16%;
-}
-.timetable .timetable-content:nth-child(odd) {
-  background: #c3c3c3;
-}
-
-.timetable .timetable-content:nth-child(even) {
-  background: #fff;
-}
+.timetable table td:last-child,
+.timetable .timetable-column-header:last-child {
+	border-right: 0px;
+} 
 .timetable .timetable-entry {
-	position: relative;
-	transition-duration: 0.3s;
-	letter-spacing: 0.75px;
-	padding: 25px 5px 5px 5px;
+    transition-duration: 0.3s;
+    letter-spacing: 0.75px;
+    border-bottom: 1px solid #E31E24;
+    color: white;
+    background: inherit;
+    text-align: center;
+    padding: 10px 5px;
 }
-
 .timetable .timetable-entry:hover {
-	background-color: rgba(0,0,0,0.4);
-	/*background-color: #E31E24;*/
 	color: white;
 	cursor: pointer;
+	background: #171717;
 }
 .timetable .timetable-entry-time {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	line-height: 1.15em;
+	font-weight: bold;
+	line-height: 1.5em;
 }
 .timetable .timetable-entry-name {
 	width: 100%;
 	overflow: hidden;
-    text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	line-height: 1.5em;
+	padding-top: 5px;
 }
   /* ============================================================================
   /* Модальное окно на странице с расписанием */
@@ -1758,45 +1740,58 @@ footer .i:hover {
   background-color: rgba(0,0,0,0.9);
   border-radius: 0; 
 }
+.timetable-modal .modal-header {
+  background: #E31E24;
+  border-bottom: 0px;
+}
 .timetable-modal .modal-body {
 	position: relative;
 	min-height: 300px;
 	letter-spacing: 0.5px;
+	font-size: 1.25em;
+  	padding: 0;
+  	color: white;
 }
 .timetable-modal #timetable-modal-content {
-  color: #E31E24;
-}
-.timetable-modal .modal-body {
-  font-size: 1.25em;
   color: white;
+  text-transform: none;
+  letter-spacing: 1.5px;
 }
-.timetable-modal .img-container {
-	float: right !important;
-	margin-bottom: 1em;
+.timetable-modal .close {
+	color: black;
+    opacity: 1;
+    text-shadow: none;
+    font-size: 2em;
+    outline: none;
+}
+.timetable-modal img {
+	position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 50%;
+    height: 100%;
+}
+.timetable-modal .text-container {
+	width: 50%;
+	height: 100%;
+	padding: 15px;
 }
 .timetable-modal #timetable-modal-description {
   margin-bottom: 60px;
 }
 .timetable-modal-time-info {
-	margin: 2em 0;
-}
-.timetable-modal-time-info.hidden-xs {
+	margin: 2em 0 1em;
 	position: absolute;
 	bottom: 0;
 }
-.timetable-modal .timetable-modal-weekday {
-  color: #E31E24;
-  text-transform: uppercase;
-  margin-right: 1em;
+.timetable-modal-time-info > div {
+	margin-left: 45px;
 }
-.timetable-modal img {
-  width: 100%;
-  min-width: 250px;
-}
-@media (max-width: 1024px) {
-	.timetable-modal-time-info {
-		position: relative;
-	}
+.timetable-modal-time-info > span {
+	float: left;
+	font-size: 36px;
+	color: #E31E24;
 }
 @media (max-width: 767px) {
 	.timetable-modal .modal-body {
@@ -1804,6 +1799,18 @@ footer .i:hover {
 	}
 	.timetable-modal #timetable-modal-description {
 	  margin-bottom: 0px;
+	}
+	.timetable-modal .text-container,
+	.timetable-modal img {
+		width: 100%;
+		height: auto;
+		position: relative;
+	}
+	.timetable-modal-time-info {
+		position: relative;
+	}
+	.timetable-modal img {
+	  min-height: 200px;
 	}
 }
 
