@@ -133,6 +133,7 @@ class StockAdmin(SortableModelAdmin):
     def shown(self, obj):
         return not(obj.hidden)
     shown.short_description = "показывается"
+    shown.boolean = True
 
 
 admin.site.register(Stock, StockAdmin)
