@@ -1717,6 +1717,9 @@ footer .i:hover {
     text-align: center;
     padding: 15px 5px;
 }
+.timetable .timetable-entry:last-child {
+    border-bottom: 0px;
+}
 .timetable .timetable-entry:hover {
 	color: white;
 	cursor: pointer;
@@ -1724,7 +1727,14 @@ footer .i:hover {
 }
 .timetable .timetable-entry-time {
 	font-weight: bold;
-	line-height: 1.5em;
+	line-height: 2em;
+}
+.timetable .timetable-entry-duration {
+    font-weight: normal;
+    line-height: 1em;
+    vertical-align: top;
+    font-size: 0.8em;
+    display: inline-block;
 }
 .timetable .timetable-entry-name {
 	width: 100%;

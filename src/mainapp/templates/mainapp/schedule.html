@@ -22,7 +22,10 @@
                                         <td>
                                             {% for entry in day.data %}
                                                 <div id="entry-{{ entry.id }}" class="timetable-entry">
-                                                    <div class="timetable-entry-time">{{ entry.get_time_display }}</div>
+                                                    <div class="timetable-entry-time">
+                                                        {{ entry.get_time_display }}
+                                                        <span class="timetable-entry-duration">({{ entry.duration }} мин.)</span>
+                                                    </div>
                                                     <div class="timetable-entry-name">{{ entry.content }}</div>
                                                 </div>
                                             {% endfor %}
