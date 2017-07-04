@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import Max
 from django import forms
 from datetime import date, datetime
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -64,6 +65,7 @@ class News(models.Model):
     image = models.ImageField(u'миниатюра',default="")
     short_text = models.TextField(u'краткий текст новости',default="",max_length=210, help_text="Максимальная длина анонса - 210 символов. Все остальные символы будут удалены.")
     full_text = RichTextUploadingField(u'полный текст новости',default="",)
+    hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
 
     def __str__(self):
         return self.title
@@ -87,6 +89,11 @@ class Stock(models.Model):
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
     order = models.PositiveIntegerField(verbose_name=u'сортировка', default=0)
     hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
+
+    def save(self, *args, **kwargs):
+        max_order = Stock.objects.all().aggregate(Max('order'))['order__max'] or 0
+        self.order = max_order + 1
+        super(Stock, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

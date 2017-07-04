@@ -79,7 +79,7 @@ def news(request, page=""):
         context.update({'breadcrumbs': breadcrumbs, 'news': news})
         return render(request, 'mainapp/news/item.html', context)
     else:  # вывод списка кратких статей
-        news = News.objects.all().order_by("-date")
+        news = News.objects.filter(hidden=False).order_by("-date")
         breadcrumbs = [{"title": "Новости", "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, 'news_list': news})
         return render(request, 'mainapp/news/list.html', context)
@@ -96,7 +96,7 @@ def stock(request, slug="", page=""):
         context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
         return render(request, 'mainapp/stock/item.html', context)
     else:  # Вывод списка акций
-        stocks = get_list_or_404(Stock, club=club)
+        stocks = get_list_or_404(Stock, club=club, hidden=False)
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                        {'title': "Новости и акции", "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, "stocks": stocks})

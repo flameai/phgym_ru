@@ -23,10 +23,15 @@ class NewsForm(ModelForm):
 
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'date')
+    list_display = ('title', 'date', 'shown')
     list_display_links = ('title', 'date')
     list_filter = ['date', ]
     form = NewsForm
+
+    def shown(self, obj):
+        return not(obj.hidden)
+    shown.short_description = "показывается"
+    shown.boolean = True
 
 
 admin.site.register(News, NewsAdmin)
@@ -125,10 +130,10 @@ class PageAdmin(SortableModelAdmin):
 admin.site.register(Page, PageAdmin)
 
 
-class StockAdmin(SortableModelAdmin):
+class StockAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_display = ('title', 'date', 'club', 'shown', 'order')
-    sortable = 'order'
+    # sortable = 'order'
 
     def shown(self, obj):
         return not(obj.hidden)
