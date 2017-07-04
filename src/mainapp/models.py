@@ -167,6 +167,23 @@ class WeekDay(models.Model):
         verbose_name = u'расписание'
         verbose_name_plural = u'расписания'
 
+
+class EntryTemplate(models.Model):
+    name = models.CharField(verbose_name=u"название", max_length=200,)
+    description = RichTextField(verbose_name=u"описание", config_name='links_only', blank=True, null=True)
+    image = models.ImageField(verbose_name=u"изображение", blank=True, null=True)
+
+    def __str__(self):
+        return "%s" % self.name
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    class Meta:
+        verbose_name = u'шаблон занятия'
+        verbose_name_plural = u'шаблоны занятий'
+
+
 class Entry(models.Model):
     TIME_CHOICES = (
         (71,u"07:00"),  (72,u"07:15"),  (73,u"07:30"),  (74,u"07:45"),
@@ -188,11 +205,15 @@ class Entry(models.Model):
     )
 
     weekday = models.ForeignKey(WeekDay, on_delete=models.CASCADE, default=None,)
-    content = models.CharField(verbose_name=u"Занятие", max_length=200,)
+    content = models.ForeignKey(EntryTemplate, verbose_name=u"Занятие", max_length=200,)
     time = models.IntegerField(verbose_name=u"время начала", choices=TIME_CHOICES,)
     duration = models.IntegerField(verbose_name=u"длительность", help_text=u"целое число в минутах")
-    description = RichTextField(verbose_name=u"описание", config_name='links_only', blank=True, null=True)
-    image = models.ImageField(verbose_name=u"изображение", blank=True, null=True)
+
+    def __str__(self):
+        return "%s" % self.content
+
+    def __unicode__(self):
+        return "%s" % self.content
 
     class Meta:
         unique_together = ('weekday','time')

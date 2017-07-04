@@ -93,8 +93,10 @@ class EntryAdmin(admin.ModelAdmin):
     get_club.admin_order_field = 'weekday__gym__club'
 
 
-
 admin.site.register(Entry, EntryAdmin)
+
+
+admin.site.register(EntryTemplate)
 
 
 class SliderAdmin(SortableModelAdmin):
