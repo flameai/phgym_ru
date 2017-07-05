@@ -249,14 +249,28 @@ $(document).ready(function() {
     }
   }
 
-  $(".timetable *[id*='entry-']").click(function() {
-    prepareModal(getId(this))
+  var openModal = function(elem) {
+    prepareModal(getId(elem))
     $(shedule_modal).modal('show')
+  }
+
+  var modalTimeout = null
+
+  $(".timetable *[id*='entry-']").mouseenter(function() {
+    var self = this
+    modalTimeout = setTimeout(function() {
+      openModal(self)
+    }, 500) 
+  })
+  $(".timetable *[id*='entry-']").mouseleave(function() {
+    clearTimeout(modalTimeout)
+  })
+  $(".timetable *[id*='entry-']").click(function() {
+    openModal(this)
   })
   $(".schedule-table *[id*='entry-mobile-'").click(function() {
     if(this.textContent) {
-      prepareModal(getId(this))
-      $(shedule_modal).modal('show')
+      openModal(this)
     }
   })
 })
