@@ -65,12 +65,12 @@
     {% for day in desktop %}
         {% for entry in day.data %}
             <div id="entry-data-{{ entry.id }}">
-                <div class="entry-data-content">{{ entry.content }}</div>
+                <div class="entry-data-content">{{ entry.content.name }}</div>
                 <div class="entry-data-time">{{ entry.get_time_display }}</div>
                 <div class="entry-data-weekday">{{ entry.weekday }}</div>
                 <div class="entry-data-duration">{{ entry.duration }}</div>
-                <div class="entry-data-description">{{ entry.description | striptags }}</div>
-                <div class="entry-data-image">{{MEDIA_URL}}{{ entry.image }}</div>
+                <div class="entry-data-description">{{ entry.content.description | striptags }}</div>
+                <div class="entry-data-image">{{MEDIA_URL}}{{ entry.content.image }}</div>
             </div>
         {% endfor %}
     {% endfor %}
