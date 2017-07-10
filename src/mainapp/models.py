@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import Max
 from django import forms
 from datetime import date, datetime
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -64,6 +65,7 @@ class News(models.Model):
     image = models.ImageField(u'миниатюра',default="")
     short_text = models.TextField(u'краткий текст новости',default="",max_length=210, help_text="Максимальная длина анонса - 210 символов. Все остальные символы будут удалены.")
     full_text = RichTextUploadingField(u'полный текст новости',default="",)
+    hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
 
     def __str__(self):
         return self.title
@@ -85,7 +87,13 @@ class Stock(models.Model):
     text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
     url_button = models.URLField(u'ссылка кнопки', default='', blank=True, null=True )
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
-    order = models.PositiveIntegerField(default=0)
+    order = models.PositiveIntegerField(verbose_name=u'сортировка', default=0)
+    hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
+
+    # def save(self, *args, **kwargs):
+    #     max_order = Stock.objects.all().aggregate(Max('order'))['order__max'] or 0
+    #     self.order = max_order + 1
+    #     super(Stock, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -95,7 +103,7 @@ class Stock(models.Model):
     class Meta:
         verbose_name = u'акция'
         verbose_name_plural = u'акции'
-        ordering = ('order',)
+        ordering = ('-order',)
 
 
 class Program(models.Model):
@@ -140,7 +148,7 @@ class WeekDay(models.Model):
         (7,u"Воскресенье"),
     )
     day = models.IntegerField(verbose_name=u"День недели",choices=DAY_OF_WEEK)
-    gym = models.ForeignKey(Gym, on_delete=models.CASCADE, default=None, verbose_name=u"Клуб",)
+    gym = models.ForeignKey(Gym, on_delete=models.CASCADE, default=None, verbose_name=u"зал",)
 
     def __str__(self):
         day_of_week = {
@@ -156,30 +164,56 @@ class WeekDay(models.Model):
 
     class Meta:
         unique_together = ('gym', 'day')
-        verbose_name_plural = u'расписание'
+        verbose_name = u'расписание'
+        verbose_name_plural = u'расписания'
+
+
+class EntryTemplate(models.Model):
+    name = models.CharField(verbose_name=u"название", max_length=200,)
+    description = RichTextField(verbose_name=u"описание", config_name='links_only', blank=True, null=True)
+    image = models.ImageField(verbose_name=u"изображение", blank=True, null=True)
+
+    def __str__(self):
+        return "%s" % self.name
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    class Meta:
+        verbose_name = u'шаблон занятия'
+        verbose_name_plural = u'шаблоны занятий'
+
 
 class Entry(models.Model):
     TIME_CHOICES = (
-        (1,u"08:00 - 09:00"),
-        (2,u"09:00 - 10:00"),
-        (3,u"10:00 - 11:00"),
-        (4,u"11:00 - 12:00"),
-        (5,u"12:00 - 13:00"),
-        (6,u"13:00 - 14:00"),
-        (7,u"14:00 - 15:00"),
-        (8,u"15:00 - 16:00"),
-        (9,u"16:00 - 17:00"),
-        (10,u"17:00 - 18:00"),
-        (11,u"18:00 - 19:00"),
-        (12,u"19:00 - 20:00"),
-        (13,u"20:00 - 21:00"),
-        (14,u"21:00 - 22:00"),
-        (15,u"22:00 - 23:00"),
+        (71,u"07:00"),  (72,u"07:15"),  (73,u"07:30"),  (74,u"07:45"),
+        (81,u"08:00"),  (82,u"08:15"),  (83,u"08:30"),  (84,u"08:45"),
+        (91,u"09:00"),  (92,u"09:15"),  (93,u"09:30"),  (94,u"09:45"),
+        (101,u"10:00"), (102,u"10:15"), (103,u"10:30"), (104,u"10:45"),
+        (111,u"11:00"), (112,u"11:15"), (113,u"11:30"), (114,u"11:45"),
+        (121,u"12:00"), (122,u"12:15"), (123,u"12:30"), (124,u"12:45"),
+        (131,u"13:00"), (132,u"13:15"), (133,u"13:30"), (134,u"13:45"),
+        (141,u"14:00"), (142,u"14:15"), (143,u"14:30"), (144,u"14:45"),
+        (151,u"15:00"), (152,u"15:15"), (153,u"15:30"), (154,u"15:45"),
+        (161,u"16:00"), (162,u"16:15"), (163,u"16:30"), (164,u"16:45"),
+        (171,u"17:00"), (172,u"17:15"), (173,u"17:30"), (174,u"17:45"),
+        (181,u"18:00"), (182,u"18:15"), (183,u"18:30"), (184,u"18:45"),
+        (191,u"19:00"), (192,u"19:15"), (193,u"19:30"), (194,u"19:45"),
+        (201,u"20:00"), (202,u"20:15"), (203,u"20:30"), (204,u"20:45"),
+        (211,u"21:00"), (212,u"21:15"), (213,u"21:30"), (214,u"21:45"),
+        (221,u"22:00"), (222,u"22:15"), (223,u"22:30"), (224,u"22:45"),
     )
 
     weekday = models.ForeignKey(WeekDay, on_delete=models.CASCADE, default=None,)
-    time = models.IntegerField(verbose_name=u"Время",choices=TIME_CHOICES,)
-    content = models.CharField(verbose_name=u"Занятие",max_length=200,)
+    content = models.ForeignKey(EntryTemplate, verbose_name=u"Занятие", max_length=200,)
+    time = models.IntegerField(verbose_name=u"время начала", choices=TIME_CHOICES,)
+    duration = models.IntegerField(verbose_name=u"длительность", help_text=u"целое число в минутах")
+
+    def __str__(self):
+        return "%s" % self.content
+
+    def __unicode__(self):
+        return "%s" % self.content
 
     class Meta:
         unique_together = ('weekday','time')
@@ -190,11 +224,7 @@ class Entry(models.Model):
 class Slider(models.Model):
     image = models.ImageField(verbose_name=u'Изображение')
     title_internal = models.CharField(verbose_name=u'Название', max_length=200, help_text=u"Отображается только в адм.части")
-    #title = models.CharField(verbose_name=u'Заголовок', max_length=200, blank=True)
-    #subtitle = models.CharField(verbose_name=u'Подзаголовок', max_length=200, blank=True)
-    #context = RichTextField(verbose_name=u'Текст', blank=True)
     button_url = models.URLField(verbose_name=u'Ссылка', blank=True)
-    #button_text = models.CharField(verbose_name=u'Текст на кнопке', max_length=100, blank=True, help_text=u"Если нет текста для кнопки, то весь слайдер будет ссылкой")
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 

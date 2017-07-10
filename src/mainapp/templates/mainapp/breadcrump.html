@@ -4,7 +4,7 @@
             <div class="path-root">
               <a href="/">Главная</a>
               {% for item in breadcrumbs %}
-                {% if item.active %}
+                {% if forloop.last %}
                   | {{item.title}}
                 {% else %}
                   | <a href="{{item.url}}">{{item.title}}</a>

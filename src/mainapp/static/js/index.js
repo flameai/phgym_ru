@@ -205,3 +205,72 @@ function setCSRFAjaxHeader () {
         }
     });
 }
+
+$(document).ready(function() {
+  var shedule_modal = $(document).find("#timetable-modal")[0]
+
+  var getId = function(element) {
+    var ids = element.id.split('-')
+    return ids[ids.length - 1]
+  } 
+
+  var prepareModal = function(id) {
+    var data = {}
+    $(".entries-data").find("#entry-data-" + id).children().each(function() {
+      var parts = this.classList[0].split("-")
+      var last = parts[parts.length - 1]
+      if(last == "image") {
+        data[last] = (this.textContent[this.textContent.length - 1] === '/') ? "" : this.textContent
+      } else {
+        data[last] = this.textContent
+      }
+    })
+
+    $(shedule_modal).find("#timetable-modal-content").text(data.content)
+
+    $(shedule_modal).find("#timetable-modal-description").text(data.description)
+
+    $(shedule_modal).find(".timetable-modal-weekday").each(function() {
+      this.textContent = data.weekday
+    })
+
+    $(shedule_modal).find(".timetable-modal-duration").each(function() {
+      this.textContent = data.time + " (" + data.duration + " минут)"
+    })
+
+    if(data.image) {
+      var img = $(shedule_modal).find("#timetable-modal-image")
+      $(img).attr("src", data.image)
+      $(img).removeClass("hide")
+      $(shedule_modal).find("#timetable-modal-description").parent().removeClass("wide")
+    } else {
+      $(shedule_modal).find("#timetable-modal-image").addClass("hide")
+      $(shedule_modal).find("#timetable-modal-description").parent().addClass("wide")
+    }
+  }
+
+  var openModal = function(elem) {
+    prepareModal(getId(elem))
+    $(shedule_modal).modal('show')
+  }
+
+  var modalTimeout = null
+
+  $(".timetable *[id*='entry-']").mouseenter(function() {
+    var self = this
+    modalTimeout = setTimeout(function() {
+      openModal(self)
+    }, 500) 
+  })
+  $(".timetable *[id*='entry-']").mouseleave(function() {
+    clearTimeout(modalTimeout)
+  })
+  $(".timetable *[id*='entry-']").click(function() {
+    openModal(this)
+  })
+  $(".schedule-table *[id*='entry-mobile-'").click(function() {
+    if(this.textContent) {
+      openModal(this)
+    }
+  })
+})

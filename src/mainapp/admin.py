@@ -23,10 +23,15 @@ class NewsForm(ModelForm):
 
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'date')
+    list_display = ('title', 'date', 'shown')
     list_display_links = ('title', 'date')
     list_filter = ['date', ]
     form = NewsForm
+
+    def shown(self, obj):
+        return not(obj.hidden)
+    shown.short_description = "показывается"
+    shown.boolean = True
 
 
 admin.site.register(News, NewsAdmin)
@@ -45,7 +50,8 @@ class GymInline(admin.TabularInline):
 
 class EntryInline(admin.TabularInline):
     model = Entry
-    max_num = 15
+    show_change_link = True
+    fields = ('content', 'weekday', 'time', 'duration')
 
 
 class ClubAdmin(SortableModelAdmin):
@@ -71,6 +77,26 @@ class WeekDayAdmin(admin.ModelAdmin):
 
 
 admin.site.register(WeekDay, WeekDayAdmin)
+
+
+class EntryAdmin(admin.ModelAdmin):
+    list_display = ('content', 'time', 'duration', 'weekday', 'get_gym', 'get_club')
+
+    def get_gym(self, obj):
+        return obj.weekday.gym
+    get_gym.short_description = u'зал'
+    get_gym.admin_order_field = 'weekday__gym'
+
+    def get_club(self, obj):
+        return obj.weekday.gym.club
+    get_club.short_description = u'клуб'
+    get_club.admin_order_field = 'weekday__gym__club'
+
+
+admin.site.register(Entry, EntryAdmin)
+
+
+admin.site.register(EntryTemplate)
 
 
 class SliderAdmin(SortableModelAdmin):
@@ -108,8 +134,13 @@ admin.site.register(Page, PageAdmin)
 
 class StockAdmin(SortableModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'date', 'club', 'order')
+    list_display = ('title', 'date', 'club', 'shown', 'order')
     sortable = 'order'
+
+    def shown(self, obj):
+        return not(obj.hidden)
+    shown.short_description = "показывается"
+    shown.boolean = True
 
 
 admin.site.register(Stock, StockAdmin)

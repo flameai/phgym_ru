@@ -4,5 +4,5 @@ register = template.Library()
 
 
 @register.filter
-def callable(value):
+def callable(value=""):
     return value.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')

@@ -173,6 +173,11 @@ CKEDITOR_CONFIGS = {
             ['Styles', 'Format', 'Font', 'FontSize'],
             ['TextColor', 'BGColor'],
         ]
+    },
+    'links_only': {
+        'width': '100%',
+        'toolbar': "OnlyLinks",
+        'toolbar_OnlyLinks': ['Link', 'Unlink']
     }
 }
 
@@ -198,7 +203,7 @@ PAGES_URL = 'http://localhost:8000/pages/'
 SUIT_CONFIG =  {
     'MENU' : (
         {'app': 'mainapp', 'label': u'Сайт', 'models': ('club', 'program', 'stock','news','slider','staticpage','fitneszone')},
-        {'label': u'Расписание', 'models': ('mainapp.gym', 'mainapp.weekday','mainapp.Entry',)},
+        {'label': u'Расписание', 'models': ('mainapp.gym', 'mainapp.weekday', 'mainapp.Entry', 'mainapp.EntryTemplate')},
         {'label': u'Формы', 'models': ('mainapp.formrequest','mainapp.form')},
         {'label': u'Настройки', 'models': ('mainapp.city',)},
         {'label': u'Прочее','models': ('mainapp.page',)},

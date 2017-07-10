@@ -1677,57 +1677,155 @@ footer .i:hover {
 .timetable {
 	margin-bottom: 80px;
 }
-.timetable ul {
+.timetable .timetable-content {
 	margin: 0;
 	padding: 0;
-	font-size: 0;
-	line-height: 0;
-	border: 1px solid #ccc;
-	margin-top: -1px;
+	letter-spacing: 0.5px;
+	border: 3px solid rgba(255,255,255,0.5);
 }
-.timetable ul li {
-	display: inline-block;
-	*zoom: 1;
-	*display: inline;
-	font-size: 13px;
+.timetable table {
+	width: 100%;
+	table-layout: fixed;
+}
+.timetable table td {
+	vertical-align: top;
+	border-right: 3px solid rgba(255,255,255,0.5);
+}
+.timetable .timetable-column-header {
+    color: white;
+    line-height: 3em;
+    text-transform: uppercase;
+    padding: 5px;
+    border-bottom: 3px solid #E31E24;
+    border-right: 3px solid rgba(255,255,255,0.5);
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.timetable table td:last-child,
+.timetable .timetable-column-header:last-child {
+	border-right: 0px;
+} 
+.timetable .timetable-entry {
+    transition-duration: 0.3s;
+    letter-spacing: 0.75px;
+    border-bottom: 1px solid #E31E24;
+    color: white;
+    background: inherit;
+    text-align: center;
+    padding: 15px 5px;
+}
+.timetable .timetable-entry:last-child {
+    border-bottom: 0px;
+}
+.timetable .timetable-entry:hover {
+	color: white;
+	cursor: pointer;
+	background: #171717;
+}
+.timetable .timetable-entry-time {
+	font-weight: bold;
+	line-height: 2em;
+}
+.timetable .timetable-entry-duration {
+    font-weight: normal;
+    line-height: 1em;
+    vertical-align: top;
+    font-size: 0.8em;
+    display: inline-block;
+}
+.timetable .timetable-entry-name {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	line-height: 1.5em;
-	width: 12%;
-	color: #454345;
-	font-weight: 700;
-	text-align: center;
-	text-transform: uppercase;
-	padding: 15px 0;
-	min-height: 108px;
-	border: 1px solid #fff;
+	padding-top: 5px;
 }
-.timetable ul li span {
-	display: block;
-	font-weight: 400;
-}
-.timetable ul li:first-child {
-	width: 16%;
-}
-.timetable .timetable-head {
-	font-weight: 700;
-	color: #454345;
-	border: 0;
-	background: #c3c3c3;
-}
-.timetable .timetable-head li {
-	font-size: 16px;
-	min-height: 30px;
-	max-height: 50px;
-}
-.timetable .timetable-content:nth-child(odd) {
-  background: #c3c3c3;
-}
+  /* ============================================================================
+  /* Модальное окно на странице с расписанием */
 
-.timetable .timetable-content:nth-child(even) {
-  background: #fff;
+.timetable-modal .modal-content {
+  background-color: rgba(0,0,0,0.9);
+  border-radius: 0; 
 }
-
-.timetable .timetable-text {
-	color: #454345;
+.timetable-modal .modal-header {
+  background: #E31E24;
+  border-bottom: 0px;
+}
+.timetable-modal .modal-body {
+	position: relative;
+	min-height: 300px;
+	letter-spacing: 0.5px;
+	font-size: 1.25em;
+  	padding: 0;
+  	color: white;
+}
+.timetable-modal #timetable-modal-content {
+  color: white;
+  text-transform: none;
+  letter-spacing: 1.5px;
+}
+.timetable-modal .close {
+	color: black;
+    opacity: 1;
+    text-shadow: none;
+    font-size: 2em;
+    outline: none;
+}
+.timetable-modal img {
+	position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 50%;
+    height: 100%;
+}
+.timetable-modal .text-container {
+	width: 50%;
+	height: 100%;
+	padding: 15px;
+}
+.timetable-modal .text-container.wide {
+	width: 100%;
+}
+.timetable-modal #timetable-modal-description {
+  margin-bottom: 60px;
+}
+.timetable-modal-time-info {
+	margin: 2em 0 1em;
+	position: absolute;
+	bottom: 0;
+}
+.timetable-modal-time-info > div {
+	margin-left: 45px;
+}
+.timetable-modal-time-info > span {
+	float: left;
+	font-size: 36px;
+	color: #E31E24;
+}
+@media (max-width: 767px) {
+	.timetable-modal .modal-body {
+		min-height: auto;
+	}
+	.timetable-modal #timetable-modal-description {
+	  margin-bottom: 0px;
+	}
+	.timetable-modal .text-container,
+	.timetable-modal img {
+		width: 100%;
+		height: auto;
+		position: relative;
+	}
+	.timetable-modal-time-info {
+		position: relative;
+	}
+	.timetable-modal img {
+	  min-height: 200px;
+	  max-width: 100%;
+	}
 }
 
   /* ============================================================================
@@ -1735,6 +1833,15 @@ footer .i:hover {
 
 .schedule-table {
   display:none;
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2),
+	(min-device-width : 768px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
+	.shedule-table {
+		display: none !important;
+	}
+	.timetable {
+		display: block !important;
+	}
 }
 
 @media only screen and (max-width: 1024px),
@@ -1790,6 +1897,14 @@ footer .i:hover {
 
   .schedule-table .other {
 	color: black;
+  }
+  .schedule-table-entry-text {
+	padding: 0 5%;
+	line-height: 1.5em;
+	border-bottom: 1px solid white;
+  }
+  .schedule-table-entry-text:last-child {
+	border-bottom: 0px;
   }
 
 }
@@ -3087,9 +3202,6 @@ list-style:none;
 	.timetable ul li {
 		width: 25%;
 		border: 1px solid #e1e1e1;
-	}
-	.timetable .timetable-head li {
-		border: 0px solid #e1e1e1;
 	}
 }
 
@@ -4645,4 +4757,3 @@ list-style:none;
 		font-size: 120% !important;
 	}
 }
-
