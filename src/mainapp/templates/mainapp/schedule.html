@@ -11,14 +11,14 @@
                         <table>
                             <thead>
                                 <tr>
-                                    {% for day in desktop %}
+                                    {% for day in shedule %}
                                     <th class="timetable-column-header">{{ day.day }}</th>
                                     {% endfor %}
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    {% for day in desktop %}
+                                    {% for day in shedule %}
                                         <td>
                                             {% for entry in day.data %}
                                                 <div id="entry-{{ entry.id }}" class="timetable-entry">
@@ -38,31 +38,31 @@
                 </div>
             </div>
 
-            {% for day in mobile %}
+            {% for day in shedule %}
+            {% if day.data %}
             <table class="schedule-table">
                 <thead><tr><th colspan="2">{{day.day}}</th></tr></thead>
                 <tbody>
-                    {% for hour in day.data %}
+                    {% for entry in day.data %}
                         <tr>
-                            <td>{{ hour.time }}</td>
+                            <td>{{ entry.get_time_display }}</td>
                             <td>
-                                {% for entry in hour.data %}
                                 <div id="entry-mobile-{{ entry.id }}" class="schedule-table-entry-text">
-                                    {{ entry.content }}
+                                    {{ entry.content }} <nobr>({{ entry.duration }} мин.)</nobr>
                                 </div>
-                                {% endfor %}
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
 
     <!-- Entries Data -->
     <div class="hide entries-data">
-    {% for day in desktop %}
+    {% for day in shedule %}
         {% for entry in day.data %}
             <div id="entry-data-{{ entry.id }}">
                 <div class="entry-data-content">{{ entry.content.name }}</div>
