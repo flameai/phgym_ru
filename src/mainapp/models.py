@@ -103,7 +103,7 @@ class Stock(models.Model):
     class Meta:
         verbose_name = u'акция'
         verbose_name_plural = u'акции'
-        ordering = ('-order',)
+        ordering = ('order',)
 
 
 class Program(models.Model):
