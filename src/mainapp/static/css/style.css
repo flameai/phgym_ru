@@ -1720,7 +1720,7 @@ footer .i:hover {
     color: white;
     background: inherit;
     text-align: center;
-    padding: 15px 5px;
+    padding: 25px 5px;
 }
 .timetable .timetable-entry:last-child {
     border-bottom: 0px;
@@ -1736,7 +1736,7 @@ footer .i:hover {
 }
 .timetable .timetable-entry-duration {
     font-weight: normal;
-    line-height: 1em;
+    line-height: 1.5em;
     vertical-align: top;
     font-size: 0.8em;
     display: inline-block;
