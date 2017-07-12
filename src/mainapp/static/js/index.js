@@ -260,17 +260,25 @@ $(document).ready(function() {
     var self = this
     modalTimeout = setTimeout(function() {
       openModal(self)
-    }, 500) 
+    }, 1500) 
   })
   $(".timetable *[id*='entry-']").mouseleave(function() {
     clearTimeout(modalTimeout)
   })
-  $(".timetable *[id*='entry-']").click(function() {
+  $(".timetable *[id*='entry-'], .schedule-table *[id*='entry-mobile-']").click(function() {
     openModal(this)
   })
-  $(".schedule-table *[id*='entry-mobile-'").click(function() {
-    if(this.textContent) {
-      openModal(this)
+
+  var days = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскесенье"]
+  var dayNum = (new Date()).getDay()
+  $(".schedule-table").each(function(index, elem) {
+    if($(elem).css("display") !== "none") {
+      var header = $(elem).find("th")[0]
+      if(days.indexOf(header.textContent.toLowerCase()) == dayNum) {
+        $("body").animate({
+          scrollTop: $(header).offset().top - $("header").height()
+        })
+      }
     }
   })
 })
