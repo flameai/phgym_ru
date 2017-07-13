@@ -270,7 +270,7 @@ $(document).ready(function() {
   })
 
   var days = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскесенье"]
-  var dayNum = (new Date()).getDay()
+  var dayNum = (new Date()).getDay() - 1 
   $(".schedule-table").each(function(index, elem) {
     if($(elem).css("display") !== "none") {
       var header = $(elem).find("th")[0]
