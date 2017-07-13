@@ -1681,7 +1681,7 @@ footer .i:hover {
 	margin: 0;
 	padding: 0;
 	letter-spacing: 0.5px;
-	border: 3px solid rgba(255,255,255,0.5);
+	/*border: 3px solid rgba(255,255,255,0.5);*/
 }
 .timetable table {
 	width: 100%;
@@ -1689,15 +1689,20 @@ footer .i:hover {
 }
 .timetable table td {
 	vertical-align: top;
-	border-right: 3px solid rgba(255,255,255,0.5);
+	/*border-right: 3px solid rgba(255,255,255,0.5);*/
+	border-right: 3px solid black;
+	background: #424242;
 }
 .timetable .timetable-column-header {
     color: white;
     line-height: 3em;
     text-transform: uppercase;
     padding: 5px;
-    border-bottom: 3px solid #E31E24;
-    border-right: 3px solid rgba(255,255,255,0.5);
+    background-color:#e22026;
+    /*border-bottom: 3px solid #E31E24;*/
+    /*border-right: 3px solid rgba(255,255,255,0.5);*/
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
     font-weight: 100;
     letter-spacing: 1px;
     text-align: center;
@@ -1711,19 +1716,22 @@ footer .i:hover {
 .timetable .timetable-entry {
     transition-duration: 0.3s;
     letter-spacing: 0.75px;
-    border-bottom: 1px solid #E31E24;
+    border-bottom: 3px solid #000000;
     color: white;
     background: inherit;
     text-align: center;
-    padding: 15px 5px;
+    padding: 25px 5px;
+    
+
+    
 }
 .timetable .timetable-entry:last-child {
-    border-bottom: 0px;
+    /*border-bottom: 0px;*/
 }
 .timetable .timetable-entry:hover {
 	color: white;
 	cursor: pointer;
-	background: #171717;
+	background: #2f2f2f;
 }
 .timetable .timetable-entry-time {
 	font-weight: bold;
@@ -1731,7 +1739,7 @@ footer .i:hover {
 }
 .timetable .timetable-entry-duration {
     font-weight: normal;
-    line-height: 1em;
+    line-height: 1.5em;
     vertical-align: top;
     font-size: 0.8em;
     display: inline-block;
@@ -1834,9 +1842,9 @@ footer .i:hover {
 .schedule-table {
   display:none;
 }
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2),
-	(min-device-width : 768px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
-	.shedule-table {
+@media only screen and (min-device-width : 991px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2),
+	(min-device-width : 991px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
+	.schedule-table {
 		display: none !important;
 	}
 	.timetable {
