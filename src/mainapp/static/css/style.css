@@ -1727,6 +1727,7 @@ footer .i:hover {
 }
 .timetable .timetable-entry:last-child {
     /*border-bottom: 0px;*/
+    margin-bottom: -3px;
 }
 .timetable .timetable-entry:hover {
 	color: white;
@@ -1842,8 +1843,8 @@ footer .i:hover {
 .schedule-table {
   display:none;
 }
-@media only screen and (min-device-width : 991px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2),
-	(min-device-width : 991px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
+@media only screen and (min-device-width : 767px) and (max-device-width : 1024px)  and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2),
+	(min-device-width : 767px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
 	.schedule-table {
 		display: none !important;
 	}
