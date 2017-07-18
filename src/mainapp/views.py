@@ -50,6 +50,12 @@ def index(request, slug=None):
             except:
                 pass
 
+        try:
+            stocks = Stock.objects.filter(club=club)[:3]
+            context.update({'stocks': stocks})
+        except:
+            pass
+
         return render(request, 'mainapp/index.html', context)
     else:   # Корпоративная страница
         try:

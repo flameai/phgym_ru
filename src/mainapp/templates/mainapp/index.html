@@ -29,6 +29,35 @@
     </div>
     {% endif %}
 
+    {% if stocks %}
+        <div class="separator-info container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Новости и акции</h3>
+                </div>
+                <div class="col-md-12">
+                    <span class="divider"></span>
+                </div>
+                {% for stock in stocks %}
+                    <div class="col-md-4">
+                        <a href="{{stock.slug}}">
+                            <div class="card-news">
+                                <div class="card-img">
+                                    <div class="news_photo" style="background-image: url({{stock.image.url}});"></div>
+                                    <div class="card-title">
+                                        <h5 style="margin: 0">{{stock.title}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+
+
     <!-- BLOG -->
     <div class="separator-info grey" id="classes">
         <div class="container">

@@ -90,10 +90,17 @@ class Stock(models.Model):
     order = models.PositiveIntegerField(verbose_name=u'сортировка', default=0)
     hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
 
-    # def save(self, *args, **kwargs):
-    #     max_order = Stock.objects.all().aggregate(Max('order'))['order__max'] or 0
-    #     self.order = max_order + 1
-    #     super(Stock, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            try:
+                stocks = Stock.objects.all()
+                for stock in stocks:
+                    stock.order += 1
+                    stock.save()
+                self.order = 0
+            except:
+                pass
+        super(Stock, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
