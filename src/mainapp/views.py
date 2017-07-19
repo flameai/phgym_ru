@@ -51,7 +51,7 @@ def index(request, slug=None):
                 pass
 
         try:
-            stocks = Stock.objects.filter(club=club)[:3]
+            stocks = Stock.objects.filter(club=club, hidden=False)[:3]
             context.update({'stocks': stocks})
         except:
             pass
