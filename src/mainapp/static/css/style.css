@@ -670,13 +670,12 @@ header .menu ul li.active {
 
 header .menu ul li ul {
 	position: absolute;
-	top: 14px;
+	top: 15px;
 	min-width: 345px;
 	display: none;
 	left: 0;
 	z-index: 99;
 	background: #E31E24;
-	border: 1px solid #ccc;
 	padding: 0;
 	margin: 45px auto 0;
 }
