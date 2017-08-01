@@ -64,7 +64,7 @@ def index(request, slug=None):
         except:
             pass
         try:
-            news = News.objects.all().order_by('-date')[:3]
+            news = News.objects.filter(hidden=False).order_by('-date')[:3]
             context.update({'news_list': news})
         except:
             pass
