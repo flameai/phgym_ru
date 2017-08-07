@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.db.models import Max
 
 from decimal import Decimal
 from random import randrange
@@ -62,7 +63,12 @@ def payment(request):
         price = 0
 
     try:
-        order_id = int(Payment.objects.first().order_id) + 1
+        max = 0
+        for p in Payment.objects.all().values('order_id'):
+            if int(p['order_id']) > max:
+                max = int(p['order_id'])
+        order_id = max + 1
+
     except:
         order_id = 1
 
