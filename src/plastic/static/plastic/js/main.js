@@ -3,6 +3,7 @@ var app = {
     currentClub: ko.observable(),
     club: ko.observable(),
     clubs: ko.observableArray(),
+    oferta: ko.observable(),
 
     getClubs: function(done) {
       $.ajax({
@@ -36,6 +37,7 @@ var app = {
      });
    },
   buyItem: function(a) {
+    app.oferta(a.oferta);
     m_payment.item_kod(a.item_kod);
     m_payment.order_type(a.type);
     m_payment.club(app.club());
@@ -78,7 +80,7 @@ app.currentClub = ko.computed(function(){
 
 app.page.subscribe(function(newValue){
   if(newValue == "registration") {
-    app.getOferta('first')
+    app.getOferta(app.oferta());
   }
 });
 
