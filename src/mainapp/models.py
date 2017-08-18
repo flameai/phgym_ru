@@ -46,6 +46,9 @@ class Club(models.Model):
                             help_text=u"Должен совпадать с кодом из API https://api.wge.ru/sportclub/hs/fitnes_mob/clubs")
     cash_register = models.ForeignKey('yandex_cash_register.CashRegister',
                                       null=True, blank=True)
+    policy_link = models.URLField(verbose_name=u'ссылка на политику конфиденциальности', 
+                                  help_text=u'необходимо указать полный URL, например https://site.domain/something',
+                                  blank=True, null=True)
 
     def __str__(self):
         return self.address
@@ -256,6 +259,7 @@ class Form(models.Model):
     title = models.CharField(verbose_name=u"заголовок", max_length=200, default="")
     club = models.ForeignKey(Club, null=True, blank=True, on_delete=models.CASCADE, verbose_name=u'Клуб')
     context = RichTextUploadingField()
+    
 
     def get_link(self):
         if self.form == 1:

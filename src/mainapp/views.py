@@ -191,11 +191,12 @@ def call(request, slug=None):
         form = get_object_or_404(Form, club=club, form=2)
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                        {"title": form.title, "url": request.path, "active": True}]
-        context.update({"breadcrumbs": breadcrumbs, "form": form})
+        context.update({"breadcrumbs": breadcrumbs, "form": form, "policy_link": club.policy_link})
     else:
         form = get_list_or_404(Form, form=2)[0]
+        club = get_object_or_404(Club, slug="rodonit29")
         breadcrumbs = [{"title": form.title, "url": request.path, "active": True}]
-        context.update({"breadcrumbs": breadcrumbs, "form": form})
+        context.update({"breadcrumbs": breadcrumbs, "form": form, "policy_link": club.policy_link})
     return render(request, 'mainapp/call.html', context)
 
 
@@ -241,11 +242,11 @@ def entry(request, slug="comsomoll"):
     context = {"title": title}
     club = get_object_or_404(Club, slug=slug)
     form = get_list_or_404(Form, club=club, form=1)[0]
-    context.update({"form": form})
+    context.update({"form": form, "policy_link": club.policy_link})
     return render(request, 'mainapp/form_entry.html', context)
 
 
-def abonement(request, slug="comsomoll"):
+def abonement(request, slug="rodonit29"):
     if request.POST:
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
@@ -265,7 +266,7 @@ def abonement(request, slug="comsomoll"):
                    {"title": form.title, "url": request.path, "active": True}]
     title = u"Заказать абонемент"
     context = {"title": title, "form": form}
-    context.update({"breadcrumbs": breadcrumbs, "form": form})
+    context.update({"breadcrumbs": breadcrumbs, "policy_link": club.policy_link})
     return render(request, 'mainapp/form_abonement.html', context)
 
 
