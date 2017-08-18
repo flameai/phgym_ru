@@ -226,7 +226,7 @@ class Entry(models.Model):
         return "%s" % self.content
 
     class Meta:
-        unique_together = ('weekday','time')
+        # unique_together = ('weekday','time')
         verbose_name = u'занятие'
         verbose_name_plural = u'занятия'
 
