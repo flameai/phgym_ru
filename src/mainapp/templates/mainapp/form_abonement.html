@@ -20,9 +20,11 @@
               <label for="formTel">Номер телефона</label> *
               <input type="text" name="Tel" id="formTel" size="11" required />
             </div>
-            <div>
-              <a href="{{ policy_link }}" target="_blank">Согласен с условиями политики обработки персональных данных</a>
-            </div>
+            {% if policy_link %}
+              <div>
+                <a href="{{ policy_link }}" target="_blank">Согласен с условиями политики обработки персональных данных</a>
+              </div>
+            {% endif %}
             <div>
               <input type="submit" name="formtype" class="abonement-btn" id="form_submit" value="Отправить заявку"/>
             </div>
