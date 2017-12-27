@@ -60,7 +60,7 @@ $(function(){
     })
 
     $('.to_about').on('click', function(){
-        $('body').scrollTop(1285);
+        $('html, body').animate({scrollTop:1285},500);
         return false;
     });
 
