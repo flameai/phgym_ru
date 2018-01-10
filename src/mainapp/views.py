@@ -177,10 +177,16 @@ def call(request, slug=None):
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
         tel = request.POST.get('Tel')
+        mainpage = False
 
         msg = u"Телефон: " + tel + u" \r\nИмя: " + name
 
-        FormRequest(formname=2, content=msg).save()
+        if slug is None:
+            slug = "rodonit29"
+            mainpage = True
+            msg += u"\r\nОтправлено с главной."
+
+        FormRequest(formname=2, content=msg, mainpage=mainpage).save()
         emails = get_object_or_404(Club, slug=slug).emails_send.split(',')
         email = [x.strip() for x in emails]
         send_mail(subject, msg, settings.EMAIL_HOST_USER, email, fail_silently=True)
