@@ -18,6 +18,7 @@ class FormRequest(models.Model):
     formname = models.IntegerField(choices=FORM_CHOICES, verbose_name=u'Форма')
     content = models.TextField(u'Текст запроса')
     daterequest = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата заявки')
+    mainpage = models.BooleanField(u'Заявка с главной', default=False)
 
     def __str__(self):
         return u"%s" % self.formname
