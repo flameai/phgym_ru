@@ -105,7 +105,11 @@
                 </div>
                 <div class="col-xs-12 col-sm-2 col-md-2">
                     <div class="throbbing-btn">
+                      {% if slug is None %}
+                        <a href="{% url 'call' %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" class="test"></a>
+                      {% else %}
                         <a href="{% url 'call' slug=slug %}"><div class="circle"></div><div class="circle-1"></div><img src="{% static 'images/phone-symbol.png' %}" alt="" class="test"></a>
+                      {% endif %}
                     </div>
                     {% getClubInfo slug as club %}
                     <div class="phone visible-xs" style="float: right; margin-top: 10px; font-size: 16px;">
