@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='index'),
 
     url(r'^news/$', views.news, name='news'),
     url(r'^news/(?P<page>[\w-]+)/$', views.news, name='news'),

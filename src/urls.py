@@ -17,6 +17,10 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from django.contrib import admin
 from django.http import HttpResponse
+from django.contrib.sitemaps.views import sitemap
+from mainapp.sitemap import sitemaps
+from django.views.decorators.cache import cache_page
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +28,7 @@ urlpatterns = [
     url(r'^shop/', include('plastic.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include('mainapp.urls')),
-    url(r'^robots\.txt$', TemplateView.as_view(template_name="mainapp/robots.txt", content_type="text/plain"))
+    url(r'^robots\.txt$', TemplateView.as_view(template_name="mainapp/robots.txt", content_type="text/plain")),
+    url(r'^sitemap\.xml$', cache_page(86400)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 handler404 = 'mainapp.views.handler404'

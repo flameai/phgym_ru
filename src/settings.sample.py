@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'oferta.apps.OfertaConfig',
     'plastic',
     'mainapp',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE_CLASSES = [
