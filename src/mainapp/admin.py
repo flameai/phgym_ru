@@ -132,11 +132,10 @@ class PageAdmin(SortableModelAdmin):
 admin.site.register(Page, PageAdmin)
 
 
-class StockAdmin(SortableModelAdmin):
+class StockAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'date', 'club', 'shown', 'order')
+    list_display = ('title', 'date', 'club', 'shown')
     list_filter = ('date', 'club')
-    sortable = 'order'
 
     def shown(self, obj):
         return not(obj.hidden)
