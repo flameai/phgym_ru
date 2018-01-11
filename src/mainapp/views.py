@@ -102,7 +102,7 @@ def stock(request, slug="", page=""):
         context.update({'breadcrumbs': breadcrumbs, 'stock': stock})
         return render(request, 'mainapp/stock/item.html', context)
     else:  # Вывод списка акций
-        stocks = Stock.objects.filter(club=club, hidden=false).order_by("-date")
+        stocks = Stock.objects.filter(club=club, hidden=False).order_by("-date")
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                        {'title': "Новости и акции", "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, "stocks": stocks})
