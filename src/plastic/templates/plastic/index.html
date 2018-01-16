@@ -88,8 +88,10 @@
                                     </div>
                                     <div class="card-content">      
                                         <p data-bind="html: $data.description"></p>
-                                        <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
-                                        <button type="submit" class="btn red" data-bind="click: $parent.buyItem">Купить</buton>
+                                        <h3 class="red-text" style="margin-bottom: 0;">
+                                            <span data-bind="text: $data.price"></span> &#x20bd;
+                                            <button type="submit" class="btn red shop-button" data-bind="click: $parent.buyItem">Купить</button>
+                                        </h3>
                                     </div>
                                 </div>
                             </form>
