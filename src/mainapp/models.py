@@ -124,6 +124,7 @@ class Program(models.Model):
 class Gym(models.Model):
     title = models.CharField(verbose_name=u'Название',max_length=255)
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None, verbose_name=u"Клуб",)
+    hidden = models.BooleanField(verbose_name=u'скрыть', default=False)
 
     def __str__(self):
         return self.title

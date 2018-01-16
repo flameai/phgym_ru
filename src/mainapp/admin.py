@@ -64,9 +64,13 @@ admin.site.register(Club, ClubAdmin)
 
 
 class GymAdmin(admin.ModelAdmin):
-    list_display = ('title', 'club')
+    list_display = ('title', 'club', 'shown')
     inlines = [WeekDayInline, ]
 
+    def shown(self, obj):
+        return not(obj.hidden)
+    shown.short_description = "показывается"
+    shown.boolean = True
 
 admin.site.register(Gym, GymAdmin)
 

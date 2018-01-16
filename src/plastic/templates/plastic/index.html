@@ -16,7 +16,7 @@
           <!-- ko with: m_auth -->
             <form style="display: inline-block;" data-bind="submit: sendPhone">
                 <div class="phoneform card-panel lighten-5">
-                    <h4>Введите номер<br /> вашего телефона</h4>
+                    <h4>Введите номер вышего<br /> мобильного телефона</h4>
                     <p>Мы отправим вам SMS с PIN-кодом для авторизации на нашем сервисе.<br />Для вас эта операция бесплатна!</p>
                     <div class="input-field">
                         <span>+</span>
@@ -88,8 +88,10 @@
                                     </div>
                                     <div class="card-content">      
                                         <p data-bind="html: $data.description"></p>
-                                        <h3 class="red-text" style="margin-bottom: 0;"><span data-bind="text: $data.price"></span> &#x20bd; </h3>
-                                        <button type="submit" class="btn red" data-bind="click: $parent.buyItem">Купить</buton>
+                                        <h3 class="red-text" style="margin-bottom: 0;">
+                                            <span data-bind="text: $data.price"></span> &#x20bd;
+                                            <button type="submit" class="btn red shop-button" data-bind="click: $parent.buyItem">Купить</button>
+                                        </h3>
                                     </div>
                                 </div>
                             </form>

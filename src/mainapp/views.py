@@ -289,7 +289,7 @@ def getGymsForClubSlug(clubslug):
     gyms = []
     try:
         club = Club.objects.get(slug=clubslug)
-        gyms_obj = Gym.objects.filter(club=club)
+        gyms_obj = Gym.objects.filter(club=club, hidden=False)
         for gym in gyms_obj:
             gyms.append({"name": gym.title, "id": gym.id})
     except:

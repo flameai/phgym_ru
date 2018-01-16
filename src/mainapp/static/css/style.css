@@ -4605,7 +4605,7 @@ list-style:none;
 }
 .card-content {
 	position: relative;
-	padding: 20px;
+	padding: 20px 20px 14px 20px;
 }
 .card-content .btn {
 	position: absolute;
@@ -4616,6 +4616,12 @@ list-style:none;
     text-transform: uppercase;
     font-weight: 700;
 }
+
+.card-content .shop-button {
+	position: static;
+	float: right;
+}
+
 .phoneform {
 	width: 300px;
 }
