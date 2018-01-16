@@ -207,6 +207,7 @@ function setCSRFAjaxHeader () {
 }
 
 $(document).ready(function() {
+  $('#formTel').val('+7').mask("+79999999999");
   var shedule_modal = $(document).find("#timetable-modal")[0]
 
   var getId = function(element) {
