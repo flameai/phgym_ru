@@ -173,7 +173,7 @@ def contacts(request, slug="comsomoll"):
 
 
 def call(request, slug=None):
-    if request.POST:
+    if request.method == "POST":
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
         tel = request.POST.get('Tel')
@@ -208,7 +208,7 @@ def call(request, slug=None):
 
 def entry(request, slug="comsomoll"):
 
-    if request.POST:
+    if request.method == "POST":
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
         tel = request.POST.get('Tel')
@@ -253,7 +253,7 @@ def entry(request, slug="comsomoll"):
 
 
 def abonement(request, slug="rodonit29"):
-    if request.POST:
+    if request.method == "POST":
         subject = request.POST.get('subject')
         name = request.POST.get('Name')
         tel = request.POST.get('Tel')
