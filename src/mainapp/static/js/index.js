@@ -86,7 +86,9 @@ function sendform() {
   if(validator.form()) {
     var subject = $('#formsubject').val();
     var url = $('#form').attr('action'),
-        data = {};
+        data = {},
+        club = _defineClub(),
+        clubMetric = _chooseYaGoal(club);
     switch(subject) {
       case "ЗАКАЗ АБОНЕМЕНТА":
         data = {
@@ -96,7 +98,8 @@ function sendform() {
         }
         sendData(url,data).done(() => {
           // ga & yandex for abonement
-          yaCounter29959819.reachGoal('order'); 
+          yaCounter29959819.reachGoal('order');
+          _createYaGoal(clubMetric, club, 'z');
           // ga('send', 'event', "card", "success");
           
           $('#form_modal').arcticmodal({
@@ -119,6 +122,7 @@ function sendform() {
         sendData(url,data).done(() => {
           // ga & yandex for call
           yaCounter29959819.reachGoal('callorder');
+          _createYaGoal(clubMetric, club, 'oz');
           // ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
             afterOpen: function() {
@@ -204,6 +208,91 @@ function setCSRFAjaxHeader () {
             }
         }
     });
+}
+
+
+function _defineClub() {
+    var club = $('.js-select-club').val().replace('/', '');
+    if (!club) {
+      club = 'main';
+    }
+    return club
+}
+
+function _chooseYaGoal(club) {
+  var yaCounters = {
+    main: {
+      oz: { id: 'oz-title', counter: 35924331 }
+    },
+    rodonit29: {
+      oz: { id: 'oz-rodonit', counter: 35924337 },
+      z: { id: 'z-rodonit', counter: 35924337 }
+    },
+    karnaval: {
+      oz: {
+        id: 'oz-karnaval',
+        counter: 35924361
+      },
+      z: {
+        id: 'z-karnaval',
+        conter: 35924364
+      }
+    },
+    deryabina24: {
+      oz: {
+        id: 'oz-deryabina24',
+        counter: 35924349
+      },
+      z: {
+        id: 'z-deryabina24',
+        counter: 35924352
+      }
+    },
+    palladium: {
+      oz: {
+        id: 'oz-palladium',
+        counter: 35924343
+      },
+      z: {
+        id: 'z-palladium',
+        counter: 35924346
+      }
+    },
+    sibtrakt2: {
+      oz: {
+        id: 'oz-komsomoll',
+        counter: 35924355
+      },
+      z: {
+        id: 'z-komsomoll',
+        counter: 35924358
+      }
+    }
+  };
+  return yaCounters[club];
+};
+
+function _createYaGoal(clubMetric, club, type) {
+  switch (club) {
+    case 'main':
+      yaCounter35924331.reachGoal(clubMetric[type]['id']);
+      break;
+    case 'rodonit29':
+      type === 'oz' ? yaCounter35924337.reachGoal(clubMetric[type]['id']) : yaCounter35924340.reachGoal(clubMetric[type]['id']);
+      break;
+    case 'karnaval':
+      type === 'oz' ? yaCounter35924361.reachGoal(clubMetric[type]['id']) : yaCounter35924364.reachGoal(clubMetric[type]['id']);
+      break;
+    case 'deryabina24':
+      type === 'oz' ? yaCounter35924349.reachGoal(clubMetric[type]['id']) : yaCounter35924352.reachGoal(clubMetric[type]['id']);
+      break;
+    case 'palladium':
+      type === 'oz' ? yaCounter35924343.reachGoal(clubMetric[type]['id']) : yaCounter35924346.reachGoal(clubMetric[type]['id']);
+      break;
+    case 'sibtrakt2':
+      type === 'oz' ? yaCounter35924355.reachGoal(clubMetric[type]['id']) : yaCounter35924358.reachGoal(clubMetric[type]['id']);
+      break;
+  }
 }
 
 $(document).ready(function() {
