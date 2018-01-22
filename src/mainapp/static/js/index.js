@@ -275,22 +275,22 @@ function _chooseYaGoal(club) {
 function _createYaGoal(clubMetric, club, type) {
   switch (club) {
     case 'main':
-      yaCounter35924331.reachGoal(clubMetric[type]['id']);
+      yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'rodonit29':
-      type === 'oz' ? yaCounter35924337.reachGoal(clubMetric[type]['id']) : yaCounter35924340.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'karnaval':
-      type === 'oz' ? yaCounter35924361.reachGoal(clubMetric[type]['id']) : yaCounter35924364.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'deryabina24':
-      type === 'oz' ? yaCounter35924349.reachGoal(clubMetric[type]['id']) : yaCounter35924352.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'palladium':
-      type === 'oz' ? yaCounter35924343.reachGoal(clubMetric[type]['id']) : yaCounter35924346.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'sibtrakt2':
-      type === 'oz' ? yaCounter35924355.reachGoal(clubMetric[type]['id']) : yaCounter35924358.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
   }
 }
