@@ -95,46 +95,40 @@ function sendform() {
           Name: $('#formName').val(),
           Tel: $('#formTel').val(),
           subject: subject
-        }
-        sendData(url,data).done(() => {
-          // ga & yandex for abonement
+        };
+        sendData(url,data).done(function() {
           yaCounter29959819.reachGoal('order');
           _createYaGoal(clubMetric, club, 'z');
-          // ga('send', 'event', "card", "success");
-          
           $('#form_modal').arcticmodal({
             afterOpen: function() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("abonement")[0];
-                },
-              2000 )
+                }, 2000)
             }
           });
-        })
-      case "ЗАКАЗ ЗВОНКА С САЙТА":                // call
+        });
+        break;
+      case "ЗАКАЗ ЗВОНКА С САЙТА":
         data = {
           Name: $('#formName').val(),
           Tel: $('#formTel').val(),
           subject: subject
-        }
-        sendData(url,data).done(() => {
-          // ga & yandex for call
+        };
+        sendData(url,data).done(function() {
           yaCounter29959819.reachGoal('callorder');
           _createYaGoal(clubMetric, club, 'oz');
-          // ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
             afterOpen: function() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("call")[0];
-                }
-              , 2000 )
+                }, 2000)
             }
           });
-        })
+        });
         break;
       case "ЗАКАЗ БЕСПЛАТНОГО ЗАНЯТИЯ С САЙТА":   // entry
        data = {
@@ -147,20 +141,20 @@ function sendform() {
          origin: [],
          service: [],
          target: [],
-       }
+       };
        if(data.Interview == "on") {
          $('[name=origin]:checked').each(function(){
            data['origin'].push($(this).val());
          });
          $('[name=service]:checked').each(function(){
            data['service'].push($(this).val());
-         })
+         });
          $('[name=target]:checked').each(function(){
            data['target'].push($(this).val());
-         })
+         });
          data['parametr'] = $('[name=parametr]:checked').val();
        }
-       sendData(url,data).done(() => {
+       sendData(url,data).done(function() {
          // ga & yandex for entry
         //  yaCounter38885450.reachGoal('freetrain_success');
         //  ga('send', 'event', "freetrain", "success");
@@ -174,7 +168,7 @@ function sendform() {
               , 2000 )
             }
          });
-       })
+       });
        break;
     }
 
@@ -275,22 +269,22 @@ function _chooseYaGoal(club) {
 function _createYaGoal(clubMetric, club, type) {
   switch (club) {
     case 'main':
-      yaCounter35924331.reachGoal(clubMetric[type]['id']);
+      yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'rodonit29':
-      type === 'oz' ? yaCounter35924337.reachGoal(clubMetric[type]['id']) : yaCounter35924340.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'karnaval':
-      type === 'oz' ? yaCounter35924361.reachGoal(clubMetric[type]['id']) : yaCounter35924364.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'deryabina24':
-      type === 'oz' ? yaCounter35924349.reachGoal(clubMetric[type]['id']) : yaCounter35924352.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'palladium':
-      type === 'oz' ? yaCounter35924343.reachGoal(clubMetric[type]['id']) : yaCounter35924346.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
     case 'sibtrakt2':
-      type === 'oz' ? yaCounter35924355.reachGoal(clubMetric[type]['id']) : yaCounter35924358.reachGoal(clubMetric[type]['id']);
+      type === 'oz' ? yaCounter29959819.reachGoal(clubMetric[type]['id']) : yaCounter29959819.reachGoal(clubMetric[type]['id']);
       break;
   }
 }
