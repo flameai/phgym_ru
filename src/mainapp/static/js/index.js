@@ -95,46 +95,40 @@ function sendform() {
           Name: $('#formName').val(),
           Tel: $('#formTel').val(),
           subject: subject
-        }
-        sendData(url,data).done(() => {
-          // ga & yandex for abonement
+        };
+        sendData(url,data).done(function() {
           yaCounter29959819.reachGoal('order');
           _createYaGoal(clubMetric, club, 'z');
-          // ga('send', 'event', "card", "success");
-          
           $('#form_modal').arcticmodal({
             afterOpen: function() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("abonement")[0];
-                },
-              2000 )
+                }, 2000)
             }
           });
-        })
-      case "ЗАКАЗ ЗВОНКА С САЙТА":                // call
+        });
+        break;
+      case "ЗАКАЗ ЗВОНКА С САЙТА":
         data = {
           Name: $('#formName').val(),
           Tel: $('#formTel').val(),
           subject: subject
-        }
-        sendData(url,data).done(() => {
-          // ga & yandex for call
+        };
+        sendData(url,data).done(function() {
           yaCounter29959819.reachGoal('callorder');
           _createYaGoal(clubMetric, club, 'oz');
-          // ga('send', 'event', "callback", "success");
           $('#form_modal').arcticmodal({
             afterOpen: function() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
                   window.location = window.location.href.split("call")[0];
-                }
-              , 2000 )
+                }, 2000)
             }
           });
-        })
+        });
         break;
       case "ЗАКАЗ БЕСПЛАТНОГО ЗАНЯТИЯ С САЙТА":   // entry
        data = {
@@ -147,20 +141,20 @@ function sendform() {
          origin: [],
          service: [],
          target: [],
-       }
+       };
        if(data.Interview == "on") {
          $('[name=origin]:checked').each(function(){
            data['origin'].push($(this).val());
          });
          $('[name=service]:checked').each(function(){
            data['service'].push($(this).val());
-         })
+         });
          $('[name=target]:checked').each(function(){
            data['target'].push($(this).val());
-         })
+         });
          data['parametr'] = $('[name=parametr]:checked').val();
        }
-       sendData(url,data).done(() => {
+       sendData(url,data).done(function() {
          // ga & yandex for entry
         //  yaCounter38885450.reachGoal('freetrain_success');
         //  ga('send', 'event', "freetrain", "success");
@@ -174,7 +168,7 @@ function sendform() {
               , 2000 )
             }
          });
-       })
+       });
        break;
     }
 
