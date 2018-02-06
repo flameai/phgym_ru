@@ -84,6 +84,7 @@ function sendData(url, data) {
 
 function sendform() {
   if(validator.form()) {
+    $('#form_submit').prop( "disabled", true );
     var subject = $('#formsubject').val();
     var url = $('#form').attr('action'),
         data = {},
@@ -104,7 +105,7 @@ function sendform() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
-                  window.location = window.location.href.split("abonement")[0];
+                  //window.location = window.location.href.split("abonement")[0];
                 }, 2000)
             }
           });
@@ -124,7 +125,7 @@ function sendform() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
-                  window.location = window.location.href.split("call")[0];
+                  //window.location = window.location.href.split("call")[0];
                 }, 2000)
             }
           });
@@ -163,7 +164,7 @@ function sendform() {
               setTimeout(
                 function() {
                   $.arcticmodal('close');
-                  window.location = window.location.href.split("entry")[0];
+                  //window.location = window.location.href.split("entry")[0];
                 }
               , 2000 )
             }
