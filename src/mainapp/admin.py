@@ -150,10 +150,11 @@ class StockAdmin(admin.ModelAdmin):
 admin.site.register(Stock, StockAdmin)
 
 
-class ProgramAdmin(admin.ModelAdmin):
+class ProgramAdmin(SortableModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_display = ('title', 'date', 'club')
-
+    sortable = 'order'
+    
 
 admin.site.register(Program, ProgramAdmin)
 

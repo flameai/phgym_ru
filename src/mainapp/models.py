@@ -110,6 +110,7 @@ class Program(models.Model):
     image = models.ImageField(verbose_name=u'Изображение')
     full_text = RichTextUploadingField(verbose_name=u'Подробное содержание')
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title

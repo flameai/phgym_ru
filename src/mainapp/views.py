@@ -120,7 +120,7 @@ def program(request, slug="", page=""):
         context.update({'breadcrumbs': breadcrumbs, "program": prog})
         return render(request, 'mainapp/program/item.html', context)
     else:  # список статей
-        progs = get_list_or_404(Program, club=club)
+        progs = get_list_or_404(Program.objects.order_by('order'), club=club)
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                        {'title': "Услуги", "url": request.path, "active": True}]
         context.update({"breadcrumbs": breadcrumbs, "programs": progs})
