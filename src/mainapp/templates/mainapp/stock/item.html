@@ -320,11 +320,14 @@
             <p style="text-align:center">Заполните, пожалуйста, форму, и мы оперативно Вам перезвоним,</p>
             <p style="text-align:center">чтобы рассказать&nbsp;о&nbsp;текущих акциях и выгодных предложениях!</p>
 
-            <form action="/{{club.slug}}/call/" class="abonement-form" id="form" name="mailform" method="post" data-callibri_parse_form="true" novalidate="novalidate">
+            <form action="/{{club.slug}}/call/" class="abonement-form" id="form" name="mailform" method="post" data-callibri_parse_form="true" novalidate="novalidate" onsubmit="yaCounter29959819.reachGoal('action',  {'Акция': 'СДерябиной'} );" >
 
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
 
                 <input type="hidden" name="subject" id="formsubject" value="ЗАКАЗ ЗВОНКА С САЙТА">
+
+
+
                 <fieldset class="csc-mailform">
                     <div>
                         <label for="formName">Ваше имя:</label>
