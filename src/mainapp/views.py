@@ -43,6 +43,7 @@ def index(request, slug=None):
         try:
             channel = YouTubeChannel.objects.get(club=club)
             context.update({'channel': channel})
+            # print ("CHANNEL", channel)
         except:
             try:
                 channel = YouTubeChannel.objects.get(club__isnull=True)
@@ -55,7 +56,6 @@ def index(request, slug=None):
             context.update({'stocks': stocks})
         except:
             pass
-
         return render(request, 'mainapp/index.html', context)
     else:   # Корпоративная страница
         try:
@@ -96,6 +96,46 @@ def stock(request, slug="", page=""):
     club = get_object_or_404(Club, slug=slug)
     if page:  # вывод подробной статьи
         stock = get_object_or_404(Stock, slug=page, club=club)
+        stocks_of_club = Stock.objects.filter(club=club)
+        # print ("SOCKS", stocks_of_club)
+        if stock:
+            try:
+                next_stock = list(filter((lambda o:o.id > stock.id), stocks_of_club))[0]
+            except Exception:
+                next_stock = None
+            try:
+                prev_stock = list(filter((lambda o:o.id < stock.id), stocks_of_club))[0]
+            except Exception:
+                prev_stock = None
+            # print ("N", next_stock, "P", prev_stock)
+
+            fitneszones = FitnesZone.objects.filter(club=club)
+            context.update({'fitneszones': fitneszones})
+
+            sliders = Slider.objects.filter(club=club).order_by('order')
+            context.update({'sliders': sliders})
+
+            channel = YouTubeChannel.objects.get()
+            context.update({'channel': channel})
+
+            try:
+                worktime1 = club.worktime.split(u'Cб-Вс')[0]
+                worktime2 = club.worktime.split(u'Cб-Вс')[1]
+                context.update({
+                    'worktime1': worktime1,
+                    'worktime2': worktime2,
+                })
+            except Exception as Ee:
+                pass
+
+
+
+
+            context.update({
+                'next_stock': next_stock,
+                'prev_stock': prev_stock,
+                'club': club
+            })
         breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                        {'title': "Новости и акции", "url": "/" + slug + "/stock/"},
                        {'title': stock.title, "url": request.path, "active": True}]
@@ -140,7 +180,7 @@ def schedule(request, slug="comsomoll", detail=None):
     context = {}
     shedule = getDataByDays(gym)
     context.update({"shedule": shedule})
-    
+
     breadcrumbs = [{'title': club.address, "url": "/" + slug + "/"},
                    {'title': u"Расписание %s" % gym.title, "url": request.path, "active": True}]
     context.update({'breadcrumbs': breadcrumbs})

@@ -1,15 +1,461 @@
 {% extends 'mainapp/base_clube.html' %}
-
+{%load static%}
 {% block title %} {{stock.title}} {% endblock title %}
 
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/styles-land.min.css' %}">
+
+<div class="next-prev-action">
+    {%if prev_stock%}
+    <a href="/{{club.slug}}/stock/{{prev_stock.slug}}" class="next-prev-action__prev-action">
+        <span class="next-prev-action__arrow next-prev-action__arrow_left"></span>
+        <div class="next-prev-action__wrapper-text">
+            <span class="next-prev-action__text">{{prev_stock.title}}</span>
+        </div>
+    </a>
+    {%endif%}
+    {%if next_stock%}
+    <a href="/{{club.slug}}/stock/{{next_stock.slug}}" class="next-prev-action__next-action">
+        <div class="next-prev-action__arrow next-prev-action__arrow_right"></div>
+
+        <div class="next-prev-action__wrapper-text">
+            <span class="next-prev-action__text">{{next_stock.title}}</span>
+        </div>
+    </a>
+    {%endif%}
+</div>
+
+<!-- <div class="slide slide_image">
+    <img src="{{stock.top_action_image.url}}" alt="">
+</div>
+ -->
+<div class="slide">
+    <div class="container">
+        <div class="slide__text">
+            <h1>{{stock.top_action_title}}</h1>
+            <p>{{stock.top_action_text | safe}}</p>
+
+                <a href="#order" class="bt action__order2">Оформить заявку</a>
+
+        </div>
+    </div>
+
+    <div class="slide__image"
+         style="background: url({{stock.top_action_image.url}}) left 50%/cover no-repeat">
+    </div>
+</div>
+
+<div class="action__info">
+    <div class="container">
+        <h3>{{stock.title}}</h3>
+        <p>
+            {{stock.full_text | safe}}
+        </p>
+    </div>
+</div>
+
+<div class="conditions">
+    <div class="container">
+        {{stock.pricing | safe}}
+    </div>
+</div>
+
+<div class="action__contacts">
+    <div class="container">
+        <div class="action__phone col-xs-12 col-lg-4">
+            <div class="action__phone-value {{club.callibri}}">{{club.phone}}</div>
+        </div>
+
+        <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-offset-0 col-lg-5">
+            <ul class="action__schedule col-xs-12 col-sm-6 col-md-6">
+                {%if worktime1 and worktime2%}
+                    <li>{{worktime1}}</li>
+                    <li>Cб-Вс{{worktime2}}</li>
+                {%else%}
+                <li>{{club.worktime}}</li>
+                {%endif%}
+
+
+            </ul>
+
+            <div class="action__address col-xs-12 col-sm-6 col-md-6">
+                <div class="">{{club.address}}</div>
+                <a href="#on-map" class="on-map-bt">Посмотреть на карте</a>
+            </div>
+        </div>
+
+        <div class="action__order col-xs-12 col-lg-3">
+            <a href="#order" class="bt">Оформить заявку</a>
+        </div>
+    </div>
+</div>
+
+<div class="action__gallery gallery">
+    <div class="gallery__container container">
+        <h2>ЗАЛЫ</h2>
+        <div class="gallery__wrapper col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+            <div class="gallery__viewport">
+                <div class="gallery__image">
+                    <div class="preloader"></div>
+                    {%for zone in fitneszones%}
+                    {%if forloop.first %}
+                    <img src="{{zone.image.url}}" alt="">
+                    <div class="gallery__info">
+                        <span class="gallery__name">{{zone.title}}</span>
+                        <span class="gallery__description">{{zone.short_description}}</span>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                </div>
+            </div>
+
+            <div class="gallery__thumbnails">
+                {%for zone in fitneszones%}
+                <div class="gallery__thumbnail {%if forloop.first %}gallery__thumbnail_active{%endif%}" data-image="{{zone.image.url}}" data-title="{{zone.title}}" data-description="{{zone.short_description}}">
+                    <img src="{{zone.image.url}}" alt="">
+                </div>
+                {%endfor%}
+               <!--  <div class="gallery__thumbnail gallery__thumbnail_active" data-image="/static/images/land/action-image.jpg" data-title="Бассейн" data-description="Более развернутое описание зоны">
+                    <img src="/static/images/land/action-image.jpg" alt="">
+                </div>
+
+                <div class="gallery__thumbnail" data-image="/static/images/land/action-image1.jpg" data-title="Бассейн 2" data-description="Более развернутое описание зоны немного длиннее">
+                    <img src="/static/images/land/action-image.jpg" alt="">
+                </div> -->
+            </div>
+        </div>
+
+        <ul class="gallery__list">
+            {%for zone in fitneszones%}
+            <li class="gallery__item" data-image="{{zone.image.url}}" data-title="{{zone.title}}" data-description="{{zone.short_description}}">{{zone.title}}</li>
+            {%endfor%}
+
+           <!--  <li class="gallery__item" data-image="/static/images/land/action-image.jpg" data-title="Бассейн" data-discription="Более развернутое описание зоны немного длиннее">Тренажерный зал</li>
+            <li class="gallery__item" data-image="/static/images/land/action-image1.jpg" data-title="Бассейн 1" data-discription="Более развернутое описание зоны немного длиннее">Тренажерный зал</li> -->
+        </ul>
+    </div>
+</div>
+
+<div class="fbso">
+    <div class="fbso__container container">
+        <div class="fbso__logotype col-md-6">
+            <img src="/static/images/land/fbso.png" alt="">
+        </div>
+        <div class="fbso__info col-md-6">
+            <div class="fbso__city">в Екатеринбурге</div>
+            <div class="fbso__text">
+                «Powerhouse Gym» работает под эгидой Федерации бодибилдинга <br/>Свердловской области
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="trainers">
+    <div class="trainers-modals">
+        <div id="trainers-modal-1" class="trainers-modals__item">
+            <div class="trainers-modals__close"></div>
+            <a href="" class="trainers__name">Артем Диянов</a>
+            <div class="trainers__description"><br>
+
+                    Главный тренер сборной Свердловской области по бодибилдингу.
+                    Мастер спорта по бодибилдингу
+                    Кандидат в мастера-спорта по пауэрлифтингу
+                    Кандидат в мастера-спорта по тяжелой атлетике
+                    3-х кратный чемпион России по классическому бодибилдингу
+                    Чемпион Мира по классическому бодибилдингу
+                    Чемпион России по бодибилдингу в категории до 80 кг
+                <br>
+                Фитнес-тренер со стажем более 11 лет. Специалист по функциональному тренингу, кинезиотерапии, персональный тренер. Лектор  и презентер региональных и международных фитнес-конвенций.
+            </div>
+        </div>
+        <div id="trainers-modal-2" class="trainers-modals__item">
+            <div class="trainers-modals__close"></div>
+            <a href="" class="trainers__name">Михаил Глазунов </a>
+            <div class="trainers__description">
+                Вице-чемпион Европы по фитнесу
+                Вице- чемпион России по бодибилдингу
+                Финалист чемпионата мира по бодибилдингу
+                Финалист Кубка Урала по бодибилдингу
+                <br>
+                Сертифицированный инструктор по направлениям: классическая аэробика, степ-аэробика, силовой тренинг, пилатес, персональный тренер тренажерного зала. Инструктор направления функциональный тренинг. Спортивный диетолог.
+
+            </div>
+        </div>
+        <div id="trainers-modal-3" class="trainers-modals__item">
+            <div class="trainers-modals__close"></div>
+            <a href="" class="trainers__name">Шленчик Вероника</a>
+            <div class="trainers__description">
+                Чемпионка Открытого Кубка Урала по бодибилдингу
+                Абсолютная чемпионка Пермского края по фитнес-бикини
+                Чемпионка Свердловской области по фитнес-бикини
+                <br>
+                Специализация: корректировка фигуры и работа с проблемными зонами; формирование атлетичной фигуры; составление индивидуальных программ тренировок; разработка плана рационального питания; формирование "бразильской попы" и чётко "читаемой" талии
+
+            </div>
+        </div>
+        <div id="trainers-modal-4" class="trainers-modals__item">
+            <div class="trainers-modals__close"></div>
+            <a href="" class="trainers__name">Аскеров Эдуард</a>
+            <div class="trainers__description">
+                Вице-чемпион Свердловской области по бодибилдингу в категории юниоры
+                Финалист Кубка Урала и Сибири по бодибилдингу в категории юниоры
+                Вице-чемпион Свердловской области по бодибилдингу в категории юниоры
+                Тхэквондо черный пояс 1 дан
+                <br>
+                Сертифицированный тренер: «Инструктор тренажерного зала», консультации по персональной диете, разработка тренировочных программ для мужчин и женщин, с целью похудения или набора мышечной массы, кинезиотерапия и реабилитация после травм. Опыт работы больше 8 лет.
+            </div>
+        </div>
+        <div id="trainers-modal-4" class="trainers-modals__item">
+            <div class="trainers-modals__close"></div>
+            <a href="" class="trainers__name">Рогаткин Евгений</a>
+            <div class="trainers__description">
+                Стаж работы фитнес-тренером более 5 лет. Сертифицированный тренер по направлениям: «Экспресс диагностика нарушений ОДА»; «Персональная тренировка на основе кинезиотерапии и функционального тренинга»; «Плечевой пояс: диагностика и коррекция дисфункций»; «Инструктор по коррекции веса Life Fitness Россия».
+                КМС по футболу
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="trainers__container container">
+        <h2>НАШИ ТРЕНЕРЫ</h2>
+        <div class="trainers__list">
+            <div class="trainers__item col-sm-12 col-sm-6 col-md-2" data-modal="#trainers-modal-1">
+                <div class="trainers__wrapper">
+                    <div class="trainers__image">
+                        <img src="/static/images/land/trener1.jpg" alt="{{trainers.name}}">
+                    </div>
+                    <a class="trainers__name">Артем Диянов</a>
+                    <div class="trainers__description">Фитнес-директор PHG-Родонитовая</div>
+                </div>
+            </div>
+
+            <div class="trainers__item col-sm-12 col-sm-6  col-md-2" data-modal="#trainers-modal-2">
+                <div class="trainers__wrapper">
+                    <div class="trainers__image">
+                        <img src="/static/images/land/trener2.jpg" alt="{{trainers.name}}">
+                    </div>
+                    <a href="" class="trainers__name">Михаил Глазунов </a>
+                    <div class="trainers__description">Фитнес-директор PHG-Хохрякова, С.Дерябиной, Д.Сибирского тракта, Халтурина</div>
+                </div>
+            </div>
+
+            <div class="trainers__item col-sm-12 col-sm-6  col-md-2" data-modal="#trainers-modal-3">
+                <div class="trainers__wrapper">
+                    <div class="trainers__image">
+                        <img src="/static/images/land/trener3.jpg" alt="{{trainers.name}}">
+                    </div>
+                    <a href="" class="trainers__name">Шленчик Вероника</a>
+                    <div class="trainers__description">Менеджер тренажерного зала PHG-Халтурина</div>
+                </div>
+            </div>
+
+            <div class="trainers__item col-sm-12 col-sm-6 col-md-2" data-modal="#trainers-modal-4">
+                <div class="trainers__wrapper">
+                    <div class="trainers__image">
+                        <img src="/static/images/land/trener4.jpg" alt="{{trainers.name}}">
+                    </div>
+                    <a href="" class="trainers__name">Аскеров Эдуард</a>
+                    <div class="trainers__description">Менеджер тренажерного зала PHG-С.Дерябиной</div>
+                </div>
+            </div>
+
+            <div class="trainers__item col-sm-12 col-sm-6 col-md-2" data-modal="#trainers-modal-4">
+                <div class="trainers__wrapper">
+                    <div class="trainers__image">
+                        <img src="/static/images/land/trener5.jpg" alt="{{trainers.name}}">
+                    </div>
+                    <a href="" class="trainers__name">Рогаткин Евгений</a>
+                    <div class="trainers__description">Менеджер тренажерного зала PHG-Хохрякова</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- BLOG -->
+<div class="separator-info grey" id="classes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Видео-блог</h3>
+            </div>
+            <div class="col-md-12">
+                <span class="divider"></span>
+            </div>
+            {% if channel %}
+                {{ channel.html | safe }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- /BLOG -->
+
+<!--
+<div class="video-blog">
+    <div class="container">
+        <h2>Видео блог</h2>
+    </div>
+
+    <div class="">
+    </div>
+</div> -->
+{%if stock.feedback_enabled%}
+<div class="reviews">
+    <div class="container">
+        <h2>Отзывы</h2>
+
+        <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+            {{stock.feedback_code |safe }}
+        </div>
+    </div>
+</div>
+{%endif%}
+
+<div id="order" class="order">
+    <div class="container">
+        <h2>ОФормить заявку</h2>
+        <div class="col-md-8 col-md-offset-2">
+            <p style="text-align:center">Заполните, пожалуйста, форму, и мы оперативно Вам перезвоним,</p>
+            <p style="text-align:center">чтобы рассказать&nbsp;о&nbsp;текущих акциях и выгодных предложениях!</p>
+
+            <form action="/{{club.slug}}/call/" class="abonement-form" id="form" name="mailform" method="post" data-callibri_parse_form="true" novalidate="novalidate">
+
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
+
+                <input type="hidden" name="subject" id="formsubject" value="ЗАКАЗ ЗВОНКА С САЙТА">
+                <fieldset class="csc-mailform">
+                    <div>
+                        <label for="formName">Ваше имя:</label>
+                        <input type="text" name="Name" id="formName" size="40" value="" required="" aria-required="true">
+                    </div>
+
+                    <div>
+                        <label for="formTel">Номер телефона</label>
+                        <input type="text" name="Tel" id="formTel" size="11" value="" required="" aria-required="true">
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <a href="https://powerhousegym.ru/pages/politika-personalnyh-dannyh-ip-girenko-kocuba/" target="_blank">Нажимая на кнопку "Отправить", Вы даёте Согласие на обработку персональных данных в соответствии с положением об обработке персональных данных</a>
+                    </div>
+
+                    <div>
+                        <input type="submit" name="formtype_mail" class="abonement-btn" id="form_submit" value="Отправить" data-callibri_parse_form="true">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+<div id="map"></div>
+
+
 <div class="grey" style="padding-top: 40px; padding-bottom: 40px">
-    <div class="container content">        
-        <h4 class="news_item__title">{{stock.title}}</h4>
-        <div class="news_item__text">{{stock.full_text | safe}}</div>
+    <div class="container content">
+
         {% if stock.show_button %}
         <a href="{{stock.url_button}}" class="btn red">{{stock.text_button}}</a>
         {% endif %}
     </div>
 </div>
+
+
+{%verbatim%}
+<script type="text/javascript">
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: {lat: -33.9, lng: 151.2} // Центр выделенны маркер
+        });
+
+        setMarkers(map);
+    }
+
+    var markers = [
+        ['Дерибиной', 'Краткое описание', -33.890542, 151.274856, 4, false],
+        ['Ботаника', 'Краткое описание', -33.923036, 151.259052, 5, true], // true для выделенного маркера
+    ];
+
+    function template(tpl, data) {
+            var re, match;
+            re = /{{([^}}]+)?}}/g;
+            while(match = re.exec(tpl)) {
+                tpl = tpl.replace(match[0], data[match[1]])
+            }
+            return tpl;
+    }
+
+    function setMarkers(map) {
+        var markerSelectIcon = {
+            url: '/static/images/land/img/marker-select.png',
+            size: new google.maps.Size(49, 63),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 32)
+        };
+
+        var markerIcon = {
+            url: '/static/images/land/img/marker.png',
+            size: new google.maps.Size(49, 63),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 32)
+        };
+
+        var infowindowopen = null;
+
+        for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i],
+                    obj = {
+                        position: {lat: marker[2], lng: marker[3]},
+                        map: map,
+                        title: marker[0],
+                        zIndex: marker[4]
+                    }
+
+            if(marker[5]){
+                obj.icon = markerSelectIcon;
+            }else{
+                obj.icon = markerIcon;
+            }
+
+            var tpl = '<div class="marker-content">'+
+                    '<h4 class="marker-title">{{title}}</h4>'+
+                    '<p class="marker-description">{{description}}</p>'+
+                    '</div>'
+
+            var contentString = template(tpl, {title: marker[0], description: marker[1]});
+
+            var gMarker = new google.maps.Marker(obj);
+            gMarker['infowindow'] = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            map.addListener('click', function() {
+                if(infowindowopen){
+                    infowindowopen.close();
+                }
+            });
+
+            google.maps.event.addListener(gMarker, 'click', function () {
+                if(infowindowopen){
+                    infowindowopen.close();
+                }
+                this['infowindow'].open(map, this);
+                infowindowopen = this['infowindow'];
+            });
+        }
+    }
+
+    initMap();
+
+</script>
+{%endverbatim%}
+<!--Add-->
+
+
 {% endblock body %}
+
+{%block scripts%}
+<script src="{% static 'js/land/app.min.js' %} " type="text/javascript"></script>
+{%endblock%}
+
