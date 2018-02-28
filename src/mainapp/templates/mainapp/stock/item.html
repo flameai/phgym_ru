@@ -24,11 +24,6 @@
     </a>
     {%endif%}
 </div>
-
-<!-- <div class="slide slide_image">
-    <img src="{{stock.top_action_image.url}}" alt="">
-</div>
- -->
 <div class="slide">
     <div class="container">
         <div class="slide__text">
@@ -39,7 +34,7 @@
 
         </div>
     </div>
-    {% if stock.top_action_image.url %}
+    {% if stock.top_action_image %}
     <div class="slide__image"
          style="background: url({{stock.top_action_image.url}}) left 50%/cover no-repeat">
     </div>
