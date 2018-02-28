@@ -39,10 +39,11 @@
 
         </div>
     </div>
-
+    {%if stock.top_action_image.url%}
     <div class="slide__image"
          style="background: url({{stock.top_action_image.url}}) left 50%/cover no-repeat">
     </div>
+    {%endif%}
 </div>
 
 <div class="action__info">
