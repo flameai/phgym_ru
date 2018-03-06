@@ -93,9 +93,9 @@
     {% endif %}
     <!-- /TEXT -->
 
-    
 
-    
+
+
 
     <!-- SEPARATOR INFO -->
     <div class="separator-info grey" id="classes">
@@ -123,11 +123,11 @@
         <div class="container">
             <div class="row carousel-slick" style="margin: 0 -10px">
                 {% for fitzone in fitneszones %}
-                  <div class="lesson" style="padding: 0 10px;">
-                    <a href="{{fitzone.link}}">
-                      <img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" />
-                      <h4 class="white-text" style="padding: 20px 10px">{{fitzone.title}}</h4>
-                    </a>
+                  <div class="blog-entry">
+                    <div class="entry-cover">
+                      <h5>{{fitzone.title}}</h5>
+                      <a href="{{fitzone.link}}"><img src="{{fitzone.image.url}}" alt="{{fitzone.title}}" /></a>
+                    </div>
                   </div>
                 {% endfor %}
             </div>

@@ -47,7 +47,7 @@ class Club(models.Model):
                             help_text=u"Должен совпадать с кодом из API https://api.wge.ru/sportclub/hs/fitnes_mob/clubs")
     cash_register = models.ForeignKey('yandex_cash_register.CashRegister',
                                       null=True, blank=True)
-    policy_link = models.URLField(verbose_name=u'ссылка на политику конфиденциальности', 
+    policy_link = models.URLField(verbose_name=u'ссылка на политику конфиденциальности',
                                   help_text=u'необходимо указать полный URL, например https://site.domain/something',
                                   blank=True, null=True)
 
@@ -80,13 +80,104 @@ class News(models.Model):
         verbose_name = u'новость'
         verbose_name_plural = u'новости'
 
+DEFAULT_PRICING_HTML = """
+<div class="col-md-12 col-md-3">
+    <div class="conditions__time">
+        <div class="conditions__text">
+            Занятия будут проходить по понедельникам и средам в 00:00
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-md-9">
+    <div class="conditions__item col-xs-12 col-sm-6 col-md-6">
+        <div class="conditions__text col-md-4">
+            Стоимость одного занятия
+        </div>
+
+        <div class="conditions__cost col-md-8">
+            <div class="conditions__price">000 руб</div>
+        </div>
+    </div>
+    <div class="conditions__item col-xs-12 col-sm-6 col-md-6">
+        <div class="conditions__text col-md-4">
+            Блок из 0 занятий
+        </div>
+
+        <div class="conditions__cost col-md-8">
+            <div class="conditions__price">00 000 руб</div>
+            <div class="conditions__saving">
+                <div class="conditions__saving-value">000 руб</div>
+                <div class="conditions__saving-text">Экономия</div>
+            </div>
+        </div>
+    </div>
+    <div class="conditions__item col-xs-12 col-sm-6 col-md-6">
+        <div class="conditions__text col-md-4">
+            Стоимость одного занятия
+        </div>
+
+        <div class="conditions__cost col-md-8">
+            <div class="conditions__price">000 руб</div>
+        </div>
+    </div>
+    <div class="conditions__item col-xs-12 col-sm-6 col-md-6">
+        <div class="conditions__text col-md-4">
+            Блок из 0 занятий
+        </div>
+
+        <div class="conditions__cost col-md-8">
+            <div class="conditions__price">00 000 руб</div>
+            <div class="conditions__saving">
+                <div class="conditions__saving-value">000 руб</div>
+                <div class="conditions__saving-text">Экономия</div>
+            </div>
+        </div>
+    </div>
+</div>
+"""
+
+DEFAULT_FEEDBACK_CODE ="""
+<a class="flamp-widget" href="//moscow.flamp.ru/firm/panaekhali_kafe_bar-4504127908393518"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="4504127908393518" data-flamp-widget-width="100%" data-flamp-widget-count="1">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>"""
+
 
 class Stock(models.Model):
+    top_action_title = models.CharField(
+        verbose_name=u'Верхний заголовок Акции',
+        max_length=65,
+        null=True,
+        blank=True,
+    )
+    top_action_image = models.ImageField(
+        verbose_name=u'Верхниее изображение Акции',
+        default='',
+        null=True,
+        blank=True,
+    )
+    top_action_text = RichTextUploadingField(
+        verbose_name=u'Верхнее короткое описание акции',
+        null=True,
+        blank=True,
+    )
+    feedback_code = models.TextField(
+        verbose_name=u"Код отзывов",
+        null=True,
+        blank=True,
+        default=DEFAULT_FEEDBACK_CODE
+    )
+    feedback_enabled = models.BooleanField(
+        verbose_name=u'Включить отзывы на странице',
+        default=True
+    )
+
+    # Код Отзывов
+    # Показывть отзывы
+
     title = models.CharField(verbose_name=u'заголовок', max_length=65)
     slug = models.SlugField(u'слаг', max_length=200, unique=True, default="")
     date = models.DateField(u'дата', default=date.today)
     image = models.ImageField(u'миниатюра',default="")
     full_text = RichTextUploadingField(verbose_name=u'полный текст')
+    pricing = RichTextUploadingField(verbose_name=u'Цены',default=DEFAULT_PRICING_HTML, null=True, blank=True)
     show_button = models.BooleanField(u'отображать кнопку', default=False)
     text_button = models.CharField(u'текст на кнопке', max_length=200, default="", blank=True, null=True)
     url_button = models.URLField(u'ссылка кнопки', default='', blank=True, null=True )
@@ -248,7 +339,7 @@ class Form(models.Model):
     title = models.CharField(verbose_name=u"заголовок", max_length=200, default="")
     club = models.ForeignKey(Club, null=True, blank=True, on_delete=models.CASCADE, verbose_name=u'Клуб')
     context = RichTextUploadingField()
-    
+
 
     def get_link(self):
         if self.form == 1:
@@ -308,6 +399,8 @@ class FitnesZone(models.Model):
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
     image = models.ImageField(u'рисунок')
     link = models.URLField(u'ссылка')
+    short_description = models.CharField(u'Краткое описание', max_length=195, default='')
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return u"%s" % self.title
