@@ -23,7 +23,7 @@
     line-height: 0;
 
     position: absolute;
-    top: 50%;
+    top: 45%;
 
     display: block;
 
@@ -40,6 +40,10 @@
     border: none;
     outline: none;
     background: transparent;
+}
+.container.content .slick-prev,
+.container.content .slick-next {
+    top: 60%;
 }
 .slick-prev:hover,
 .slick-prev:focus,

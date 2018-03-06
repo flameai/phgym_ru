@@ -35,7 +35,7 @@ def index(request, slug=None):
             pass
 
         try:
-            fitneszone = FitnesZone.objects.filter(club=club)
+            fitneszone = FitnesZone.objects.order_by('order').filter(club=club)
             context.update({'fitneszones': fitneszone})
         except:
             pass
@@ -109,7 +109,7 @@ def stock(request, slug="", page=""):
                 prev_stock = None
             # print ("N", next_stock, "P", prev_stock)
 
-            fitneszones = FitnesZone.objects.filter(club=club)
+            fitneszones = FitnesZone.objects.order_by('order').filter(club=club)
             context.update({'fitneszones': fitneszones})
 
             sliders = Slider.objects.filter(club=club).order_by('order')

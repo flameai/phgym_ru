@@ -166,8 +166,9 @@ class StaticPageAdmin(admin.ModelAdmin):
 admin.site.register(StaticPage, StaticPageAdmin)
 
 
-class FitnesZoneAdmin(admin.ModelAdmin):
+class FitnesZoneAdmin(SortableModelAdmin):
     list_display = ('title', 'club',)
+    sortable = 'order'
 
 
 admin.site.register(FitnesZone, FitnesZoneAdmin)

@@ -400,6 +400,7 @@ class FitnesZone(models.Model):
     image = models.ImageField(u'рисунок')
     link = models.URLField(u'ссылка')
     short_description = models.CharField(u'Краткое описание', max_length=195, default='')
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return u"%s" % self.title
