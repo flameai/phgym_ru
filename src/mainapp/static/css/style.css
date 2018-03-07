@@ -4746,7 +4746,7 @@ list-style:none;
     left: 20px;
 }
 .slick-next {
-    right: 20px;
+    right: -16px;
 }
 .slick-prev:before, .slick-next:before {
     font-size: 80px;
@@ -4755,8 +4755,8 @@ list-style:none;
 	margin-left:-35px;
 	margin-top:-35px;
 
-    width: 35px;
-    height: 35px;
+    width: 80px;
+    height: 80px;
     z-index: 2;
 }
 .pb0 {
