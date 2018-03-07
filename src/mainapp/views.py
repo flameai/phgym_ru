@@ -7,7 +7,7 @@ from django.conf import settings
 from .templatetags.mainapp_extras import register
 
 from .models import *
-
+import json
 
 def handler404(request):
     context = {}
@@ -79,10 +79,26 @@ def index(request, slug=None):
 def news(request, page=""):
     context = {}
     if page:  # вывод подробной статьи
+        clubs = Club.objects.all()
         news = get_object_or_404(News, slug=page)
         breadcrumbs = [{"title": "Новости", "url": "/news/"},
                        {"title": news.title, "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, 'news': news})
+
+        club_markers = []
+        for iclub in clubs:
+                club_markers.append([iclub.address, iclub.short_description or '', iclub.lat, iclub.lon, 4, False])
+                center = {'lat': iclub.lat, 'lng':iclub.lon}
+                # club_markers.append([iclub.address, iclub.short_description or '', iclub.lat, iclub.lon, 4, False])
+        #print ("MAAAA", club_markers)
+        context.update({
+            'club_markers':json.dumps(club_markers),
+            'center': json.dumps(center),
+            'is_news_page':True
+        })
+
+
+
         return render(request, 'mainapp/stock/item.html', context)
     else:  # вывод списка кратких статей
         news = News.objects.filter(hidden=False).order_by("-date")
@@ -94,6 +110,7 @@ def news(request, page=""):
 def stock(request, slug="", page=""):
     context = {}
     club = get_object_or_404(Club, slug=slug)
+    clubs = Club.objects.all()
     if page:  # вывод подробной статьи
         stock = get_object_or_404(Stock, slug=page, club=club)
         stocks_of_club = Stock.objects.filter(club=club)
@@ -128,7 +145,18 @@ def stock(request, slug="", page=""):
             except Exception as Ee:
                 pass
 
-
+            club_markers = []
+            for iclub in clubs:
+                if iclub.id != club.id:
+                    club_markers.append([iclub.address, iclub.short_description or '', iclub.lat, iclub.lon, 4, False])
+                else:
+                    center = {'lat': iclub.lat, 'lng':iclub.lon}
+                    club_markers.append([iclub.address, iclub.short_description or '', iclub.lat, iclub.lon, 4, True])
+            #print ("MAAAA", club_markers)
+            context.update({
+                'club_markers':json.dumps(club_markers),
+                'center': json.dumps(center)
+            })
 
 
             context.update({

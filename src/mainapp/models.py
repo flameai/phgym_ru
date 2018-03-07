@@ -33,6 +33,9 @@ class FormRequest(models.Model):
 
 class Club(models.Model):
     address = models.CharField(verbose_name=u"Адрес",max_length=200)
+    short_description = models.CharField(verbose_name=u"Краткое описание для карты",max_length=200, blank=True, null=True)
+    # coord_lat = models.CharField(verbose_name=u"Кордината lat", max_length=200, blank=True, null=True, default="0")
+    # coord_lng = models.CharField(verbose_name=u"Кордината lng", max_length=200, blank=True, null=True, default="0")
     phone = models.CharField(verbose_name=u"Телефоны",max_length=200)
     email = models.CharField(verbose_name=u"E-mail для контактов",max_length=200)
     emails_send = models.CharField(verbose_name=u'E-майл для заявок', help_text=u'Можно указывать несколько значений через запятую.', max_length=200, default='')
@@ -399,7 +402,7 @@ class FitnesZone(models.Model):
     club = models.ForeignKey(Club, on_delete=models.DO_NOTHING, verbose_name=u'клуб')
     image = models.ImageField(u'рисунок')
     link = models.URLField(u'ссылка')
-    short_description = models.CharField(u'Краткое описание', max_length=195, default='')
+    short_description = models.CharField(u'Краткое описание', max_length=195, default='',blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 
     def __str__(self):

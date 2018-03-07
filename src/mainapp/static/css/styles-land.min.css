@@ -12,3 +12,35 @@
 .gallery__item{
     list-style: none;
 }
+
+@media all and (max-width: 50em){
+    .next-prev-action__prev-action{
+        display: none;
+    }
+}
+
+
+#map{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+}
+
+@media all and (max-width: 50em){
+    .gallery__list {
+        -webkit-column-count: initial;
+        column-count: initial;
+    }
+
+    .gallery__thumbnail {
+        width: 100%;
+        height: auto;
+    }
+    .abonement-form, #mailform {
+        width: 90%;
+    }
+    .trainers__item {
+        padding: 20px 10px;
+    }
+}

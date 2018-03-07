@@ -1,5 +1,7 @@
 {% extends 'mainapp/base_clube.html' %}
-{%load static%}
+{%load static %}
+{%load thumbnail %}
+
 {% block title %} {{stock.title}} {% endblock title %}
 
 {% block body %}
@@ -69,10 +71,14 @@
 
 <div class="action__contacts">
     <div class="container">
+        {%if is_news_page%}
+        <div class="action__phone col-lg-3">
+        </div>
+        {%endif%}
         <div class="action__phone col-xs-12 col-lg-4">
             <div class="action__phone-value {{club.callibri}}">{{club.phone}}</div>
         </div>
-
+        {%if not is_news_page%}
         <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-offset-0 col-lg-5">
             <ul class="action__schedule col-xs-12 col-sm-6 col-md-6">
                 {%if worktime1 and worktime2%}
@@ -81,15 +87,13 @@
                 {%else%}
                 <li>{{club.worktime}}</li>
                 {%endif%}
-
-
             </ul>
-
             <div class="action__address col-xs-12 col-sm-6 col-md-6">
                 <div class="">{{club.address}}</div>
                 <a href="#on-map" class="on-map-bt">Посмотреть на карте</a>
             </div>
         </div>
+        {%endif%}
 
         <div class="action__order col-xs-12 col-lg-3">
             <a href="#order" class="bt">Оформить заявку</a>
@@ -97,9 +101,11 @@
     </div>
 </div>
 
+{%if is_news_page %}
+{%else%}
 <div class="action__gallery gallery">
     <div class="gallery__container container">
-        <h2>ЗАЛЫ</h2>
+        <h2>ФИТНЕС-ЗОНЫ</h2>
         <div class="gallery__wrapper col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
             <div class="gallery__viewport">
                 <div class="gallery__image">
@@ -115,23 +121,24 @@
                     {%endfor%}
                 </div>
             </div>
-
             <div class="gallery__thumbnails">
                 {%for zone in fitneszones%}
-                <div class="gallery__thumbnail {%if forloop.first %}gallery__thumbnail_active{%endif%}" data-image="{{zone.image.url}}" data-title="{{zone.title}}" data-description="{{zone.short_description}}">
-                    <img src="{{zone.image.url}}" alt="">
-                </div>
-                {%endfor%}
-               <!--  <div class="gallery__thumbnail gallery__thumbnail_active" data-image="/static/images/land/action-image.jpg" data-title="Бассейн" data-description="Более развернутое описание зоны">
-                    <img src="/static/images/land/action-image.jpg" alt="">
-                </div>
 
-                <div class="gallery__thumbnail" data-image="/static/images/land/action-image1.jpg" data-title="Бассейн 2" data-description="Более развернутое описание зоны немного длиннее">
-                    <img src="/static/images/land/action-image.jpg" alt="">
-                </div> -->
+
+                    {% thumbnail zone.image "140x140" crop="center" as im %}
+
+                        <div class="gallery__thumbnail {%if forloop.first %}gallery__thumbnail_active{%endif%}" data-image="{{zone.image.url}}" data-title="{{zone.title}}" data-description="{{zone.short_description}}">
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        </div>
+                    {% endthumbnail %}
+
+                {%endfor%}
+
+
+
+
             </div>
         </div>
-
         <ul class="gallery__list">
             {%for zone in fitneszones%}
             <li class="gallery__item" data-image="{{zone.image.url}}" data-title="{{zone.title}}" data-description="{{zone.short_description}}">{{zone.title}}</li>
@@ -142,7 +149,7 @@
         </ul>
     </div>
 </div>
-
+{%endif%}
 <div class="fbso">
     <div class="fbso__container container">
         <div class="fbso__logotype col-md-6">
@@ -371,21 +378,31 @@
 </div>
 
 
+<script>
+    var clubmstr='{{club_markers | safe }}';
+    var centerstr='{{center | safe }}';
+    window.club_markers=JSON.parse(clubmstr);
+    window.center_pos=JSON.parse(centerstr);
+</script>
+
+
 {%verbatim%}
 <script type="text/javascript">
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
-            center: {lat: -33.9, lng: 151.2} // Центр выделенны маркер
+            zoom: 12,
+            center: window.center_pos// Центр выделенны маркер
         });
 
         setMarkers(map);
     }
 
-    var markers = [
-        ['Дерибиной', 'Краткое описание', -33.890542, 151.274856, 4, false],
-        ['Ботаника', 'Краткое описание', -33.923036, 151.259052, 5, true], // true для выделенного маркера
-    ];
+    // var markers = [
+    //     ['Дерибиной', 'Краткое описание', -33.890542, 151.274856, 4, false],
+    //     ['Ботаника', 'Краткое описание', -33.923036, 151.259052, 5, true], // true для выделенного маркера
+    // ];
+
+    var markers = window.club_markers;
 
     function template(tpl, data) {
             var re, match;
@@ -459,6 +476,9 @@
     initMap();
 
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtRKA4GEvvv9zd3dvLkiKobYI-yDfVR2E&callback=initMap"></script>
+
+
 {%endverbatim%}
 <!--Add-->
 
