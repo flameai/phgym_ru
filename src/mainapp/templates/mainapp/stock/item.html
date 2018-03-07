@@ -42,16 +42,25 @@
 
 </div>
 {%endif%}
-
 <div class="action__info">
     <div class="container">
+
+        <h3>{{news.title}}</h3>
+        <p>
+            {{news.full_text | safe}}
+        </p>
+
+        {%if stock%}
+
+
         <h3>{{stock.title}}</h3>
         <p>
             {{stock.full_text | safe}}
         </p>
+        {%endif%}
+
     </div>
 </div>
-
 <div class="conditions">
     <div class="container">
         {{stock.pricing | safe}}

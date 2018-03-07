@@ -83,7 +83,7 @@ def news(request, page=""):
         breadcrumbs = [{"title": "Новости", "url": "/news/"},
                        {"title": news.title, "url": request.path, "active": True}]
         context.update({'breadcrumbs': breadcrumbs, 'news': news})
-        return render(request, 'mainapp/news/item.html', context)
+        return render(request, 'mainapp/stock/item.html', context)
     else:  # вывод списка кратких статей
         news = News.objects.filter(hidden=False).order_by("-date")
         breadcrumbs = [{"title": "Новости", "url": request.path, "active": True}]
