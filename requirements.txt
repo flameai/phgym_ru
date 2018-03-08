@@ -5,6 +5,7 @@ django-suit==0.2.21
 django-yandex-cash-register==0.1.4
 lxml==3.8.0
 Pillow==3.4.2
+sorl-thumbnail
 requests==2.12.3
 six==1.10.0
 mysqlclient==1.3.7

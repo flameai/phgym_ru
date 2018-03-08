@@ -91,10 +91,24 @@ def news(request, page=""):
                 center = {'lat': iclub.lat, 'lng':iclub.lon}
                 # club_markers.append([iclub.address, iclub.short_description or '', iclub.lat, iclub.lon, 4, False])
         #print ("MAAAA", club_markers)
+
+        try:
+            channel = YouTubeChannel.objects.get(club=club)
+            context.update({'channel': channel})
+            # print ("CHANNEL", channel)
+        except:
+            try:
+                channel = YouTubeChannel.objects.get(club__isnull=True)
+                context.update({'channel': channel})
+            except:
+                pass
+
+
         context.update({
             'club_markers':json.dumps(club_markers),
             'center': json.dumps(center),
-            'is_news_page':True
+            'is_news_page': True,
+            'channel': channel
         })
 
 

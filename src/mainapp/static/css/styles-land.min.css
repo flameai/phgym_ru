@@ -18,7 +18,9 @@
         display: none;
     }
 }
-
+.clb{
+    clear: both;
+}
 
 #map{
     position: relative;
@@ -44,3 +46,4 @@
         padding: 20px 10px;
     }
 }
+

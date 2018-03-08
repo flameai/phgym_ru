@@ -69,16 +69,15 @@
     </div>
 </div>
 
+
+
+
+{%if not is_news_page%}
 <div class="action__contacts">
     <div class="container">
-        {%if is_news_page%}
-        <div class="action__phone col-lg-3">
-        </div>
-        {%endif%}
         <div class="action__phone col-xs-12 col-lg-4">
             <div class="action__phone-value {{club.callibri}}">{{club.phone}}</div>
         </div>
-        {%if not is_news_page%}
         <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-offset-0 col-lg-5">
             <ul class="action__schedule col-xs-12 col-sm-6 col-md-6">
                 {%if worktime1 and worktime2%}
@@ -93,13 +92,15 @@
                 <a href="#on-map" class="on-map-bt">Посмотреть на карте</a>
             </div>
         </div>
-        {%endif%}
-
         <div class="action__order col-xs-12 col-lg-3">
             <a href="#order" class="bt">Оформить заявку</a>
         </div>
     </div>
 </div>
+{%endif%}
+
+
+
 
 {%if is_news_page %}
 {%else%}
@@ -283,6 +284,21 @@
                 </div>
             </div>
         </div>
+        {%if is_news_page%}
+        <div style="padding: 60px 0;">
+            <div class="container">
+                <div class="clb"></div>
+                <div class="action__phone col-lg-3">
+                </div>
+                <div class="action__phone col-xs-12 col-lg-4">
+                    <div class="action__phone-value {{club.callibri}}">{{club.phone}}</div>
+                </div>
+                <div class="action__order col-xs-12 col-lg-3">
+                    <a href="#order" class="bt">Оформить заявку</a>
+                </div>
+            </div>
+        </div>
+        {%endif%}
     </div>
 </div>
 
@@ -473,7 +489,9 @@
         }
     }
 
-    initMap();
+        initMap();
+
+
 
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtRKA4GEvvv9zd3dvLkiKobYI-yDfVR2E&callback=initMap"></script>
