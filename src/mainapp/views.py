@@ -9,6 +9,7 @@ from .templatetags.mainapp_extras import register
 from .models import *
 import json
 
+
 def handler404(request):
     context = {}
     page = get_object_or_404(Page, slug='404')

@@ -14,7 +14,7 @@
 }
 
 @media all and (max-width: 50em){
-    .next-prev-action__prev-action{
+    .next-prev-action__prev-action, .next-prev-action__next-action{
         display: none;
     }
 }
@@ -26,7 +26,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 400px;
+    height: 433px;
 }
 
 @media all and (max-width: 50em){

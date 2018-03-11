@@ -1,6 +1,7 @@
 {% extends 'mainapp/base_clube.html' %}
 {%load static %}
 {%load thumbnail %}
+{% load mainapp_extras %}
 
 {% block title %} {{stock.title}} {% endblock title %}
 
@@ -285,13 +286,18 @@
             </div>
         </div>
         {%if is_news_page%}
+        {% getMainPhone as phone %}
+
+
+
+
         <div style="padding: 60px 0;">
             <div class="container">
                 <div class="clb"></div>
                 <div class="action__phone col-lg-3">
                 </div>
                 <div class="action__phone col-xs-12 col-lg-4">
-                    <div class="action__phone-value {{club.callibri}}">{{club.phone}}</div>
+                    <div class="action__phone-value {{club.callibri}}">  {% if phone %} {{phone}} {%endif%}</div>
                 </div>
                 <div class="action__order col-xs-12 col-lg-3">
                     <a href="#order" class="bt">Оформить заявку</a>
@@ -398,9 +404,10 @@
     var clubmstr='{{club_markers | safe }}';
     var centerstr='{{center | safe }}';
     window.club_markers=JSON.parse(clubmstr);
-    window.center_pos=JSON.parse(centerstr);
-</script>
+    //window.center_pos=JSON.parse(centerstr); // Можно брать центр последнего клуба
+    window.center_pos = {lat:56.826471, lng: 60.604294 } //Возьмем за центр точку метро геологическая
 
+</script>
 
 {%verbatim%}
 <script type="text/javascript">
