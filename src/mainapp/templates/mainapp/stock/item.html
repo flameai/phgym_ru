@@ -64,11 +64,13 @@
 
     </div>
 </div>
+{%if stock.pricing%}
 <div class="conditions">
     <div class="container">
         {{stock.pricing | safe}}
     </div>
 </div>
+{%endif%}
 
 
 
@@ -110,6 +112,9 @@
         <h2>ФИТНЕС-ЗОНЫ</h2>
         <div class="gallery__wrapper col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
             <div class="gallery__viewport">
+                <div class="gallery__arrow gallery__arrow_left"></div>
+                <div class="gallery__arrow gallery__arrow_right"></div>
+
                 <div class="gallery__image">
                     <div class="preloader"></div>
                     {%for zone in fitneszones%}
@@ -232,6 +237,7 @@
     </div>
     </div>
 
+    <div class="trainers">
     <div class="trainers__container container">
         <h2>НАШИ ТРЕНЕРЫ</h2>
         <div class="trainers__list">
@@ -297,7 +303,7 @@
                 <div class="action__phone col-lg-3">
                 </div>
                 <div class="action__phone col-xs-12 col-lg-4">
-                    <div class="action__phone-value {{club.callibri}}">  {% if phone %} {{phone}} {%endif%}</div>
+                    <div class="action__phone-value {%if club.callibri%}{{club.callibri}}{%else%}callibri_phone01{%endif%}">  {% if phone %} {{phone}} {%endif%}</div>
                 </div>
                 <div class="action__order col-xs-12 col-lg-3">
                     <a href="#order" class="bt">Оформить заявку</a>
@@ -306,6 +312,8 @@
         </div>
         {%endif%}
     </div>
+    </div>
+
 </div>
 
 
