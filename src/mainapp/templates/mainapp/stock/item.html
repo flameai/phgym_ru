@@ -364,7 +364,7 @@
             <p style="text-align:center">Заполните, пожалуйста, форму, и мы оперативно Вам перезвоним,</p>
             <p style="text-align:center">чтобы рассказать&nbsp;о&nbsp;текущих акциях и выгодных предложениях!</p>
 
-            <form action="/{{club.slug}}/call/" class="abonement-form" id="form" name="mailform" method="post" data-callibri_parse_form="true" novalidate="novalidate" onsubmit="yaCounter29959819.reachGoal('action',  {'Акция': 'СДерябиной'} );" >
+            <form action="{%if club.slug%}/{{club.slug}}{%endif%}/call/" class="abonement-form" id="form" name="mailform" method="post" data-callibri_parse_form="true" novalidate="novalidate" onsubmit="yaCounter29959819.reachGoal('action',  {'Акция': 'СДерябиной'} );" >
 
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
 
