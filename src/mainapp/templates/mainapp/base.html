@@ -11,19 +11,9 @@
    {% if metadata.title %}
       {{ metadata.title }}
     {% else %}
-    <title>
-        
-       {% block title %} {% endblock title %}  
+    <title>{% block title %} {% endblock title %}</title>
     
-    
-    
-    
-    
-    </title>
-    
-    
-    
-  {% endif %}
+    {% endif %}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
