@@ -8,11 +8,30 @@
   <head>
     {{metadata.description}}
     {{metadata.keywords}}
-    {% if metadata.title %}
+    <!--{% if metadata.title %}
       {{ metadata.title }}
-    {% else %}
-    <title>{% block title %} {% endblock title %}  </title>
-    {% endif %}
+    {% else %}-->
+    <title>
+        
+        <!--{% block title %} {% endblock title %}-->  
+    
+    {% block title %}
+        {% if metadata.title %}
+        {{ metadata.title.value }}
+        {% else %}
+            {% if title %}
+              {{ title }}
+            {% endif %}
+        {% endif %}
+      {% endblock title %}
+    
+    
+    
+    </title>
+    
+    
+    
+    <!--{% endif %}-->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
