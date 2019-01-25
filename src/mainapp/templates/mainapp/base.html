@@ -11,7 +11,24 @@
     {% if metadata.title %}
       {{ metadata.title }}
     {% else %}
-    <title>{% block title %} {% endblock title %}</title>
+    <title>
+        
+       <!-- {% block title %} {% endblock title %}-->
+       
+       
+       {% block title %}
+        {% if metadata.title %}
+        {{ metadata.title.value }}
+        {% else %}
+            {% if title %}
+              {{ title }}
+            {% endif %}
+        {% endif %}
+      {% endblock title %}
+        
+        
+        
+        </title>
     {% endif %}
 
     <meta charset="utf-8">
